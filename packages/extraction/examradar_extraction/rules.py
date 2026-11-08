@@ -306,7 +306,6 @@ def certificate_facts(doc: DocText) -> list[Fact]:
             if key in seen:
                 continue
             seen.add(key)
-            start = text.rfind(".", 0, max(0, m.start() - 200))
             facts.append(Fact("certificate_rule", value, text[max(0, m.start() - 160): end].strip(), pno, 0.88))
         for m in re.finditer(r"certificate should be dated on or before (?:the )?last date of (?:registration|receipt|submission)", text, re.I):
             cert = _cert_name(text[max(0, m.start() - 300): m.end()])
