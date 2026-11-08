@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Missed notices{% endblock %}
+{% block body %}
+<h2>Possible missed notices</h2>
+<p class="muted">News headlines with no matching official item. The official source was re-checked automatically. Nothing here is published as exam data.</p>
+<table><tr><th>Organisation</th><th>Headline</th><th>Seen</th><th></th></tr>
+{% for r in rows %}
+<tr><td>{{ orgs[r.organisation_id].name if r.organisation_id in orgs else '—' }}</td>
+<td><a href="{{ r.url }}" target="_blank" rel="noopener noreferrer">{{ r.title }}</a></td><td class="muted">{{ r.created_at.strftime('%d %b %H:%M') }}</td>
+<td><button hx-post="/admin/missed/{{ r.id }}/confirm" hx-target="closest tr" hx-swap="outerHTML">Real, entered</button>
+<button hx-post="/admin/missed/{{ r.id }}/dismiss" hx-target="closest tr" hx-swap="outerHTML">Dismiss</button></td></tr>
+{% else %}<tr><td colspan="4" class="muted">None open.</td></tr>{% endfor %}
+</table>
+{% endblock %}

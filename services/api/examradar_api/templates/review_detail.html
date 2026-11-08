@@ -1,0 +1,47 @@
+{% extends "base.html" %}{% block title %}Review {{ t.id }}{% endblock %}
+{% block body %}
+<p><a href="/admin/review">← Review queue</a></p>
+<h2>{{ t.kind | replace('_', ' ') | title }} <span class="pill {% if t.priority == 1 %}p1{% endif %}">P{{ t.priority }}</span></h2>
+<p>{{ t.reason }}</p>
+{% if cycle %}<p>Exam: <a href="/admin/exams/{{ cycle.id }}">{{ cycle.title }}</a></p>{% endif %}
+{% if source %}<p>Source: <a href="{{ source.url }}" rel="noopener noreferrer" target="_blank">{{ source.key }}</a> · status {{ source.status }} · {{ source.last_error or '' }}</p>{% endif %}
+<div class="grid">
+  <div>
+    {% if ef %}
+    <div class="card">
+      <b>Extracted {{ ef.field_name }}</b> <span class="muted">· method {{ ef.method }} · confidence {{ '%.2f' % ef.confidence }}</span>
+      {% if ef.validation_errors %}<p class="err">{{ ef.validation_errors | join('; ') }}</p>{% endif %}
+      {% if t.payload and t.payload.new %}<p>Proposed: <b>{{ t.payload.new.date }}</b> ({{ t.payload.new.certainty }})</p>{% endif %}
+      {% if ev %}
+      <p><b>Supporting text</b> (page {{ ev.page or '?' }}):<br><q>{{ ev.quote }}</q></p>
+      <p class="muted">Official source: <a href="{{ ev.source_url }}" target="_blank" rel="noopener noreferrer">{{ ev.source_url[:90] }}</a><br>
+      Document hash {{ (ev.document_hash or '')[:16] }} · retrieved {{ ev.retrieved_at.strftime('%d %b %Y %H:%M') if ev.retrieved_at else '' }}</p>
+      {% endif %}
+      {% if doc %}<p><a href="/admin/documents/{{ doc.id }}/raw" target="_blank">Open stored copy</a></p>{% endif %}
+    </div>
+    {% if t.status == 'open' %}
+    <div class="card" style="margin-top:14px">
+      <form method="post" action="/admin/review/{{ t.id }}/approve">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <label>Value (edit only if the extraction is wrong)</label>
+        <textarea name="edited" rows="8" placeholder='Leave empty to approve as is. Example: {"date": "2026-12-09"}'></textarea>
+        <p class="muted">Current value:</p><pre class="doc" style="max-height:180px">{{ value_json }}</pre>
+        <p><button class="primary">Approve and publish</button></p>
+      </form>
+      <form method="post" action="/admin/review/{{ t.id }}/reject">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <label>Reject reason</label><input name="reason" value="Incorrect extraction">
+        <p><button>Reject</button></p>
+      </form>
+    </div>
+    {% else %}<p class="muted">Resolved: {{ t.status }} by {{ t.resolved_by }}.</p>{% endif %}
+    {% else %}
+    {% if t.status == 'open' %}
+      <form method="post" action="/admin/review/{{ t.id }}/reject"><input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="reason" value="Acknowledged"><button>Mark as handled</button></form>
+    {% endif %}
+    {% endif %}
+  </div>
+  <div>{% if doc %}<div class="doc">{{ doc_html | safe }}</div>{% else %}<p class="muted">No document attached.</p>{% endif %}</div>
+</div>
+{% endblock %}

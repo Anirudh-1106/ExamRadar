@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Audit log{% endblock %}
+{% block body %}
+<h2>Audit log</h2>
+<table><tr><th>When</th><th>Who</th><th>Action</th><th>Entity</th><th>Details</th></tr>
+{% for r in rows %}<tr><td class="muted">{{ r.at.strftime('%d %b %Y %H:%M') }}</td><td>{{ r.actor }}</td><td>{{ r.action }}</td><td>{{ r.entity }} {{ r.entity_id or '' }}</td>
+<td class="muted">{{ (r.after or {}) | tojson }}</td></tr>{% endfor %}</table>
+{% endblock %}

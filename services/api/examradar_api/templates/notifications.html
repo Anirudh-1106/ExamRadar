@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Notifications{% endblock %}
+{% block body %}
+<h2>Notifications</h2>
+<h3>Waiting (preview)</h3>
+<table><tr><th>User</th><th>Type</th><th>Title</th><th>Body</th><th>Status</th></tr>
+{% for n in pending %}<tr><td>{{ n.user_id }}</td><td>{{ n.type }}{% if n.urgent %} <span class="pill p1">urgent</span>{% endif %}</td><td>{{ n.title }}</td><td>{{ n.body }}</td><td>{{ n.status }}</td></tr>
+{% else %}<tr><td colspan="5" class="muted">Nothing waiting.</td></tr>{% endfor %}</table>
+<h3>Recently sent</h3>
+<table><tr><th>When</th><th>Type</th><th>Title</th><th>Status</th></tr>
+{% for n in recent %}<tr><td class="muted">{{ n.created_at.strftime('%d %b %H:%M') }}</td><td>{{ n.type }}</td><td>{{ n.title }}</td><td>{{ n.status }}</td></tr>{% endfor %}</table>
+{% endblock %}

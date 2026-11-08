@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}{{ c.title[:40] }}{% endblock %}
+{% block body %}
+<h2>{{ c.title }}</h2>
+<p class="muted">ID {{ c.id }} · {{ c.notification_number or 'no number' }} · <a href="{{ c.official_url }}" target="_blank" rel="noopener noreferrer">official page</a> · <a href="/admin/manual?exam_id={{ c.id }}">add a date</a></p>
+<table><tr><th>Event</th><th>Date</th><th>Certainty</th><th>Status</th><th>Revisions</th><th>Emergency</th></tr>
+{% for e in events %}
+<tr><td>{{ e.label or e.event_type }}{% if e.category_number %} <span class="muted">· {{ e.category_number }}</span>{% endif %}</td>
+<td>{{ e.date_start }}{% if e.date_end %} to {{ e.date_end }}{% endif %}</td><td>{{ e.certainty }}</td><td>{{ e.status }}</td><td>{{ e.revision_count }}</td>
+<td>{% if e.status == 'active' %}<form method="post" action="/admin/events/{{ e.id }}/retract" onsubmit="return confirm('Retract this date and notify users?')">
+<input type="hidden" name="csrf" value="{{ csrf }}"><input name="reason" placeholder="Reason shown to users" required style="width:200px"> <button>Retract</button></form>{% endif %}</td></tr>
+{% else %}<tr><td colspan="6" class="muted">No dates yet.</td></tr>{% endfor %}
+</table>
+{% if not c.retracted %}
+<form method="post" action="/admin/exams/{{ c.id }}/retract" class="card" style="margin-top:18px;max-width:560px" onsubmit="return confirm('Withdraw the whole exam and send corrections?')">
+  <input type="hidden" name="csrf" value="{{ csrf }}"><b>Withdraw this exam</b>
+  <label>Reason shown to users</label><input name="reason" required><p><button>Withdraw and send correction</button></p>
+</form>{% endif %}
+{% endblock %}

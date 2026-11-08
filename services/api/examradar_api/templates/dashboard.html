@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Overview{% endblock %}
+{% block body %}
+<h2>Overview</h2>
+<div class="stats">
+  <a class="stat" href="/admin/review"><b>{{ counts.open_reviews }}</b>open reviews</a>
+  <a class="stat" href="/admin/review"><b class="{% if counts.urgent_reviews %}warn{% endif %}">{{ counts.urgent_reviews }}</b>urgent (date changes, health)</a>
+  <a class="stat" href="/admin/sources"><b class="{% if counts.problem_sources %}warn{% endif %}">{{ counts.problem_sources }}</b>sources needing attention</a>
+  <a class="stat" href="/admin/missed"><b>{{ counts.missed }}</b>possible missed notices</a>
+  <div class="stat"><b>{{ counts.exams }}</b>exams tracked</div>
+  <div class="stat"><b>{{ counts.events }}</b>published dates</div>
+  <a class="stat" href="/admin/notifications"><b>{{ counts.pending_notifications }}</b>notifications waiting</a>
+</div>
+<p class="muted" style="margin-top:24px">Changed dates never go live without review. Retract wrong information from the exam page; users who saw it get a correction.</p>
+{% endblock %}

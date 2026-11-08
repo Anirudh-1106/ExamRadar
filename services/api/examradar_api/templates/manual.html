@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% block title %}Manual entry{% endblock %}
+{% block body %}
+<h2>Manual entry</h2>
+<p class="muted">Use this for sources that cannot be read automatically (RBI, blocked RRB pages) or to fix gaps. An official source URL on the organisation's allowlist and the exact supporting text are required.</p>
+{% if error %}<p class="err">{{ error }}</p>{% endif %}{% if ok %}<p class="ok">{{ ok }}</p>{% endif %}
+<form method="post" action="/admin/manual" class="card" style="max-width:720px">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <label>Organisation</label>
+  <select name="org_key">{% for o in orgs %}<option value="{{ o.key }}" {% if exam and exam.exam.organisation_id == o.id %}selected{% endif %}>{{ o.name }}</option>{% endfor %}</select>
+  <label>Existing exam ID (leave empty to create one)</label><input name="exam_id" value="{{ exam.id if exam else '' }}">
+  <label>Exam name (new exams only)</label><input name="exam_name" placeholder="RBI Grade B Officer">
+  <label>Cycle title (new exams only)</label><input name="cycle_title" placeholder="RBI Grade B Officers 2027">
+  <label>Event</label>
+  <select name="event_type">
+    {% for k, v in [('notification','Notification published'),('application_start','Applications open'),('application_end','Last date to apply'),
+      ('fee_deadline','Fee deadline'),('correction_window','Correction window'),('confirmation_deadline','Confirmation deadline'),('exam_city','Exam city intimation'),
+      ('admit_card','Admit card'),('exam','Exam date'),('answer_key','Answer key'),('objection_deadline','Objection deadline'),('result','Result'),
+      ('cut_off','Cut-off'),('document_verification','Document verification'),('interview','Interview'),('postponement','Postponed'),('cancellation','Cancelled')] %}
+    <option value="{{ k }}">{{ v }}</option>{% endfor %}
+  </select>
+  <div class="grid"><div><label>Date</label><input type="date" name="date_start" required></div><div><label>End date (windows only)</label><input type="date" name="date_end"></div></div>
+  <label>Certainty</label><select name="certainty"><option value="official">Official (stated as a date in an official notice)</option><option value="tentative">Tentative (official calendar or marked tentative)</option></select>
+  <label>Official source URL</label><input name="source_url" type="url" required placeholder="https://opportunities.rbi.org.in/...">
+  <label>Exact supporting text from the source</label><textarea name="quote" rows="3" required></textarea>
+  <p><button class="primary">Publish</button></p>
+</form>
+{% endblock %}

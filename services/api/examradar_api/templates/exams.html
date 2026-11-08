@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Exams{% endblock %}
+{% block body %}
+<h2>Exams</h2>
+<form method="get"><input name="q" value="{{ q }}" placeholder="Search title" style="max-width:340px"> <button>Search</button></form>
+<table style="margin-top:12px"><tr><th>ID</th><th>Title</th><th>Number</th><th>Updated</th></tr>
+{% for c in cycles %}<tr><td>{{ c.id }}</td><td><a href="/admin/exams/{{ c.id }}">{{ c.title }}</a>{% if c.retracted %} <span class="pill p1">retracted</span>{% endif %}</td>
+<td class="muted">{{ c.notification_number or '' }}</td><td class="muted">{{ c.updated_at.strftime('%d %b %H:%M') }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Admin{% endblock %} · ExamRadar</title>
+<script src="/admin-static/htmx.min.js"></script>
+<style>
+  :root { --ink:#1d2433; --muted:#667085; --line:#e4e7ec; --bg:#fbfaf7; --accent:#0b5d4b; --warn:#9a3412; --mark:#fde68a; }
+  * { box-sizing:border-box } body { margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); background:var(--bg) }
+  header { display:flex; gap:18px; align-items:center; padding:10px 20px; border-bottom:1px solid var(--line); background:#fff; flex-wrap:wrap }
+  header b { margin-right:12px } header a { color:var(--ink); text-decoration:none } header a:hover { text-decoration:underline }
+  main { padding:20px; max-width:1300px }
+  table { border-collapse:collapse; width:100%; background:#fff } th,td { text-align:left; padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top }
+  th { font-weight:600; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.03em }
+  .muted { color:var(--muted) } .warn { color:var(--warn) } .pill { display:inline-block; padding:1px 7px; border:1px solid var(--line); border-radius:10px; font-size:12px }
+  .p1 { border-color:var(--warn); color:var(--warn) } button,.btn { font:inherit; padding:5px 11px; border:1px solid var(--ink); background:#fff; border-radius:4px; cursor:pointer }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff } input,select,textarea { font:inherit; padding:5px 7px; border:1px solid #c9ced6; border-radius:4px; width:100% }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:18px } .card { background:#fff; border:1px solid var(--line); padding:14px; border-radius:6px }
+  .doc { white-space:pre-wrap; font:12.5px/1.5 ui-monospace,Consolas,monospace; max-height:72vh; overflow:auto; background:#fff; border:1px solid var(--line); padding:12px }
+  mark { background:var(--mark) } .stats { display:flex; gap:14px; flex-wrap:wrap } .stat { background:#fff; border:1px solid var(--line); padding:12px 16px; min-width:150px; border-radius:6px }
+  .stat b { display:block; font-size:22px } label { display:block; margin:8px 0 3px; font-weight:600; font-size:13px } .err { color:var(--warn); margin:8px 0 } .ok { color:var(--accent) }
+  @media (max-width:900px) { .grid { grid-template-columns:1fr } }
+</style>
+</head>
+<body hx-headers='{"X-CSRF-Token": "{{ csrf }}"}'>
+{% if sess %}
+<header>
+  <b>ExamRadar admin</b>
+  <a href="/admin">Overview</a><a href="/admin/review">Review</a><a href="/admin/exams">Exams</a><a href="/admin/manual">Manual entry</a>
+  <a href="/admin/sources">Sources</a><a href="/admin/missed">Missed notices</a><a href="/admin/factcheck">Fact checks</a>
+  <a href="/admin/notifications">Notifications</a><a href="/admin/audit">Audit log</a>
+  <form method="post" action="/admin/logout" style="margin-left:auto"><span class="muted">{{ sess.email }}</span> <button>Log out</button></form>
+</header>
+{% endif %}
+<main>{% block body %}{% endblock %}</main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% block title %}Sources{% endblock %}
+{% block body %}
+<h2>Source health</h2>
+<table>
+<tr><th>Source</th><th>Status</th><th>Last success</th><th>Last new item</th><th>Errors</th><th>Items</th><th></th></tr>
+{% for s in sources %}
+<tr>
+  <td>{{ s.key }}<br><span class="muted">{{ s.kind }}{% if not s.is_official %} · signal only{% endif %}</span></td>
+  <td><span class="pill {% if s.status in ['failing','blocked','stale','robots'] %}p1{% endif %}">{{ s.status }}</span>
+      {% if s.last_error %}<br><span class="muted">{{ s.last_error[:120] }}</span>{% endif %}</td>
+  <td class="muted">{{ s.last_success_at.strftime('%d %b %H:%M') if s.last_success_at else 'never' }}</td>
+  <td class="muted">{{ s.last_new_item_at.strftime('%d %b %H:%M') if s.last_new_item_at else '—' }}</td>
+  <td>{{ s.runs_failed }}/{{ s.runs_total }}</td>
+  <td>{{ s.last_parser_yield if s.last_parser_yield is not none else '—' }}</td>
+  <td>{% if s.kind != 'manual' %}<form hx-post="/admin/sources/{{ s.id }}/recrawl" hx-swap="outerHTML"><button>Re-crawl</button></form>{% endif %}</td>
+</tr>
+{% endfor %}
+</table>
+<h3>Recent failed jobs</h3>
+<table><tr><th>When</th><th>Source</th><th>Status</th><th>Error</th></tr>
+{% for r in runs %}<tr><td class="muted">{{ r.started_at.strftime('%d %b %H:%M') }}</td><td>{{ names.get(r.source_id) }}</td><td>{{ r.status }}</td><td>{{ (r.error or '')[:200] }}</td></tr>
+{% else %}<tr><td colspan="4" class="muted">No failures.</td></tr>{% endfor %}</table>
+{% endblock %}
