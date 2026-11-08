@@ -16,8 +16,12 @@ EVENT_LABELS: list[tuple[str, str, str]] = [
      r"online registration(?: of application)?(?: and payment of fees?)?(?: including edit/modification of application by candidates)?"
      r"|apply online from|on-?line applications? (?:can be submitted|will be accepted) from", RANGE),
     ("fee_deadline", r"last date (?:for|of) (?:online )?payment of (?:application )?fees?", POINT),
+    # Extension notices: "decided to extend the last date for submission of the Online Application Form ... up to 09th November 2026".
     ("application_end",
-     r"last date (?:for|of) (?:the )?(?:receipt|submission|filling up|filling|on-?line submission)?\s?(?:of )?(?:on-?line )?"
+     r"(?:extend(?:ed)?|extension of) the (?:last|closing) date (?:for|of) (?:the )?(?:submission|receipt|registration|filling)[^.]{0,160}?"
+     r"(?:up ?to|till|until|to)", POINT),
+    ("application_end",
+     r"last date (?:for|of) (?:the )?(?:receipt|submission|filling up|filling|on-?line submission)?\s?(?:of )?(?:the )?(?:on-?line )?"
      r"(?:applications?|application forms?)|last date to apply|closing date (?:for|of) (?:on-?line )?(?:registration|applications?)"
      r"|last date for (?:on-?line )?registration", POINT),
     ("application_start",

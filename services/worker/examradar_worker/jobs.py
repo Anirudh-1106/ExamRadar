@@ -73,3 +73,33 @@ def tick() -> dict:
     docs = process_documents()
     sent = dispatch()
     return {"crawled": results, "documents": docs, "dispatched": sent}
+
+
+def reprocess(org_key: str) -> dict:
+    """Re-read every stored document of one organisation with the current rules and OCR.
+
+    Facts that already match are confirmed; new or changed ones go through the normal validation and review path.
+    Review tasks raised only because a scan was unreadable are closed once the text reads well.
+    """
+    from examradar_adapters.base import CycleHint, Item
+    from examradar_core.models import Document, ExamCycle, Organisation, ReviewTask, SourceItem
+    from examradar_core.storage import get_store
+
+    done = facts = 0
+    with session_scope() as s:
+        p = Pipeline(s)
+        org = s.scalar(select(Organisation).where(Organisation.key == org_key))
+        ad = p.adapter(org_key)
+        src_ids = [x.id for x in org.sources]
+        for si in s.scalars(select(SourceItem).where(SourceItem.source_id.in_(src_ids), SourceItem.document_id.is_not(None))).all():
+            d = s.get(Document, si.document_id)
+            payload = si.data or {}
+            item = Item(key=si.item_key, title=si.title, url=si.url, kind=si.kind, doc_urls=payload.get("doc_urls", []),
+                        cycle=CycleHint(**payload["cycle"]) if payload.get("cycle") else None, published_hint=si.published_hint)
+            cycle = s.get(ExamCycle, si.exam_cycle_id) if si.exam_cycle_id else None
+            facts += len(p.process_document(org, ad, item, cycle, d, get_store().get(d.storage_key)))
+            done += 1
+            if (d.text_quality or 0) >= 0.5:
+                for t in s.scalars(select(ReviewTask).where(ReviewTask.status == "open", ReviewTask.reason.like(f"Low text quality%{d.url}%"))):
+                    t.status, t.resolved_by, t.resolved_at, t.resolution = "approved", "ocr", utcnow(), {"note": "re-read with OCR"}
+    return {"organisation": org_key, "documents": done, "facts": facts}

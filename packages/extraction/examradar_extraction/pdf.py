@@ -31,11 +31,27 @@ class DocText:
         return len(self.pages)
 
 
+def _configure_tesseract():
+    """Use TESSERACT_CMD / TESSDATA_PREFIX from settings, or a project-local install in .tools/ocr if present."""
+    import os
+
+    import pytesseract
+    from examradar_core.settings import REPO_ROOT, get_settings
+
+    s = get_settings()
+    local = REPO_ROOT / ".tools" / "ocr"
+    cmd = s.tesseract_cmd or (str(local / "Library" / "bin" / "tesseract.exe") if (local / "Library" / "bin" / "tesseract.exe").exists() else None)
+    data = s.tessdata_prefix or (str(local / "share" / "tessdata") if (local / "share" / "tessdata").exists() else None)
+    if cmd:
+        pytesseract.pytesseract.tesseract_cmd = cmd
+    if data:
+        os.environ["TESSDATA_PREFIX"] = data
+    return pytesseract
+
+
 def ocr_available() -> bool:
     try:
-        import pytesseract
-
-        pytesseract.get_tesseract_version()
+        _configure_tesseract().get_tesseract_version()
         return True
     except Exception:
         return False
@@ -43,7 +59,7 @@ def ocr_available() -> bool:
 
 def _ocr_page(page: "pymupdf.Page", lang: str = "eng+mal") -> str | None:
     try:
-        import pytesseract
+        pytesseract = _configure_tesseract()
         from PIL import Image
     except ImportError:
         return None

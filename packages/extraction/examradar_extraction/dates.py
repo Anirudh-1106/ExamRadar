@@ -19,7 +19,8 @@ _MON = "|".join(sorted(EN_MONTHS, key=len, reverse=True))
 _ML = "|".join(sorted(ML_MONTHS, key=len, reverse=True))
 
 RE_NUM = re.compile(r"(?<![\d/.-])(\d{1,2})\s?[./-]\s?(\d{1,2})\s?[./-]\s?(\d{4}|\d{2})(?![\d/])")
-RE_DMY = re.compile(rf"(?<!\d)(\d{{1,2}})(?:st|nd|rd|th)?\s*(?:of\s+)?[-\s]?({_MON})\.?[-,\s]+(\d{{4}})", re.I)
+# OCR often turns a superscript ordinal ("9th") into a quote or degree mark: 09" November 2026.
+RE_DMY = re.compile(rf"(?<!\d)(\d{{1,2}})(?:st|nd|rd|th|[\"'”’°ºª])?\s*(?:of\s+)?[-\s]?({_MON})\.?[-,\s]+(\d{{4}})", re.I)
 RE_MDY = re.compile(rf"\b({_MON})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(\d{{4}})", re.I)
 RE_MY = re.compile(rf"\b({_MON})\.?,?\s+(\d{{4}})\b", re.I)
 RE_ML = re.compile(rf"(\d{{4}})\s*({_ML})\s*(?:മാസം)?\s*(\d{{1,2}})")

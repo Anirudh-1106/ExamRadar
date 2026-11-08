@@ -24,6 +24,8 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--force", action="store_true")
     d = sub.add_parser("process", help="download and extract pending documents")
     d.add_argument("--limit", type=int, default=20)
+    rp = sub.add_parser("reprocess", help="re-read stored documents with the current rules (after rule or OCR changes)")
+    rp.add_argument("org", help="organisation key, e.g. nta")
     sub.add_parser("reminders")
     sub.add_parser("dispatch")
     sub.add_parser("health")
@@ -51,6 +53,8 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(jobs.crawl_source(i, force=args.force), default=str))
     elif args.cmd == "process":
         print(jobs.process_documents(args.limit))
+    elif args.cmd == "reprocess":
+        print(json.dumps(jobs.reprocess(args.org)))
     elif args.cmd == "reminders":
         print(jobs.reminders())
     elif args.cmd == "dispatch":

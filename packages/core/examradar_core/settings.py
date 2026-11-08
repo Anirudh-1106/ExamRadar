@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     crawler_max_bytes: int = 25_000_000
     crawler_extra_ca_file: str = str(REPO_ROOT / "config" / "extra-ca.pem")
 
+    # OCR. Leave empty to use tesseract on PATH or a project-local install in .tools/ocr.
+    tesseract_cmd: str | None = None
+    tessdata_prefix: str | None = None
+
     llm_provider: str = "none"  # groq | none
     groq_api_key: str | None = None
     groq_model: str = "llama-3.3-70b-versatile"
