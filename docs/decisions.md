@@ -61,3 +61,6 @@ A date that differs from an already published one goes to the review queue with 
 
 ## D20. Mobile API client generated from OpenAPI (2026-11-08)
 `tools/gen_dart_models.py` writes typed Dart models from the FastAPI spec. Endpoint calls are a thin hand-written layer in `lib/data/api.dart`. A full generator (openapi-generator) needs Java tooling and produced more code than the app uses.
+
+## D21. UPSC coverage while its site refuses the crawler (2026-11-08)
+Checked other routes on 2026-11-08: `upsc.gov.in` still returns 403; `upsconline.gov.in` only previews applications made before 25 March 2025; `upsconline.nic.in` needs a login; PIB's RSS now also returns 403 to the crawler; Employment News' free list had no UPSC items. No other official, openly readable source carries UPSC notices. UPSC updates therefore come from news feeds that allow it (Indian Express Jobs and Education, The Hindu, Mint Education), shown as unverified headlines and raised to admins, who enter official dates from upsc.gov.in in a browser. Disguising the crawler's identity to get past the block was ruled out (brief rule 8).

@@ -128,6 +128,9 @@ news_feeds:
   - { key: news_indianexpress_jobs, publisher: The Indian Express, url: "https://indianexpress.com/section/jobs/feed/", enabled: true }
   - { key: news_thehindu_education, publisher: The Hindu, url: "https://www.thehindu.com/education/feeder/default.rss", enabled: true }
   - { key: news_mathrubhumi, publisher: Mathrubhumi, url: "https://www.mathrubhumi.com/rss", enabled: true }
+  # Added 2026-11-08 for UPSC coverage while upsc.gov.in refuses the crawler (decisions D13). robots.txt allows both.
+  - { key: news_indianexpress_education, publisher: The Indian Express, url: "https://indianexpress.com/section/education/feed/", enabled: true }
+  - { key: news_livemint_education, publisher: Mint, url: "https://www.livemint.com/rss/education", enabled: true }
   # Google News search feeds: disabled by default pending legal review (docs/legal-review.md L11).
   - { key: news_google_rbi, publisher: Google News, url: "https://news.google.com/rss/search?q=RBI+recruitment&hl=en-IN&gl=IN&ceid=IN:en", enabled: false, google: true }
   - { key: news_google_kpsc, publisher: Google News, url: "https://news.google.com/rss/search?q=Kerala+PSC&hl=en-IN&gl=IN&ceid=IN:en", enabled: false, google: true }

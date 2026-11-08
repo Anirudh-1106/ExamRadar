@@ -91,7 +91,9 @@ def news(org: str | None = None, limit: int = Query(30, ge=1, le=100), s: Sessio
     """Headlines from news publishers. Shown as unverified mentions only; never used as exam data."""
     if not get_settings().news_mentions_public:
         return []
-    q = select(NewsItem).where(NewsItem.public.is_(True)).order_by(NewsItem.published_at.desc().nulls_last(), NewsItem.id.desc())
+    recent = svc_now() - timedelta(days=90)  # feeds sometimes carry very old stories
+    q = (select(NewsItem).where(NewsItem.public.is_(True), (NewsItem.published_at >= recent) | NewsItem.published_at.is_(None))
+         .order_by(NewsItem.published_at.desc().nulls_last(), NewsItem.id.desc()))
     if org:
         q = q.join(Organisation, NewsItem.organisation_id == Organisation.id).where(Organisation.key == org)
     out = []
