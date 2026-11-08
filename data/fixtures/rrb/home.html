@@ -1,0 +1,2080 @@
+
+
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W0GNG1D8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1W0GNG1D8N');
+</script>
+
+<link rel="icon" type="image/png" sizes="32x32"	href="/publicView/assets/images/favicon-32x32.png">
+<link rel="stylesheet" href="/publicView/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/publicView/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/publicView/assets/css/style.css">
+<link rel="stylesheet" href="/publicView/assets/css/rrbHomePage.css">
+<link rel="stylesheet" href="/publicView/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/publicView/assets/css/responsive.css">
+<link rel="stylesheet" href="/publicView/assets/css/lightbox.min.css">
+<link rel="stylesheet" href="/publicView/assets/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="/publicView/assets/css/jquery-ui.css">
+<link rel="stylesheet" href="/publicView/assets/css/flexslider.css">
+<link rel="stylesheet" href="/publicView/assets/css/themeStyleSheet.css">
+<link rel="stylesheet" href="/admin/css/bootstrap.css">
+
+<title>RRB</title>
+<style>
+.CookieConsent {
+    align-items: baseline;
+    background: rgb(53, 53, 53);
+    color: white;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    bottom: 0;
+    padding: 10px 0;
+}
+
+#rcc-decline-button {
+    background: rgb(193, 42, 42);
+    border: 0;
+    color: rgb(229, 229, 229);
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 15px;
+}
+
+#rcc-confirm-button {
+    background: rgb(255, 212, 45);
+    border: 0;
+    color: black;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 15px;
+}
+#rcc-confirm-button, #rcc-decline-button {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    border: none !important;
+    outline: none !important;
+    background: #daf2f4 !important;
+    color: #0f5757 !important;
+    font-size: 1.2rem !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 18px !important;
+    letter-spacing: .12px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px!important;
+    -ms-border-radius: 4px!important;
+    -o-border-radius: 4px!important;
+}
+.CookieConsent {
+    background: #fff !important;
+    color: #150202 !important;
+    z-index: 9999999 !important;
+}
+</style>
+<style>
+/* CEN dropdown (#cenorderedlist): the per-CEN-number location list flies out
+   to the side on hover instead of expanding inline below it. position:fixed
+   (not absolute) + JS-computed top/left (see the mouseenter handler further
+   down) because .main_drop's own max-height/overflow-y:auto would otherwise
+   clip an absolutely-positioned child that tries to escape sideways. */
+#cenorderedlist, #cenorderedlist .main_drop, ul.dropdown-menu.main_drop { z-index: 999999999 !important; }
+#cenorderedlist .list_bx {
+    display: none;
+    position: fixed;
+    min-width: 220px;
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #0f5757;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    z-index: 999999999;
+    padding: 6px 0;
+    margin: 0;
+}
+
+#cenorderedlist .list_bx li a {
+    display: block;
+    padding: 8px 16px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+#cenorderedlist .list_bx li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+@media screen and (max-width: 767px) {
+	#cenorderedlist .list_bx {position: relative; top:0!important; left: 0!important;}
+	.dropdown-item > a {
+	    position: relative;
+	}
+	.dropdown-item > a:after {
+	    position: absolute;
+	    content: "";
+	    width: 10px;
+	    height: 10px;
+	    right: 10px;
+	    top: 50%;
+		color: #fff;
+		transform: translateY(-50%);
+		font-family: FontAwesome !important;
+		content: "\f107";
+	}
+	}
+</style>
+
+
+<style>
+ul.childdata.showc2, ul.childdata.showc1.show1, ul.childdata.df.show1 {
+    z-index: 999999999 !important;
+}
+ul.childdata.showc1 li {
+    padding-right: 0px !important;
+}
+nav#nav ul li ul li ul{ position:static !important;}
+nav#nav ul li ul li span {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+}
+#nav a{height:inherit;}
+#nav a {padding:15px 20px;}
+ul.dropdown-menu.show{scrollbar-color: #0F5757 #fff;
+    scrollbar-width: thin;}
+ul.dropdown-menu.main_drop {
+    width: 168px !important;
+}
+ul.childdata.showc2 {
+    max-height: inherit;
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+    height: 330px !important; scrollbar-color: #0F5757 #fff;
+    scrollbar-width: thin;
+}
+ul.childdata.showc2 {
+    display: none !important;
+}
+ul.childdata.showc2.show2 {
+    display: block !important;
+}
+ul.childdata.showc1.show1 {
+    border-radius: 0px !important;
+}
+ul.childdata.showc2 {
+    width: 168px !important;
+}
+nav#nav ul li ul li ul{width:160px !important;  scrollbar-width: thin;}
+span.toggle-icon {
+    right: 5px !important;
+}
+#nav ul.childdata.showc2 li.addChield > ul.childdata.showc1.show1,
+#nav ul.childdata.showc2 li.addChield > ul.childdata.df.show1 {
+    position: fixed !important;
+    top: var(--flyout-top, 0) !important;
+    left: var(--flyout-left, 0) !important;
+    right: auto !important;
+    width: 220px !important;
+    height: auto !important;
+    max-height: 260px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: #0f5757;
+    border-radius: 6px !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 999999999 !important;
+    padding: 6px 0;
+    margin: 0;
+}
+#nav ul.childdata.showc2 li.addChield > ul.childdata.showc1.show1 li a,
+#nav ul.childdata.showc2 li.addChield > ul.childdata.df.show1 li a {
+    color: #fff;
+    white-space: nowrap;
+}
+#nav ul.childdata.showc2 li.addChield > ul.childdata.showc1.show1 li a:hover,
+#nav ul.childdata.showc2 li.addChield > ul.childdata.df.show1 li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+@media screen and (max-width: 991px) {
+    #nav ul.childdata.showc2 {
+        width: 100% !important;
+    }
+    #nav ul.childdata.showc2 li.addChield > ul.childdata.showc1.show1,
+    #nav ul.childdata.showc2 li.addChield > ul.childdata.df.show1 {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        /* Match #cenorderedlist .list_bx's own scroll behavior so a CEN with
+           many categories scrolls inside its own box instead of pushing the
+           rest of the nav panel down indefinitely. */
+        max-height: 260px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        background: #0f5757 !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    #nav ul.childdata.showc2 li.addChield > ul.childdata.showc1.show1 li a,
+    #nav ul.childdata.showc2 li.addChield > ul.childdata.df.show1 li a {
+        color: #fff !important;
+        background: #4abfbfa8 !important;
+        padding: 8px 16px !important;
+    }
+}
+</style>
+</head>
+<!-- body class="green"> -->
+<body id="bodyColor" class="default">
+	<div id="wrapper">
+	<header class="header-section" role="banner">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="main-logo">
+							 <a href="/"> <img src="/admin/images/emb.png" alt="Government of India Emblem" loading="lazy" decoding="async">
+								<h2>
+								   <span>Government of India, Ministry of Railways </span>
+								     <strong> Railway Recruitment Board 
+								     </strong>
+								</h2>
+							</a>
+						</div>
+					</div> 
+
+					<!----------Search start ----------->  
+					 <div class="col-md-4">
+		   		     <div class="d-flex justify-content-lg-center align-items-center top-search-wrap">
+			   		<div class="top-search-sec">
+			   		<div class="input-group">
+					<form action="/search" method="post" id="globalsearchform">
+					    <label for="search" class="sr-only">search</label>
+					    <input minlength="3" name="globalSearchInput" list="searchHints" id="search" type="text" role="searchbox" aria-label="search" placeholder="Keyword Search" autocomplete="on" value="" required >
+					     <input name="locationSearchEnterData"id="locationSearchEnterData" type="hidden"  autocomplete="off" required value="rrb">
+					    <datalist id="searchHints"> </datalist>
+                        <ul class="autocomplete-list d-none" id="searchHintsList"></ul>
+					    <button  type="submit"><img src="/admin/img/search.png" alt="search" title="search" loading="lazy" decoding="async"/></button>
+					</form>
+					</div>
+				    </div>
+				  <div class="ocrSearch"  style="display:none;">
+                            <a href="#" class="ocrBtn" onclick="goToSearch()" title="OCR Search">OCR Search</a>
+                        </div>
+					</div> 		
+					</div>
+					<!----------Search end  ------------>
+					<div class="col-md-2">
+						<div class="top-right-menu">
+							
+							<div class="digital_logo">
+
+									<a href=""><img
+										src="/admin/images/logo-ir.png"
+										alt="Indian Railways Logo" loading="lazy" decoding="async"></a>
+
+							</div>
+							<ul>
+							   <li> <div class="bhashini-plugin-container" ></div></li>
+							   <li>
+								  <button class="accessibility" onclick="openNav()"  aria-label="Open accessibility panel">
+								    <img src="/admin/img/3.png" alt="" />
+								  </button>
+									<div id="mySidenav" class="sidenav" role="dialog" aria-modal="true"  aria-hidden="true">
+										<h2>
+											<img src="/admin/img/3.png"
+												alt="" /> Accessibility Controls
+										</h2>
+										<a href="javascript:void(0)" class="closebtn"
+											onclick="closeNav()" aria-label="Close accessibility panel">&times;</a>
+										<div class="d-flex align-items-baseline gap10">
+											<button type="button" name="font_large" value="A"
+											onClick="set_font_size('normal');" id="font_large"
+											title="Normal Font Size"
+											class="resize-text fontScaler large font-large" style="margin-right:0px !important;">Resize
+											Text</button>
+											<button id="resetTheme" class="resize-text fontScaler large font-large" style="display:none;width:inherit;padding:8px 12px !important">Reset</button>
+											</div>
+										<ul class="butt_invt">
+											<li>
+												<button class="dark_contrst" aria-pressed="false" aria-label="Enable dark contrast">
+													<img src="/admin/img/001.png"
+														alt="" /><span>Dark Contrast</span>
+												</button>
+												<button class="light_contrst" style="display:none;">
+													<img src="/admin/img/001.png"
+														alt="logo" /><span>Light Contrast</span>
+												</button>
+											</li>
+											<li>
+												<button class="invert" aria-label="Invert page colors">
+													<img src="/admin/img/01.png"
+														alt="" /><span>Invert</span>
+												</button>
+											</li>
+											<li>
+												<button class="saturation" aria-label="Reduce saturation">
+													<img src="/admin/img/02.png"
+														alt="" /><span>Saturation</span>
+												</button>
+											</li>
+											<li>
+												<button type="button" name="font_larger" value="A+"
+													onClick="set_font_size('increase');" id="font_larger"
+													title="Increase Font Size" aria-label="Increase text size"
+													class="text_size_inc fontScaler largest font-largest">
+													<img src="/admin/img/03.png"
+														 alt="" /><span>Text Size Increase</span>
+												</button>
+											</li>
+											<li>
+												<button type="button" name="font_normal" value="A-"
+													onClick="set_font_size('decrease');" id="font_normal"  aria-label="Decrease text size"
+													title="Decrease Font Size"
+													class="text_size_dec fontScaler normal font-normal current">
+													<img src="/admin/img/04.png"
+														alt="" /><span>Text Size Decrease</span>
+												</button>
+											</li>
+											<li>
+												<button class="heighlight_link" aria-label="Highlight all links">
+													<img src="/admin/img/05.png"
+														alt="" /><span>Highlight Links</span>
+												</button>
+												
+												<button class="unheighlight_link" aria-label="Unhighlight Links" style="display:none;">
+																									<img src="/admin/img/05.png"
+																										alt="" /><span>Unhighlight Links</span>
+																								</button>
+												
+												
+											</li>
+											<li>
+												<button class="hide_img" aria-label="Hide all images">
+													<img src="/admin/img/06.png"
+														alt="" /><span>Hide Images</span>
+												</button>
+												<button class="show_img" aria-label="show all images" style="display:none;">
+																									<img src="/admin/img/06.png"
+																										alt="" /><span>show Images</span>
+																								</button>
+											</li>
+											<li>
+												<button class="default_cursor" aria-label="Restore cursor">
+													<img
+														src="/admin/img/07.png"
+														alt="" /><span>Default Cursor</span>
+												</button>
+												<button class="increase_cursor" aria-label="Restore cursor" style="display:none;">
+																									<img
+																										src="/admin/img/07.png"
+																										alt="" /><span>Increased Cursor Size</span>
+																								</button>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	
+	
+	<div class="mainnav" id="mainHeader"  role="navigation" aria-label="Main Navigation">
+		<div class="container">
+			<div class="navheader">
+				<!-- //Top Header Menu -->
+				<div id="main1">
+					
+					<button class="openbtn" onclick="openNav()" aria-label="Open navigation menu">
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAATCAYAAABhh3Y4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTQ4QTUzQTZEOUUwMTFFREJFMEVCRjUzNjc4QTNCNDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTQ4QTUzQTdEOUUwMTFFREJFMEVCRjUzNjc4QTNCNDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxNDhBNTNBNEQ5RTAxMUVEQkUwRUJGNTM2NzhBM0I0NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxNDhBNTNBNUQ5RTAxMUVEQkUwRUJGNTM2NzhBM0I0NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhM33XgAAACUSURBVHjaYvz//z8DDiAAxHOB2AqIGYEYp0ICgAmI/wDxWkY8ltkB8UEGKgJ8lnECcRMQG1LBHpAlu/BZRnXAxEBHMGoZVQALEGcCcTyU/Y8GdjBCzV0PSo3/6ekzUF6KpIPPto7ms1HLCKZGUoENEFcAMQeJpf5KclLjByDmp5fP2oE4H4jZiKy9QfnsLxDvAQgwADyZKzm3AjVYAAAAAElFTkSuQmCC" alt="Menu icon">
+					</button>
+				</div>
+				<nav class="navbar navbar-expand-lg navbar-light navmenuy" role="menubar">
+					<!-- Toggler for mobile -->
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<!--	<span class="navbar-toggler-icon"></span>
+						 <span class="sr-only">Toggle navigation</span>-->
+						 
+						 <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						   <rect width="20" height="2" rx="1" fill="currentColor"/>
+						   <rect y="7" width="20" height="2" rx="1" fill="currentColor"/>
+						   <rect y="14" width="20" height="2" rx="1" fill="currentColor"/>
+						 </svg>
+					</button>
+
+					<!-- Navbar Links -->
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item" role="none"><a class="nav-link active"
+								href="/"  role="menuitem">Home</a></li>
+								
+							<!-- About Us -->
+							<li class="nav-item dropdown"  role="none">
+							 <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown"
+								role="menuitem" aria-haspopup="true" data-bs-toggle="dropdown"
+								aria-expanded="false">About Us <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								<ul class="dropdown-menu" aria-labelledby="aboutDropdown"><li><a class="dropdown-item" href="/ahmedabad/header/overview">RRB Ahmedabad</a></li><li><a class="dropdown-item" href="/ajmer/header/overview">RRB Ajmer</a></li><li><a class="dropdown-item" href="/bengaluru/header/overview">RRB Bengaluru</a></li><li><a class="dropdown-item" href="/bhopal/header/overview">RRB Bhopal</a></li><li><a class="dropdown-item" href="/bhubaneswar/header/overview">RRB Bhubaneswar</a></li><li><a class="dropdown-item" href="/bilaspur/header/overview">RRB Bilaspur</a></li><li><a class="dropdown-item" href="/chandigarh/header/overview">RRB Chandigarh</a></li><li><a class="dropdown-item" href="/chennai/header/overview">RRB Chennai</a></li><li><a class="dropdown-item" href="/gorakhpur/header/overview">RRB Gorakhpur</a></li><li><a class="dropdown-item" href="/guwahati/header/overview">RRB Guwahati</a></li><li><a class="dropdown-item" href="/kolkata/header/overview">RRB Kolkata</a></li><li><a class="dropdown-item" href="/malda/header/overview">RRB Malda</a></li><li><a class="dropdown-item" href="/mumbai/header/overview">RRB Mumbai</a></li><li><a class="dropdown-item" href="/muzaffarpur/header/overview">RRB Muzaffarpur</a></li><li><a class="dropdown-item" href="/patna/header/overview">RRB Patna</a></li><li><a class="dropdown-item" href="/prayagraj/header/overview">RRB Prayagraj</a></li><li><a class="dropdown-item" href="/ranchi/header/overview">RRB Ranchi</a></li><li><a class="dropdown-item" href="/secunderabad/header/overview">RRB Secunderabad</a></li><li><a class="dropdown-item" href="/siliguri/header/overview">RRB Siliguri</a></li><li><a class="dropdown-item" href="/thiruvananthapuram/header/overview">RRB Thiruvananthapuram</a></li></ul>
+							</li>	
+
+							<!-- RRBs Dropdown -->
+							<li class="nav-item dropdown"  role="none">
+							 <a class="nav-link dropdown-toggle" href="#" id="rrbDropdown"
+								role="menuitem" aria-haspopup="true"   data-bs-toggle="dropdown" aria-expanded="false">RRBs 
+								<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								<ul class="dropdown-menu" aria-labelledby="rrbDropdown" role="menu">
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/ahmedabad" role="menuitem">RRB Ahmedabad</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/ajmer" role="menuitem">RRB Ajmer</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/bengaluru" role="menuitem">RRB Bengaluru</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/bhopal" role="menuitem">RRB Bhopal</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/bhubaneswar" role="menuitem">RRB Bhubaneswar</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/bilaspur" role="menuitem">RRB Bilaspur</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/chandigarh" role="menuitem">RRB Chandigarh</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/chennai" role="menuitem">RRB Chennai</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/gorakhpur" role="menuitem">RRB Gorakhpur</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/guwahati" role="menuitem">RRB Guwahati</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/jammu" role="menuitem">RRB Jammu</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/kolkata" role="menuitem">RRB Kolkata</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/malda" role="menuitem">RRB Malda</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/mumbai" role="menuitem">RRB Mumbai</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/muzaffarpur" role="menuitem">RRB Muzaffarpur</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/patna" role="menuitem">RRB Patna</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/prayagraj" role="menuitem">RRB Prayagraj</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/ranchi" role="menuitem">RRB Ranchi</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/secunderabad" role="menuitem">RRB Secunderabad</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/siliguri" role="menuitem">RRB Siliguri</a></li>
+										
+									
+										
+											<li role="none"><a class="dropdown-item"
+												href="/thiruvananthapuram" role="menuitem">RRB Thiruvananthapuram</a></li>
+										
+									
+										
+									
+								</ul>
+							</li>
+
+							<!-- Recruitment Dropdown (Nested Example) -->
+							
+						    
+						    
+						     <li class="nav-item dropdown" role="none"><a class="nav-link dropdown-toggle" href="#" id="recruitmentDropdown" 
+								role="menuitem"  aria-haspopup="true"  data-bs-toggle="dropdown" aria-expanded="false">Recruitment (CENs) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								<div id="cenorderedlist"></div>
+						    </li>
+
+							<!-- Contact Us -->
+							<li class="nav-item dropdown" role="none">
+							  <a class="nav-link dropdown-toggle" href="#" id="contactDropdown"
+								 role="menuitem" aria-haspopup="true" data-bs-toggle="dropdown"
+							     aria-expanded="false">Contact Us <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								 <ul class="dropdown-menu" aria-labelledby="contactDropdown"><li><a class="dropdown-item" href="/ahmedabad/connect/contact-us">RRB Ahmedabad</a></li><li><a class="dropdown-item" href="/ajmer/connect/contact-us">RRB Ajmer</a></li><li><a class="dropdown-item" href="/bengaluru/connect/contact-us">RRB Bengaluru</a></li><li><a class="dropdown-item" href="/bhopal/connect/contact-us">RRB Bhopal</a></li><li><a class="dropdown-item" href="/bhubaneswar/connect/contact-us">RRB Bhubaneswar</a></li><li><a class="dropdown-item" href="/bilaspur/connect/contact-us">RRB Bilaspur</a></li><li><a class="dropdown-item" href="/chandigarh/connect/contact-us">RRB Chandigarh</a></li><li><a class="dropdown-item" href="/chennai/connect/contact-us">RRB Chennai</a></li><li><a class="dropdown-item" href="/gorakhpur/connect/contact-us">RRB Gorakhpur</a></li><li><a class="dropdown-item" href="/guwahati/connect/contact-us">RRB Guwahati</a></li><li><a class="dropdown-item" href="/jammu/connect/contact-us">RRB Jammu</a></li><li><a class="dropdown-item" href="/kolkata/connect/contact-us">RRB Kolkata</a></li><li><a class="dropdown-item" href="/malda/connect/contact-us">RRB Malda</a></li><li><a class="dropdown-item" href="/mumbai/connect/contact-us">RRB Mumbai</a></li><li><a class="dropdown-item" href="/muzaffarpur/connect/contact-us">RRB Muzaffarpur</a></li><li><a class="dropdown-item" href="/patna/connect/contact-us">RRB Patna</a></li><li><a class="dropdown-item" href="/prayagraj/connect/contact-us">RRB Prayagraj</a></li><li><a class="dropdown-item" href="/ranchi/header/contact-us">RRB Ranchi</a></li><li><a class="dropdown-item" href="/secunderabad/connect/contact-us">RRB Secunderabad</a></li><li><a class="dropdown-item" href="/siliguri/connect/contact-us">RRB Siliguri</a></li><li><a class="dropdown-item" href="/thiruvananthapuram/connect/contact-us">RRB Thiruvananthapuram</a></li></ul></li>
+							
+							<li class="nav-item" role="none"><a class="nav-link"
+								href="https://www.rrbapply.gov.in/#/auth/landing"  role="menuitem"
+								onclick="return confirmAndOpen(this.href);" aria-label="Apply online link opens in a new tab">Apply Online</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<section class="banner-sec" aria-label="Homepage banner carousel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="sld">
+						<div class="home-demo">
+							<div class="owl-carousel owl-theme" id="sld" role="region" aria-roledescription="carousel" 
+							      aria-label="Featured Banner Images" aria-live="polite">
+							<!--<li> 
+					          <img src="https://cbpssubscriber.mygov.in/assets/uploads/3rpbtfC38B9muoRQ?8" alt="Inviting Ideas for Mann Ki Baat by Prime Minister Narendra Modi on 20st September 2025.">
+					        </li>-->
+							<div class="item" role="group" aria-roledescription="slide" aria-label="Slide 1 of X">
+							    <img src="https://cbpssubscriber.mygov.in/assets/uploads/3rpbtfC38B9muoRQ?8"
+							         alt="Inviting Ideas for Mann Ki Baat by Prime Minister Narendra Modi on 21st September 2025."
+							         loading="lazy" decoding="async" fetchpriority="low">
+							</div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ann_sec">
+		<div class="container">
+			<div class="row-marquee">
+				<div class="mrg-rt">
+					<h3 class="ans">
+						<!--<img class="impt" src="admin/images/important.png" alt="img" />-->
+						Announcement <img src="admin/images/announcement.svg" alt="img" />
+					</h3>
+				</div>
+				<div class="mrg-lft">
+		          <div id="scroll_news4" class="scroll-container" aria-live="polite" aria-atomic="true">
+		            <div class="scroll-content">
+						
+						    
+						        
+									
+						            <a  href="/-/image/1790253798904HeadLinesImages.pdf/HeadLinesImages"
+						                onclick="return confirm('This will open the PDF in a new tab. Continue?');"
+						                class="mq_a" target="_blank" aria-label="Open PDF: Welcome to the New Website of Railway Recruitment Boards.">
+						                Welcome to the New Website of Railway Recruitment Boards.
+						            </a>
+									
+									
+						        
+
+						        
+
+						        
+						    
+						
+		            </div>
+		          </div>
+		        </div>
+								 
+				<div class="bt_marq">
+				          <button type="button" id="b1"
+				            value="Stop"
+				            class="marq-btn"
+				            aria-label="Pause or play announcements"  aria-pressed="false"
+				            onclick="button_click()">
+						  <span class="sr-only">Pause or play announcements</span>
+				          </button>
+			    </div>
+            </div>
+			</div>
+		</div>
+
+		<!-- Modal Structure -->
+		<div id="readMoreModal"
+			style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); z-index: 1000;">
+			<p id="modalContent"></p>
+			<button
+				onclick="document.getElementById('readMoreModal').style.display='none'">Close</button>
+		</div>
+	</section>
+	<section class="states states_section">
+		<div class="container">
+			<div class="row">
+ 				<div class="col-md-8">
+					<div class="rrb_ds">
+						<ul>
+							<li><a href="https://rrb.indianrailways.gov.in/ajmer"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Ajmer" loading="lazy" decoding="async" />RRB<span>Ajmer</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/ahmedabad"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Ahmedabad" loading="lazy" decoding="async" />RRB<span>Ahmedabad</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/bengaluru"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Bengaluru" loading="lazy" decoding="async" />RRB<span>Bengaluru</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/bhopal"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Bhopal" loading="lazy" decoding="async" />RRB<span>Bhopal</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/bhubaneswar"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Bhubaneswar" loading="lazy" decoding="async" />RRB<span>Bhubaneswar</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/bilaspur"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Bilaspur" loading="lazy" decoding="async" />RRB<span>Bilaspur</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/chandigarh"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Chandigarh" loading="lazy" decoding="async" />RRB<span>Chandigarh</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/chennai"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Chennai" loading="lazy" decoding="async" />RRB<span>Chennai</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/gorakhpur"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Gorakhpur" loading="lazy" decoding="async" />RRB<span>Gorakhpur</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/guwahati"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Guwahati" loading="lazy" decoding="async" />RRB<span>Guwahati</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/jammu"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Jammu" loading="lazy" decoding="async" />RRB<span>Jammu</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/kolkata"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Kolkata" loading="lazy" decoding="async" />RRB<span>Kolkata</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/malda"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Malda" loading="lazy" decoding="async" />RRB<span>Malda</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/mumbai"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Mumbai" loading="lazy" decoding="async" />RRB<span>Mumbai</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/muzaffarpur"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Muzaffarpur" loading="lazy" decoding="async" />RRB<span>Muzaffarpur</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/patna"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Patna" loading="lazy" decoding="async" />RRB<span>Patna</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/prayagraj"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Prayagraj" loading="lazy" decoding="async" />RRB<span>Prayagraj</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/ranchi"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Ranchi" loading="lazy" decoding="async" />RRB<span>Ranchi</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/secunderabad"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Secunderabad" loading="lazy" decoding="async" />RRB<span>Secunderabad</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/siliguri"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Siliguri" loading="lazy" decoding="async" />RRB<span>Siliguri</span></a></li>
+							<li><a href="https://rrb.indianrailways.gov.in/thiruvananthapuram"><img
+									src="/admin/images/train-station.png" alt="Train station icon for RRB Thiruvananthapuram" loading="lazy" decoding="async" />RRB<span>Thiruvananthapuram</span></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="whats_inner gen_update">
+						<h2>General Updates</h2>
+						<ul id="whatsNewCollectData" class="whats_new"
+							style="display: block">
+							
+								
+
+								<li>
+										
+											<a
+												href="/-/image/1790253798904HeadLinesImages.pdf/HeadLinesImages"
+												onclick="return confirm('This would open the pdf link in a new tab. Do you want to continue anyway?');"
+												target="_blank"> <span> <img
+													src="/admin/img/calender.png"
+													alt="Calendar icon" aria-hidden="true" loading="lazy" decoding="async" />
+											</span> 
+													
+											
+				                                Welcome to the New Website of Railway Recruitment Boards.
+				                            
+												 <!-- Read more icon -->
+												<img class="read-more"
+					                                   src="/admin/images/read-more.png"
+					                                   alt="View full headline" 
+					                                   data-description="Welcome to the New Website of Railway Recruitment Boards."
+					                                   data-target="popup-0"
+					                                   style="cursor: pointer; margin-left: 5px;"
+					                                   onclick="event.preventDefault(); event.stopPropagation(); showPopup(this);"
+					                                   aria-controls="popup-0" 
+					                                   aria-expanded="false"  />
+											</a>
+										
+										
+									 <!-- Hidden popup div (inline expansion) -->
+									<div id="popup-0" class="popup-text"
+									                        role="region" 
+									                        aria-live="polite"
+									                        aria-label="Full description for headline 0"
+									                        tabindex="-1" 
+									                        style="display: none; margin-top: 5px; padding: 8px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px;">
+									                       <!-- Full description will load here -->
+									                   </div>
+									<!--<div id="popup-0" class="popup-text" role="region"aria-live="polite"
+									  aria-label="Full description for headline 0"
+										style="display: none; margin-top: 5px; padding: 8px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px;">
+										 Full description will load here 
+									</div>--></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<!-- Cookie Consent Start -->
+<div class="CookieConsent" id="cookieConsent" style="display:none;">
+    <div style="flex: 1 0 300px; margin: 0px 15px;">
+        <div class="customize-cookies-container d-block">
+            <p class="mt-3 fw-bold">
+                This website uses cookies to provide a better user experience.
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <button id="rcc-decline-button" aria-label="Decline optional cookies">
+            Decline optional cookies
+        </button>
+
+        <button id="rcc-confirm-button" aria-label="Accept all cookies">
+            Accept all cookies
+        </button>
+    </div>
+</div>
+<!-- Cookie Consent End -->
+
+	
+
+
+
+
+<script type="text/javascript">
+  function getWhatsNew(){
+	  const contentType = '';
+	  const location = '';
+     if(contentType == '' || location == '' ){
+    	 return false;
+     }
+  	$.ajax({
+ 	    type: "GET",
+ 	    url: "/"+location+"/whatsNew?&contentType="+contentType,
+ 	    processData: false,
+ 	    contentType: false,
+ 	    cache: false,
+ 	    success: function(response, textStatus, jqXHR) {
+ 	          if(response != null){
+ 	        	 var notificationsCollectData = "";
+ 	        	 var recuitmentCollectData = "";
+ 	        	 var tenderCollectData = "";
+ 	        	 var whatsNewCollectData = "";
+ 	        	 var stackeCollectData = "";
+ 	        	 let nt=false;
+ 	        	 let rt=false;
+ 	        	 let td=false;
+ 	        	 let wn=false;
+ 	        	let st=false;
+ 	        	  $.each(response, function(index, response) {
+ 	        		   if(response.notification == 1){
+ 	        			  notificationsCollectData +='<li><a href="/offrings/vacancy/news-updates" target="_blank"><span><img alt="icon" src="/admin/img/link.png"> '+response.title+'</a></li>';
+	        	          if(!nt){
+	        	        	  nt = true; 
+	        	        	  $(".nti").show('slow');
+	 	        	       }
+ 	        		   }
+ 	        		   if(response.recuitment == 1){
+ 	        			  recuitmentCollectData +='<li><a href="/offrings/vacancy/recruitment-statistics" target="_blank"><span><img alt="icon" src="/admin/img/link.png"> '+response.title+'</a></li>';
+ 	        	         if(!rt){
+ 	        	        	rt = true; 
+	        	        	 $(".rtm").show('slow');
+	 	        	       }
+ 	        		   }
+ 	        		  
+ 	        		   if(response.tender == 1){
+ 	        			  tenderCollectData +='<li><a href="/offrings/vacancy/exams" target="_blank"><img alt="icon" src="/admin/img/link.png" /> '+response.title+'</a></li>';
+ 	        	         if(!td){
+ 	        	        	td = true; 
+ 	        	        	 $(".tnd").show('slow');
+	        	          }
+ 	        		   }
+ 	        		   
+ 	        		  if(response.exams == 1){
+ 	        			  tenderCollectData +='<li><a href="/offrings/vacancy/exams" target="_blank"><img alt="icon" src="/admin/img/link.png" /> '+response.title+'</a></li>';
+ 	        	         if(!td){
+ 	        	        	td = true; 
+ 	        	        	 $(".tnd").show('slow');
+	        	          }
+ 	        		   }
+ 	        		   
+ 	        		   if(response.wahtsNew == 1){
+	        	          whatsNewCollectData +='<li><a href="'+response.pageLink+'" target="_blank"><span><img src="/admin/img/calender.png" alt="icon" /> '+response.createDate+'</span>'+response.title+'</a></li>';
+	        	          if(!wn){
+	        	        	  wn = true; 
+	        	        	  $(".whats_new").show('slow');
+	        	          }
+ 	        		   }
+ 	        		   
+ 	        		  if(response.stackeHolder == 1){
+ 	        			 /* stackeCollectData +='<div class="item"><a href="'+response.pageLink+'" target="_blank"> <span class="service-icon"> <img src='+response.featureImage+' alt="icon"> </span><p>'+response.title+'</p></a></div>';
+ 	        			 if(!st){
+	        	        	  st = true; 
+	        	        	  $(".stakeH").show('slow');
+	        	          } */
+ 	        			 $(".stakeH").show('slow');
+ 	        		   }
+ 	        		   
+ 	        		  });
+ 	        	  $("#notificationsCollectData").append(notificationsCollectData);
+ 	        	  $("#recuitmentCollectData").append(recuitmentCollectData);
+ 	        	  $("#tenderCollectData").append(tenderCollectData);
+ 	        	  $("#whatsNewCollectData").append(whatsNewCollectData);
+ 	        	  /* $("#servicesdr").html(stackeCollectData); */
+ 	             }
+ 	    },
+ 	    error: function(jqXHR, textStatus, errorThrown) {  
+ 	    	alert(data.failure);
+ 	    }
+ 	});
+}
+  </script>
+	
+	
+
+
+
+
+<footer id="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container bd_btm">
+        <div class="row">
+          <div class="col-sm-8">
+          	<div class="ft-cont" role="contentinfo">
+          		<h2 id="useful-links-heading">Useful Links</h2>
+          		<ul class='addChield'><li class='addChield'><a href='/footer/websitepolicies' ><i class="fa fa-angle-right" aria-hidden="true"></i> Website Policies</a></li><li class='addChield'><a href='/footer/relatedlinks' ><i class="fa fa-angle-right" aria-hidden="true"></i> Related Links</a></li><li class='addChield'><a href='/footer/helppublicviewpage' ><i class="fa fa-angle-right" aria-hidden="true"></i> Help</a></li><li class='addChield'><a href='/footer/sitemappublicviewpage' ><i class="fa fa-angle-right" aria-hidden="true"></i> Sitemap</a></li></ul>
+          	</div>
+		  </div>
+          <div class="col-sm-4"> 
+		    
+		    <div class="my-gv">
+				<a href="https://www.mygov.in/"
+				   onclick="return confirmAndOpen(this.href);"
+				   class="external-link"
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="Visit MyGov website (opens in new tab)">
+				    <img alt="MyGov logo" src="/admin/images/mygovmerisarkar.png" />
+				</a>
+
+				<a href="https://www.india.gov.in/"
+				   onclick="return confirmAndOpen(this.href);"
+				   class="external-link"
+				   target="_blank"
+				   rel="noopener noreferrer"
+				   aria-label="Visit India Government portal (opens in new tab)">
+				    <img alt="India Government logo" src="/admin/img/ft-logo2.png" />
+				</a>
+		    </div>
+		    
+		  </div>
+		  </div>
+		  <div class="row">
+		    <div class="col-md-6">
+	            <p class="text-white">This Website belongs to the Ministry of Railways, Government of India</p>
+	        </div>
+		    <div class="col-md-6">
+					<div class="update-info d-flex justify-content-between align-items-center flex-wrap">
+						<p> <span style="white-space: nowrap;">
+				           Number of visitors:
+				            <strong>
+				                12939383  |
+				            </strong>
+
+				             Last updated On:
+				            
+				                
+				                    24-Sep-2026
+				                
+				                
+				            
+				        </span> </p>
+					</div>
+		   </div>
+		 </div>
+		<div class= "row">
+	      
+	     </div>
+        </div>
+    </div>
+    
+  </footer>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+  </footer>
+  <script>
+    function confirmAndOpen(url) {
+        const confirmOpen = confirm("You are about to open an external website. Do you want to continue?");
+        if (confirmOpen) {
+            window.open(url, '_blank');
+        }
+        return false;
+    }
+</script>
+</body>
+<script>
+	// Seed Hindi as the default only on a first visit, so the Bhashini dropdown
+	// shows Hindi as selected. A visitor who later picks another language keeps it.
+	if (!localStorage.getItem("preferredLanguage")) {
+		localStorage.setItem("preferredLanguage", "hi");
+	}
+</script>
+<script src="https://translation-plugin.bhashini.co.in/v3/website_translation_utility.js"
+	page-source-language="en"
+	initial_preferred_language="hi"></script>
+
+</html>
+
+	<script src="/publicView/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/publicView/assets/js/bootstrap.min.js"></script>
+<script src="/publicView/assets/js/popper.min.js"></script>
+<script src="/publicView/assets/js/jquery.flexslider.js"></script>
+<script src="/publicView/assets/js/main.js"></script>
+<script src="/publicView/assets/js/owl.carousel.js"></script>
+<script src="/publicView/assets/js/jquery.easy-ticker.js"></script>
+<script src="/publicView/assets/js/jquery.easing.min.js"></script>
+<!--<script src="/publicView/assets/js/lightbox.min.js"></script>-->
+<script src="/publicView/assets/js/jquery.mCustomScrollbar.js"></script>
+<script src="/publicView/assets/js/jquery-ui.js"></script>
+<script src="/publicView/assets/js/ticker_custom.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css" integrity="sha256-oRc+Vv1HS+BN2++oG9dcxGVifvL12yYXkufSX7eHF0M=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js" integrity="sha256-Tobw4i5HcbW4qsJMYTxmGAameLGvooTQPPatA9PiGgo=" crossorigin="anonymous"></script>
+
+<script>
+function externalLinkPopUp(externalLink){
+    Swal.fire({
+        title: '',
+        text: 'This would take you to an external website that opens in a new tab. Do you want to continue anyway?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, proceed',
+        cancelButtonText: 'No, cancel',
+        confirmButtonColor: '#68a477',
+        cancelButtonColor: '#dc3545'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        	window.open(externalLink, "_blank");
+
+        }
+    });
+    return false;
+}
+</script>
+<script>
+$(document).ready(function () {
+	  // Show/hide button on scroll
+	  $(window).scroll(function () {
+	    if ($(this).scrollTop() > 100) {
+	      $('#scrollTopBtn').fadeIn();
+	    } else {
+	      $('#scrollTopBtn').fadeOut();
+	    }
+	  });
+
+	  // Scroll to top on click
+	  $('#scrollTopBtn').click(function () {
+	    $('html, body').animate({ scrollTop: 0 }, 600);
+	    return false;
+	  });
+	});
+
+</script>
+<script>
+$(document).ready(function () {
+	  $(window).scroll(function () {
+	    if ($(this).scrollTop() > 115) {
+	      $('.mainnav').addClass('scrolled');
+	    } else {
+	      $('.mainnav').removeClass('scrolled');
+	    }
+	  });
+	});
+</script>
+
+	</div>
+	<script type="text/javascript">
+		getWhatsNew();
+		findTopInfoHeader();
+		getPassengerServices();
+	</script>
+	
+	<script>
+		$(document).ready(function() {
+			$('#sld').owlCarousel({
+				items : 1,
+				margin : 0,
+				nav : true,
+				loop : true,
+				autoplay : true,
+				autoplayTimeout : 4000,
+				smartSpeed : 1000, // controls transition duration
+				animateOut : 'fadeOut', // fade out the current slide
+				animateIn : 'fadeIn', // fade in the next slide
+				autoplayHoverPause : false,
+				responsive : {
+					0 : {
+						items : 1
+					},
+					600 : {
+						items : 1
+					},
+					1000 : {
+						items : 1
+					}
+				}
+			});
+		});
+	</script>
+	<script>
+		function button_click() {
+			if (document.getElementById('b1').value == "Start") {
+				document.getElementById('b1').value = "Stop";
+				document.getElementById('scroll_news4').start();
+			} else {
+				document.getElementById('b1').value = "Start";
+				document.getElementById('scroll_news4').stop();
+			}
+		}
+	</script>
+	<script>
+		jQuery("#carousel")
+				.owlCarousel(
+						{
+							autoplay : true,
+							rewind : false, /* use rewind if you don't want loop */
+							margin : 20,
+							loop : true,
+							/*
+							animateOut: 'fadeOut',
+							animateIn: 'fadeIn',
+							 */
+							responsiveClass : true,
+							autoHeight : true,
+							autoplayTimeout : 7000,
+							smartSpeed : 800,
+							nav : true,
+							navText : [
+									'<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>',
+									'<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>' ],
+							responsive : {
+								0 : {
+									items : 1
+								},
+
+								600 : {
+									items : 3
+								},
+
+								1024 : {
+									items : 6
+								},
+
+								1366 : {
+									items : 6
+								}
+							}
+						});
+	</script>
+	<script>
+		function confirmAndOpen(url) {
+			const confirmOpen = confirm("You are about to open an external website. Do you want to continue?");
+			if (confirmOpen) {
+				window.open(url, '_blank');
+			}
+			return false;
+		}
+	</script>
+	<script>
+		$(document).on("click", function(event) {
+			if (!$(event.target).closest("#bhashiniLanguageDropdown").length) {
+				$("#bhashiniLanguageDropdown").hide(); // or use .addClass("hidden")
+			}
+		});
+
+		function confirmAndOpen(url) {
+			if (confirm("Do you want to open this external link?")) {
+				window.open(url, "_blank");
+			}
+			return false;
+		}
+	</script>
+
+	<script>
+		function showPopup(el) {
+			const fullText = el.getAttribute("data-description");
+			const targetId = el.getAttribute("data-target");
+			const popupDiv = document.getElementById(targetId);
+
+			if (popupDiv.style.display === "none") {
+				popupDiv.innerText = fullText;
+				popupDiv.style.display = "block";
+			} else {
+				popupDiv.style.display = "none"; // toggle close
+			}
+		}
+	</script>
+<script>
+function openNav() {
+    const width = window.innerWidth <= 768 ? "260px" : "320px";
+    document.getElementById("mySidenav").style.width = width;
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0px";
+}
+</script>
+<script>
+$(document).ready(function(){
+  $(".bar_icon").click(function(){
+    $(".mn-left").addClass("lft");
+  });
+  $(".closebtn").click(function(){
+	    $(".mn-left").removeClass("lft");
+	  });
+});
+</script>
+
+<script>
+	$(document).ready(function () {
+
+	    const allThemes = [
+	        "dark_theme",
+	        "invertFlt",
+	        "saturation",
+	        "linkH",
+	        "hideImg",
+	        "cursorSize",
+	        "font_large",
+	        "font_normal"
+	    ];
+
+	    function toggleTheme(theme) {
+
+	        if ($("body").hasClass(theme)) {
+	            $("body").removeClass(theme);
+	            $("#resetTheme").hide();
+	            return;
+	        }
+
+	        $("body").removeClass(allThemes.join(" "));
+	        $("body").addClass(theme);
+	    }
+
+	    $(".invert").click(function () {
+	        toggleTheme("invertFlt");
+	        $("#resetTheme").show();
+	    });
+
+	    $(".saturation").click(function () {
+	        toggleTheme("saturation");
+	        $("#resetTheme").show();
+	    });
+		$("#font_larger").click(function () {
+		    $("body").removeClass("font_large"); // reset first
+		    $("body").addClass("font_large");    // apply large font
+		    $("#resetTheme").show();
+		});
+		$("#font_normal").click(function () {
+		    $("body").removeClass("font_large");
+		    $("#resetTheme").show();
+		});
+	    $(".heighlight_link").click(function () {
+	        toggleTheme("linkH");
+	        $("#resetTheme").show();
+	    });
+
+	    $(".hide_img").click(function () {
+	        toggleTheme("hideImg");
+	        $("#resetTheme").show();
+	    });
+
+	    $(".default_cursor").click(function () {
+	        toggleTheme("cursorSize");
+	        $("#resetTheme").show();
+	    });
+
+	    $(".font_larger").click(function () {
+	        toggleTheme("font_large");
+	        $("#resetTheme").show();
+	    });
+
+	    $(".font_normal").click(function () {
+	        toggleTheme("font_normal");
+	        $("#resetTheme").show();
+	    });
+
+	    $("#resetTheme").click(function () {
+	        $("body").removeClass(allThemes.join(" "));
+	        $(this).hide();
+	    });
+
+	});</script>
+	<script>
+		$(document).ready(function () {
+
+		    // DARK MODE ON
+		    $(".dark_contrst").click(function () {
+		        $("body").addClass("dark_theme");
+		        $(".dark_contrst").hide();
+		        $(".light_contrst").show();
+		    });
+
+		    // DARK MODE OFF
+		    $(".light_contrst").click(function () {
+		        $("body").removeClass("dark_theme");
+		        $(".light_contrst").hide();
+		        $(".dark_contrst").show();
+		    });
+
+		    // Optional: Ensure correct visibility on page load
+		    if ($("body").hasClass("dark_theme")) {
+		        $(".dark_contrst").hide();
+		        $(".light_contrst").show();
+		    } else {
+		        $(".light_contrst").hide();
+		        $(".dark_contrst").show();
+		    }
+
+		});
+	
+	</script>
+	<script>
+		$(document).ready(function () {
+
+		    // Increase or Decrease button click
+		    $(".text_size_inc, .text_size_dec").click(function () {
+		        $(".resize-text")
+		            .addClass("reszt")        // show resize-text style
+		            .removeClass("reszt_none"); // remove reset hide
+		    });
+
+		    // Reset button click
+		    $(".resize-text").click(function () {
+		        $(".resize-text")
+		            .addClass("reszt_none")  // hide or mark reset
+		            .removeClass("reszt");   // remove active class
+
+		        // Reset all font sizes to default
+		        $("body").css("font-size", "100%");
+		    });
+
+		});
+	</script>
+	<style>
+		button:focus, a:focus {
+		    outline: 5px auto -webkit-focus-ring-color !important;
+		    outline-offset: -2px !important;
+		}
+   </style>
+   
+  
+	
+		<script>
+		$(document).ready(function(){
+		    // After carousel loads, update navigation buttons for accessibility
+		    setTimeout(function(){
+		        $(".owl-prev").attr("aria-label", "Previous slide");
+		        $(".owl-next").attr("aria-label", "Next slide");
+		        $(".owl-dot").each(function(index){
+		            $(this).attr("aria-label", "Go to slide " + (index + 1));
+		        });
+		    }, 300);
+		});
+		</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+	  // ===== DROPDOWN-ITEM MENU =====
+	  document.querySelectorAll(".dropdown-item").forEach(function (item) {
+	    const toggleLink = item.querySelector(":scope > a");
+	    const list = item.querySelector(":scope > .list_bx");
+
+	    if (!toggleLink || !list) return;
+
+	    // Add toggle icon
+	    let icon = toggleLink.querySelector(".toggle-icon");
+	    if (!icon) {
+	      icon = document.createElement("span");
+	      icon.className = "toggle-icon";
+	      icon.innerHTML = "▶";
+	      toggleLink.appendChild(icon);
+	    }
+
+	    toggleLink.addEventListener("click", function (e) {
+	      e.preventDefault();
+
+	      const isOpen = list.style.display === "block";
+
+	      // Close other menus
+	      document.querySelectorAll(".dropdown-item > .list_bx").forEach(function (ul) {
+	        if (ul !== list) {
+	          ul.style.display = "none";
+	          ul.parentElement.classList.remove("active");
+	          const otherIcon = ul.parentElement.querySelector(".toggle-icon");
+	          if (otherIcon) otherIcon.classList.remove("rotate");
+	        }
+	      });
+
+	      // Toggle current
+	      list.style.display = isOpen ? "none" : "block";
+	      item.classList.toggle("active", !isOpen);
+	      icon.classList.toggle("rotate", !isOpen);
+	    });
+	  });
+
+	  // Prevent submenu click from closing parent
+	  document.querySelectorAll(".list_bx a").forEach(function (subLink) {
+	    subLink.addEventListener("click", function (e) {
+	      e.stopPropagation();
+	    });
+	  });
+
+
+	  // ===== NAV DROPDOWN MENU =====
+	  document.querySelectorAll(".nav-item.dropdown").forEach(function (item) {
+	    const toggleLink = item.querySelector(":scope > a");
+	    const icon = toggleLink ? toggleLink.querySelector("i, .toggle-icon") : null;
+
+	    if (!toggleLink) return;
+
+	    toggleLink.addEventListener("click", function (e) {
+	      e.preventDefault();
+
+	      const dropdownMenu = item.querySelector(".dropdown-menu");
+	      if (!dropdownMenu) return;
+
+	      const isOpen = dropdownMenu.classList.contains("show");
+
+	      // Close other dropdowns
+	      document.querySelectorAll(".nav-item.dropdown").forEach(function (nav) {
+	        if (nav !== item) {
+	          nav.classList.remove("active");
+	          const menu = nav.querySelector(".dropdown-menu");
+	          const navIcon = nav.querySelector("i, .toggle-icon");
+	          if (menu) menu.classList.remove("show");
+	          if (navIcon) navIcon.classList.remove("rotate");
+	        }
+	      });
+
+	      // Toggle current
+	      dropdownMenu.classList.toggle("show", !isOpen);
+	      item.classList.toggle("active", !isOpen);
+	      if (icon) icon.classList.toggle("rotate", !isOpen);
+	    });
+	  });
+
+	  // Close on outside click
+	  document.addEventListener("click", function (e) {
+	    document.querySelectorAll(".nav-item.dropdown").forEach(function (item) {
+	      if (!item.contains(e.target)) {
+	        item.classList.remove("active");
+	        const menu = item.querySelector(".dropdown-menu");
+	        const icon = item.querySelector("i, .toggle-icon");
+	        if (menu) menu.classList.remove("show");
+	        if (icon) icon.classList.remove("rotate");
+	      }
+	    });
+	  });
+
+	});
+
+</script>
+
+<script>
+	function orderCen(){
+		
+		(function () {
+		    const ul = document.querySelector('.main_drop');
+		    if (!ul) return;
+		
+		    const items = Array.from(ul.children);
+		
+		    function extractDate(text) {
+		        // Handles: "05/2025" and "RPF 02/2024"
+		        const match = text.match(/(\d{2})\/(\d{4})/);
+		        if (!match) return new Date(0);
+		        const month = parseInt(match[1], 10) - 1;
+		        const year = parseInt(match[2], 10);
+		        return new Date(year, month, 1);
+		    }
+		
+		    items.sort((a, b) => {
+		        const aText = a.querySelector('a')?.textContent.trim() || '';
+		        const bText = b.querySelector('a')?.textContent.trim() || '';
+		
+		        const dateA = extractDate(aText);
+		        const dateB = extractDate(bText);
+		
+		        // DESC order (latest first)
+		        return dateB - dateA;
+		    });
+		
+		    // Re-append in sorted order
+		    items.forEach(item => ul.appendChild(item));
+		})();
+		
+	}
+</script>	
+<script>
+	
+	const nav = document.querySelector("nav");
+	 
+		if (nav) {
+		  nav.addEventListener("click", function (e) {
+		    const link = e.target.closest("a");
+		    if (!link || !nav.contains(link)) return;
+	 
+		    // Find the closest li of the clicked link
+		    const li = link.closest("li");
+		    if (!li) return;
+	 
+		    // Find the top-level li (direct child of nav > ul)
+		    const topLevelLi = li.parentElement.parentElement === nav.querySelector("ul")
+		      ? li.parentElement.parentElement.querySelectorAll(":scope > li")
+		          .contains(li) ? li : null
+		      : li.closest("ul").parentElement.tagName === "LI"
+		          ? li.closest("ul").parentElement
+		          : li;
+	 
+		    if (!topLevelLi) return;
+	 
+		    // Remove current from all top-level lis
+		    nav.querySelectorAll("ul > li").forEach(li => li.classList.remove("current"));
+	 
+		    // Add current to top-level li
+		    topLevelLi.classList.add("current");
+		  });
+		}
+	 
+	</script> 
+
+<!--script for search option start -->
+<script>
+	function escapeRegExp(text) {
+		return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\$&');
+	}
+
+	const ignoreClasses = ['no-search', 'header', 'footer'];
+	const ignoreIds = ['nav', 'footerContainer'];
+
+	function removeHighlights() {
+		const highlights = document.querySelectorAll('.highlight');
+		highlights.forEach(el => {
+			const parent = el.parentNode;
+			parent.replaceChild(document.createTextNode(el.textContent), el);
+			parent.normalize(); // fix split text nodes
+		});
+	}
+
+	function shouldIgnore(node) {
+		let current = node.parentNode;
+		while (current && current !== document.body) {
+			if (ignoreIds.includes(current.id)) return true;
+			if (current.classList && [...current.classList].some(cls => ignoreClasses.includes(cls))) return true;
+			current = current.parentNode;
+		}
+		return false;
+	}
+
+	function highlightText(term) {
+		if (!term) return;
+
+		const regex = new RegExp(escapeRegExp(term), 'gi');
+		const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+			acceptNode: function (node) {
+				const tag = node.parentNode?.nodeName;
+				if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME'].includes(tag)) return NodeFilter.FILTER_REJECT;
+				if (shouldIgnore(node)) return NodeFilter.FILTER_REJECT;
+				return NodeFilter.FILTER_ACCEPT;
+			}
+		});
+
+		const nodes = [];
+		while (walker.nextNode()) {
+			nodes.push(walker.currentNode);
+		}
+
+		nodes.forEach(node => {
+			const matches = [...node.nodeValue.matchAll(regex)];
+			if (matches.length === 0) return;
+
+			const span = document.createElement('font');
+			const fragment = document.createDocumentFragment();
+			let lastIndex = 0;
+
+			matches.forEach(match => {
+				const index = match.index;
+				const before = node.nodeValue.slice(lastIndex, index);
+				if (before) fragment.appendChild(document.createTextNode(before));
+
+				const highlight = document.createElement('font');
+				highlight.className = 'highlight';
+				highlight.textContent = match[0];
+				fragment.appendChild(highlight);
+
+				lastIndex = index + match[0].length;
+			});
+
+			const after = node.nodeValue.slice(lastIndex);
+			if (after) fragment.appendChild(document.createTextNode(after));
+
+			span.appendChild(fragment);
+			node.parentNode.replaceChild(span, node);
+		});
+	}
+
+	function handleSearch() {
+		const value = $("#search").val().trim();
+		removeHighlights();
+		if (value.length > 0) highlightText(value);
+	}
+	
+	document.getElementById('search').addEventListener('input', function () {
+		const cleaned = cleanInput(this.value);   
+		 this.value = cleaned;
+		 handleSearch();
+		    /* if (this.value.length < 2) {
+		    	alert("add atleast 3 characters.");
+		    } */
+		});
+	
+	function cleanInput(input) {   
+		 return input.replace(/[^a-zA-Z0-9 ]/g, '');
+		}
+	
+	
+	function goToSearch() {
+	  // Always carry this site's location forward - without llc, the search page falls
+	  // back to the generic main site instead of staying on this RRB location.
+	  const query = document.getElementById("search").value;
+	  if(query.length >= 3) {
+	    // POST, not a GET URL - /pdf/searchfromPdf accepts POST only (STQC 1.4)
+	    const f = document.createElement("form");
+	    f.method = "post";
+	    f.action = "/pdf/searchfromPdf";
+	    [["descriptionInput", query], ["llc", "rrb"]].forEach(function(p) {
+	      const i = document.createElement("input");
+	      i.type = "hidden"; i.name = p[0]; i.value = p[1];
+	      f.appendChild(i);
+	    });
+	    document.body.appendChild(f);
+	    f.submit();
+	  } else {
+		  window.location.href = "/cms/searchFrompdf?llc=rrb";
+	  }
+	}
+	
+
+</script>
+<noscript class="d-none"></noscript>
+<script>
+// The "hints" dropdown used to show a static top-10 trending-keywords list on
+// focus, never actually filtered by what was typed despite looking like a
+// live typeahead - removed in favor of just typing + pressing Enter/Search,
+// which goes straight to the full results page (matches the reference site
+// this was redesigned after).
+</script>
+<noscript class="d-none"></noscript>
+<script>
+	document.getElementById("globalsearchform").addEventListener("submit", function(event) {
+		const searchInput = document.getElementById("search");
+		if (searchInput.value.length < 3) {
+			alert("Please enter at least 3 characters.");
+			event.preventDefault(); // Prevent form submission
+		}
+		// Was hardcoded to the literal 'rrb' here, overwriting the correct
+		// per-site value the hidden field is now rendered with server-side -
+		// every one of the 21 location sites' searches went to the mainsite's
+		// results instead of that location's own. Leave the field alone so
+		// results stay scoped to whichever site the search was submitted from.
+	});
+</script>
+<noscript class="d-none"></noscript>
+<!--script for search option end -->
+<script>
+	var fontSize = 100;
+	function set_font_size(fontType){
+	  if(fontType == "increase"){  
+	//alert(fontSize); 
+			    if(fontSize < 109){ /* 114 */
+	        fontSize = parseInt(fontSize) + 3;
+	       }
+	      }else if(fontType == "decrease"){
+	        if(fontSize > 91){
+	        fontSize = parseInt(fontSize) - 3;
+	        }
+	      }else{
+	        fontSize = 100;
+	      }
+	  //_setCookie("fontSize",fontSize);
+	  jQuery("body").css("font-size",fontSize + "%");
+	  //jQuery("#template_three_column").css("font-size",fontSize + "%");
+	} 
+
+	</script>
+	
+	
+	</script>
+<script>
+	$(document).ready(function () {
+
+	    const allThemes = [
+	        "dark_theme",
+	        "invertFlt",
+	        "saturation",
+	        "linkH",
+	        "hideImg",
+	        "cursorSize",
+	        "font_large",
+	        "font_normal"
+	    ];
+
+	    let fontSize = 100;
+
+	    function toggleTheme(theme) {
+	        $("body").removeClass(allThemes.join(" "));
+	        $("body").addClass(theme);
+	        $("#resetTheme").show();
+	    }
+
+	    // Delegated events for dynamically loaded buttons
+	    $(document).on("click", ".invert", function() { toggleTheme("invertFlt"); });
+	    $(document).on("click", ".saturation", function() { toggleTheme("saturation"); });
+	    $(document).on("click", ".heighlight_link", function() { toggleTheme("linkH"); });
+	    $(document).on("click", ".hide_img", function() { toggleTheme("hideImg"); });
+	    $(document).on("click", ".default_cursor", function() { toggleTheme("cursorSize"); });
+
+	    $(document).on("click", "#font_larger", function() {
+	        $("body").addClass("font_large");
+	        $("#resetTheme").show();
+	    });
+	    $(document).on("click", "#font_normal", function() {
+	        $("body").removeClass("font_large");
+	        $("#resetTheme").show();
+	    });
+
+	    // Dark mode
+	    $(document).on("click", ".dark_contrst", function() {
+	        $("body").addClass("dark_theme");
+	        $(".dark_contrst").hide();
+	        $(".light_contrst").show();
+	        $("#resetTheme").show();
+	    });
+	    $(document).on("click", ".light_contrst", function() {
+	        $("body").removeClass("dark_theme");
+	        $(".light_contrst").hide();
+	        $(".dark_contrst").show();
+	        $("#resetTheme").show();
+	    });
+		
+		
+		$(document).on("click", ".dark_contrst", function() {
+		        $("body").addClass("dark_theme");
+		        $(".dark_contrst").hide();
+		        $(".light_contrst").show();
+		        $("#resetTheme").show();
+		    });
+		    $(document).on("click", ".light_contrst", function() {
+		        $("body").removeClass("dark_theme");
+		        $(".light_contrst").hide();
+		        $(".dark_contrst").show();
+		        $("#resetTheme").show();
+		    });
+			
+			$(document).on("click", ".hide_img", function() {
+			    $("body").addClass("hideImg");
+			    $(".hide_img").hide();
+			    $(".show_img").show();
+			    $("#resetTheme").show();
+			});
+
+			$(document).on("click", ".show_img", function() {
+			    $("body").removeClass("hideImg");
+			    $(".show_img").hide();
+			    $(".hide_img").show();
+			    $("#resetTheme").show();
+			});
+
+			$(document).on("click", ".default_cursor", function() {
+			    $("body").addClass("cursorSize");
+			    $(".default_cursor").hide();
+			    $(".increase_cursor").show();
+			    $("#resetTheme").show();
+			});
+
+			$(document).on("click", ".increase_cursor", function() {
+			    $("body").removeClass("cursorSize");
+			    $(".increase_cursor").hide();
+			    $(".default_cursor").show();
+			    $("#resetTheme").show();
+			});
+			$(document).on("click", ".heighlight_link", function() {
+			    $("body").addClass("linkH");
+			    $(".heighlight_link").hide();
+			    $(".unheighlight_link").show();
+			    $("#resetTheme").show();
+			});
+
+			$(document).on("click", ".unheighlight_link", function() {
+			    $("body").removeClass("linkH");
+			    $(".unheighlight_link").hide();
+			    $(".heighlight_link").show();
+			    $("#resetTheme").show();
+			});
+
+	    // Reset
+	    $(document).on("click", "#resetTheme", function() {
+	        $("body").removeClass(allThemes.join(" "));
+	        $("body").css("font-size", "100%");
+	        fontSize = 100;
+	        $(".resize-text").addClass("reszt_none").removeClass("reszt");
+	        $(".light_contrst").hide();
+	        $(".dark_contrst").show();
+	        $(this).hide();
+	    });
+
+	});
+</script>
+<script>
+let cenLoaded = false; // prevent multiple calls
+$('#recruitmentDropdown').on('click', function () {
+    if (cenLoaded) return; // already loaded once
+    
+    loadCen();
+}); 
+function loadCen(){
+	$.ajax({
+        url: '/cencall/cen-list',
+        type: 'GET',
+        success: function (response) {
+            let html = response.active;
+            $('#cenorderedlist').html('');
+            $('#cenorderedlist').html(html);
+            cenLoaded = true; // mark as loaded
+            orderCen();
+        },
+        error: function () {
+            console.log("Error loading CEN dropdown");
+        }
+    });
+}
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	loadCen();
+});
+
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+	  var hideTimers = new WeakMap();
+
+	  function closeSubmenu(li) {
+	    const childUl = li.querySelector(":scope > ul");
+	    if (!childUl) return;
+	    clearTimeout(hideTimers.get(childUl));
+	    childUl.style.display = "none";
+	    childUl.classList.remove("show1");
+	  }
+
+	  function openSubmenu(li) {
+	    const childUl = li.querySelector(":scope > ul");
+	    if (!childUl) return;
+	    clearTimeout(hideTimers.get(childUl));
+
+	    document.querySelectorAll(".childdata.showc1.show1, .childdata.df.show1").forEach(function (openUl) {
+	      if (openUl !== childUl) {
+	        const parentLi = openUl.closest("li.addChield");
+	        if (parentLi) closeSubmenu(parentLi);
+	      }
+	    });
+
+	    Array.from(li.parentElement.children).forEach(function (sib) {
+	      if (sib !== li) closeSubmenu(sib);
+	    });
+
+	    const rect = li.getBoundingClientRect();
+	    childUl.style.setProperty("--flyout-top", (rect.top - 1) + "px");
+	    childUl.style.setProperty("--flyout-left", rect.right + "px");
+
+	    childUl.style.display = "block";
+	    childUl.classList.add("show1");
+	  }
+
+	  function scheduleClose(li) {
+	    const childUl = li.querySelector(":scope > ul");
+	    if (!childUl) return;
+	    clearTimeout(hideTimers.get(childUl));
+	    hideTimers.set(childUl, setTimeout(function () {
+	      closeSubmenu(li);
+	    }, 300));
+	  }
+
+	  document.addEventListener("click", function (e) {
+	    const a = e.target.closest("ul.childdata.showc2 > li.addChield > a");
+	    if (!a) return;
+	    e.preventDefault();
+	    const li = a.parentElement;
+	    const childUl = li.querySelector(":scope > ul");
+	    if (!childUl) return;
+	    if (childUl.style.display === "block") {
+	      closeSubmenu(li);
+	    } else {
+	      openSubmenu(li);
+	    }
+	  });
+
+	  // Restricted to pointers that actually support hovering - see the
+	  // matching comment in infoTop.jsp's copy of this script.
+	  function canHover() {
+	    return window.matchMedia("(hover: hover)").matches;
+	  }
+
+	  document.addEventListener("mouseover", function (e) {
+	    if (!canHover()) return;
+	    const li = e.target.closest("ul.childdata.showc2 > li.addChield");
+	    if (!li || li.contains(e.relatedTarget)) return;
+	    openSubmenu(li);
+	  });
+	  document.addEventListener("mouseout", function (e) {
+	    if (!canHover()) return;
+	    const li = e.target.closest("ul.childdata.showc2 > li.addChield");
+	    if (!li || li.contains(e.relatedTarget)) return;
+	    scheduleClose(li);
+	  });
+
+	  document.addEventListener("mouseover", function (e) {
+	    if (!canHover()) return;
+	    const ul = e.target.closest(".childdata.showc1.show1, .childdata.df.show1");
+	    if (!ul || ul.contains(e.relatedTarget)) return;
+	    clearTimeout(hideTimers.get(ul));
+	  });
+	  document.addEventListener("mouseout", function (e) {
+	    if (!canHover()) return;
+	    const ul = e.target.closest(".childdata.showc1.show1, .childdata.df.show1");
+	    if (!ul || ul.contains(e.relatedTarget)) return;
+	    const li = ul.closest("li.addChield");
+	    if (li) closeSubmenu(li);
+	  });
+
+	  function closeAllOpenSubmenus() {
+	    document.querySelectorAll(".childdata.showc2 > li").forEach(function (li) {
+	      closeSubmenu(li);
+	    });
+	  }
+	  window.addEventListener("scroll", function (e) {
+	    if (e.target && e.target.closest && (e.target.closest(".childdata.showc1") || e.target.closest(".childdata.df"))) {
+	      return;
+	    }
+	    closeAllOpenSubmenus();
+	  }, true);
+
+	});
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+	  document.addEventListener("click", function (e) {
+	    const link = e.target.closest("li.addChield > a");
+	    const childUl = link && link.parentElement.querySelector(":scope > ul.childdata.showc2");
+	    if (!childUl) {
+	      if (!e.target.closest("ul.childdata.showc2")) {
+	        document.querySelectorAll("ul.childdata.showc2.show2").forEach(function (ul) {
+	          ul.classList.remove("show2");
+	        });
+	      }
+	      return;
+	    }
+
+	    e.preventDefault();
+	    e.stopPropagation();
+
+	    const isOpen = childUl.classList.contains("show2");
+
+	    document.querySelectorAll("ul.childdata.showc2").forEach(function (ul) {
+	      if (ul !== childUl) {
+	        ul.classList.remove("show2");
+	      }
+	    });
+
+	    childUl.classList.toggle("show2", !isOpen);
+	  });
+
+	});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+    // hide all child menus initially
+    $('.list_bx').hide();
+
+    // click on parent (01/2024 etc) - kept for touch devices, which have no hover
+    $(document).on('click', '.dropdown-item > a[href="javascript:void(0)"]', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let submenu = $(this).next('.list_bx');
+
+        // close others
+        $('.list_bx').not(submenu).slideUp();
+
+        // toggle current
+        submenu.slideToggle();
+    });
+
+    // Desktop: hovering a CEN number (04/2026 etc) flies its location list out
+    // to the side, positioned via JS against the hovered item's own rect since
+    // the CEN-number list's own overflow-y:auto would clip a plain CSS flyout.
+    // Hiding is delayed (not instant) because the CEN-number list's own
+    // scrollbar sits in the gap the mouse has to cross to reach the flyout -
+    // without the delay, the cursor "leaves" the CEN item while still over
+    // that scrollbar and the flyout vanishes before the mouse gets to it.
+    var cenFlyoutHideTimer = null;
+
+    function showCenFlyout($item) {
+        clearTimeout(cenFlyoutHideTimer);
+        var $flyout = $item.children('.list_bx');
+        if (!$flyout.length) {
+            return;
+        }
+        $('#cenorderedlist .list_bx').not($flyout).stop(true, true).hide();
+
+        var rect = $item[0].getBoundingClientRect();
+        $flyout.css({
+            top: rect.top + 'px',
+            left: rect.right + 'px'
+        });
+        $flyout.stop(true, true).show();
+    }
+
+    function scheduleHideCenFlyout($item) {
+        clearTimeout(cenFlyoutHideTimer);
+        cenFlyoutHideTimer = setTimeout(function () {
+            $item.children('.list_bx').stop(true, true).hide();
+        }, 300);
+    }
+
+    // Chrome's mobile device emulation (and some real touch+stylus hybrids)
+    // still fires mouseenter/mouseleave on tap, which opened this flyout on
+    // the very first tap before a click could ever reach it - restrict the
+    // hover-open/hover-close behavior to pointers that actually support
+    // hovering (real desktop mouse), so a touch tap only ever goes through
+    // the click handler above (.dropdown-item > a[href="javascript:void(0)"]).
+    function canHover() {
+        return window.matchMedia('(hover: hover)').matches;
+    }
+
+    $(document).on('mouseenter', '#cenorderedlist .dropdown-item', function () {
+        if (!canHover()) return;
+        showCenFlyout($(this));
+    });
+    $(document).on('mouseleave', '#cenorderedlist .dropdown-item', function () {
+        if (!canHover()) return;
+        scheduleHideCenFlyout($(this));
+    });
+    $(document).on('mouseenter', '#cenorderedlist .list_bx', function () {
+        if (!canHover()) return;
+        clearTimeout(cenFlyoutHideTimer);
+    });
+    $(document).on('mouseleave', '#cenorderedlist .list_bx', function () {
+        if (!canHover()) return;
+        $(this).stop(true, true).hide();
+    });
+
+    // Scrolling the CEN-number list (or the page) moves the hovered item but
+    // an open flyout stays at its old position - close it. Scrolling inside
+    // the flyout itself must NOT close it (real "scroll" events don't bubble,
+    // so this only fires for the CEN list / page, not the flyout's own
+    // scrollbar).
+    function closeAllCenFlyouts() {
+        $('#cenorderedlist .list_bx').stop(true, true).hide();
+    }
+    // capture:true since .main_drop is loaded later via AJAX (loadCen()) -
+    // jQuery delegation can't bind to it upfront, and "scroll" doesn't bubble
+    // anyway, so this catches it on the way down instead.
+    window.addEventListener('scroll', function (e) {
+        if (e.target && e.target.closest && e.target.closest('.list_bx')) {
+            return;
+        }
+        closeAllCenFlyouts();
+    }, true);
+
+});
+</script>
+<script>
+$(document).ready(function () {
+
+    if(localStorage.getItem("cookieConsent") !== "accepted"){
+        $("#cookieConsent").css("display","flex");
+    }
+    $("#rcc-confirm-button, #rcc-decline-button").click(function () {
+        localStorage.setItem("cookieConsent", "accepted");
+        $("#cookieConsent").fadeOut();
+    });
+});
+</script>
+</body>
+</html>

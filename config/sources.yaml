@@ -1,6 +1,6 @@
-# Source registry. Hostnames here were verified by direct fetch on the date shown.
-# purpose: content = pages we collect, apply = valid apply/portal link target, portal = login portal (link only)
-# Apply links are valid only for the organisation they are listed under (see docs/decisions.md D2).
+# Source registry. Hostnames were verified by direct fetch on the date shown (see docs/source-report.md).
+# purpose: content = pages we collect, apply = valid apply link target, portal = login portal (link only)
+# Apply links are valid only for the organisation they are listed under (docs/decisions.md D2).
 
 organisations:
   - key: upsc
@@ -16,7 +16,7 @@ organisations:
       - https://www.upsc.gov.in/examinations/active-exams
       - https://www.upsc.gov.in/examinations/forthcoming-exams
       - https://www.upsc.gov.in/examinations/exam-calendar
-      - https://www.upsc.gov.in/recruitment/recruitment-advertisement
+    apply_entry: https://upsconline.gov.in/
     schedule: { every_minutes: 120, active_deadline_minutes: 30 }
 
   - key: kerala_psc
@@ -32,9 +32,7 @@ organisations:
       - https://keralapsc.gov.in/notifications
       - https://keralapsc.gov.in/examinations
       - https://keralapsc.gov.in/latest
-      - https://keralapsc.gov.in/psc-examination-updates
-      - https://keralapsc.gov.in/shortlists
-      - https://keralapsc.gov.in/rankedlist
+    apply_entry: https://thulasi.psc.kerala.gov.in/thulasi/
     schedule: { every_minutes: 120, active_deadline_minutes: 30 }
 
   - key: kdrb
@@ -45,10 +43,9 @@ organisations:
       - { host: kdrb.kerala.gov.in, purpose: content, verified: 2026-11-08 }
       - { host: recruitment.kdrb.kerala.gov.in, purpose: apply, verified: 2026-11-08 }
     listings:
-      - https://kdrb.kerala.gov.in/wp-sitemap.xml
       - https://kdrb.kerala.gov.in/category/examination/notifications/
       - https://kdrb.kerala.gov.in/category/examination/announcements/
-      - https://recruitment.kdrb.kerala.gov.in/index.php/LatestNotifications
+    apply_entry: https://recruitment.kdrb.kerala.gov.in/
     schedule: { every_minutes: 180 }
 
   - key: sbi
@@ -61,25 +58,25 @@ organisations:
       - { host: ibpsreg.ibps.in, purpose: apply, verified: 2026-11-08, note: "used by some SBI recruitments" }
     listings:
       - https://sbi.bank.in/web/careers/current-openings
-      - https://sbi.bank.in/web/careers/recruitment-results
     schedule: { every_minutes: 120 }
 
   - key: ibps
     name: Institute of Banking Personnel Selection
     group: central
     collection: auto
+    skip_title_prefixes: ["SBI "]
     domains:
       - { host: www.ibps.in, purpose: content, verified: 2026-11-08 }
       - { host: ibpsreg.ibps.in, purpose: apply, verified: 2026-11-08 }
     listings:
       - https://www.ibps.in/
-      - https://www.ibps.in/index.php/recruitment/
     schedule: { every_minutes: 120 }
 
   - key: nta
     name: National Testing Agency
     group: central
     collection: auto
+    include_keywords: ["UGC", "CSIR", "NET", "recruitment", "teacher"]
     domains:
       - { host: nta.ac.in, purpose: content, verified: 2026-11-08 }
       - { host: www.nta.ac.in, purpose: content, verified: 2026-11-08 }
@@ -87,17 +84,16 @@ organisations:
       - { host: csirnet.nta.nic.in, purpose: content, verified: 2026-11-08 }
       - { host: exams.nta.nic.in, purpose: content, verified: 2026-11-08 }
       - { host: exams.nta.ac.in, purpose: content, verified: 2026-11-08 }
+      - { host: examinationservices.nic.in, purpose: apply, verified: 2026-11-08 }
     listings:
       - https://nta.ac.in/
-      - https://ugcnet.nta.nic.in/
-      - https://csirnet.nta.nic.in/
     schedule: { every_minutes: 120 }
 
   - key: rrb
     name: Railway Recruitment Boards
     group: central
     collection: auto
-    crawl_delay_seconds: 10
+    crawl_delay_seconds: 12
     domains:
       - { host: rrb.indianrailways.gov.in, purpose: content, verified: 2026-11-08 }
     listings:
@@ -107,16 +103,32 @@ organisations:
   - key: ssc
     name: Staff Selection Commission
     group: central
-    collection: pending_decision   # see docs/decisions.md D11
+    collection: auto            # rendered in a headless browser; owner approved collecting from the site
     domains:
       - { host: ssc.gov.in, purpose: content, verified: 2026-11-08 }
-    listings: []
+    listings:
+      - https://ssc.gov.in/
+    schedule: { every_minutes: 180 }
 
   - key: rbi
     name: Reserve Bank of India
     group: central
-    collection: manual             # image CAPTCHA, see docs/decisions.md D5
+    collection: rss_and_manual  # recruitment site has an image CAPTCHA, never fetched (decisions D5)
     domains:
-      - { host: opportunities.rbi.org.in, purpose: content, verified: 2026-11-08 }
+      - { host: opportunities.rbi.org.in, purpose: content, verified: 2026-11-08, note: "CAPTCHA; link only" }
       - { host: www.rbi.org.in, purpose: content, verified: 2026-11-08 }
-    listings: []
+      - { host: rbi.org.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - { url: "https://www.rbi.org.in/pressreleases_rss.xml", kind: rss }
+    apply_entry: https://opportunities.rbi.org.in/Scripts/Vacancies.aspx
+    schedule: { every_minutes: 120 }
+
+# Publisher RSS feeds used as signals only. Robots rules checked 2026-11-08.
+news_feeds:
+  - { key: news_indianexpress_jobs, publisher: The Indian Express, url: "https://indianexpress.com/section/jobs/feed/", enabled: true }
+  - { key: news_thehindu_education, publisher: The Hindu, url: "https://www.thehindu.com/education/feeder/default.rss", enabled: true }
+  - { key: news_mathrubhumi, publisher: Mathrubhumi, url: "https://www.mathrubhumi.com/rss", enabled: true }
+  # Google News search feeds: disabled by default pending legal review (docs/legal-review.md L11).
+  - { key: news_google_rbi, publisher: Google News, url: "https://news.google.com/rss/search?q=RBI+recruitment&hl=en-IN&gl=IN&ceid=IN:en", enabled: false, google: true }
+  - { key: news_google_kpsc, publisher: Google News, url: "https://news.google.com/rss/search?q=Kerala+PSC&hl=en-IN&gl=IN&ceid=IN:en", enabled: false, google: true }
+  - { key: news_google_ssc, publisher: Google News, url: "https://news.google.com/rss/search?q=SSC+exam+notification&hl=en-IN&gl=IN&ceid=IN:en", enabled: false, google: true }
