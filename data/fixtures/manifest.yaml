@@ -157,3 +157,9 @@ documents:
   retrieved_at: '2026-11-08'
   official: true
   bytes: 42434
+- file: ssc/home_rendered.html
+  source_url: https://ssc.gov.in/ (rendered in headless Chromium)
+  sha256: a7b797e9f876c97d0273903c99e81f00ee4924cf56ed572b8a8cbbc970618df3
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 266965

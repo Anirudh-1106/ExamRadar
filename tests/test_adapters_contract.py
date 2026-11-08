@@ -129,3 +129,11 @@ def test_pdfs_have_usable_text(rel):
 
 def test_today_is_not_hardcoded():
     assert date.today().year >= 2026
+
+
+def test_ssc_rendered_notice_board():
+    items = parse("ssc", "https://ssc.gov.in/", "ssc/home_rendered.html")
+    dated = [i for i in items if i.published_hint]
+    assert len(dated) >= 8 and all(i.data.get("fetch") is False for i in dated)
+    assert any(i.kind == "answer_key" for i in dated)
+    assert any(i.cycle and i.cycle.title == "Combined Graduate Level Examination, 2026" for i in dated)

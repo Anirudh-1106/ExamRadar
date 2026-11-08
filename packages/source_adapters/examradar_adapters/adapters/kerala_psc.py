@@ -112,7 +112,10 @@ class KeralaPSC(Adapter):
             if wef and kind in ("ranked_list", "short_list") and cats:
                 d = find_dates(wef.group(1))
                 if d:
+                    post = clean(re.sub(r"\(\s*Cat\.?\s*No.*$", "", title, flags=re.I))
+                    dept_m = re.search(r"\)\s+in\s+(.+?)\.?$", title)
                     facts.append(Fact("event", {"event_type": kind, "date": d[0].value.isoformat(), "category_numbers": cats,
+                                                "post": post or None, "department": clean(dept_m.group(1)) if dept_m else None,
                                                 "precision": "day", "certainty": "official"}, wef.group(0), None, 0.9))
             items.append(Item(key=href or f"latest:{typ}:{title}", title=f"{typ}: {title}", url=href, kind=kind,
                               facts=facts, data={"category_numbers": cats}))

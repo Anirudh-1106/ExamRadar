@@ -30,6 +30,7 @@ class Settings(BaseSettings):
     crawler_default_min_delay_seconds: float = 5.0
     crawler_timeout_seconds: float = 30.0
     crawler_max_bytes: int = 25_000_000
+    crawler_extra_ca_file: str = str(REPO_ROOT / "config" / "extra-ca.pem")
 
     llm_provider: str = "none"  # groq | none
     groq_api_key: str | None = None

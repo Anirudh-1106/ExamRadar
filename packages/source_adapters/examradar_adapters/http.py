@@ -6,12 +6,15 @@ or worked around: it raises SourceBlocked so the source is marked blocked and an
 """
 
 import random
+import ssl
 import threading
 import time
 import urllib.robotparser
 from dataclasses import dataclass, field
+from pathlib import Path
 from urllib.parse import urlparse
 
+import certifi
 import httpx
 from examradar_core.settings import get_settings
 
@@ -60,6 +63,19 @@ class FetchResult:
     headers: dict[str, str] = field(default_factory=dict)
 
 
+def tls_context() -> ssl.SSLContext:
+    """Normal certificate verification, plus intermediate certificates that some official sites fail to send.
+
+    Verification is never turned off. config/extra-ca.pem holds only intermediates downloaded from the issuing
+    CA's own address (see docs/decisions.md D14); each must chain to a root already in the trust store.
+    """
+    ctx = ssl.create_default_context(cafile=certifi.where())
+    extra = Path(get_settings().crawler_extra_ca_file)
+    if extra.exists():
+        ctx.load_verify_locations(cafile=str(extra))
+    return ctx
+
+
 class PoliteClient:
     def __init__(self, user_agent: str | None = None, min_delay: float | None = None,
                  transport: httpx.BaseTransport | None = None, respect_robots: bool = True):
@@ -73,6 +89,7 @@ class PoliteClient:
             timeout=s.crawler_timeout_seconds,
             follow_redirects=True,
             transport=transport,
+            verify=tls_context(),
         )
         self._last_hit: dict[str, float] = {}
         self._host_delay: dict[str, float] = {}
