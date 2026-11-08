@@ -14,3 +14,8 @@ This file lists questions for a qualified lawyer. Nothing here is legal advice.
 | L8 | Scam Check verdicts | Risk of a "Known fake" or "Suspicious" label being wrong. Wording, evidence display, and correction process. | Open |
 | L9 | Users under 18 | Launch targets adults. Some exams (for example NDA) have younger candidates. Parental consent flow needed before allowing minors. | Open |
 | L10 | Use of the name "ExamRadar" | Trademark search before release. | Open |
+| L11 | Google News RSS feeds | Their terms may not allow use in an app. The feeds are configured but off. | Open |
+| L12 | Showing news headlines with links | We show publisher headlines with a link, labelled unverified. Is headline display fair use, or should we show only the publisher name? | Open |
+| L13 | Headless rendering of SSC and the UPSC block | SSC is rendered like a browser visit. UPSC returned HTTP 403 to our crawler. Should we write to UPSC and SSC for permission? | Open |
+| L14 | Malayalam translations | Written by the build agent. They need review by a fluent speaker before release. Not a legal item, but a release blocker. | Open |
+

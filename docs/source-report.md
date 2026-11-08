@@ -148,3 +148,30 @@ Checked on **2026-11-08** from a connection in India, using plain HTTPS requests
 ## Not yet checked
 
 PSC Bulletin, SSC regional sites, UPSC answer key and cut-off page structures, KDRB notice PDFs, scanned gazette samples, and RRB CEN PDF formats. Each will be sampled when its adapter is built.
+
+## Live run results (2026-11-08, evening)
+
+The full pipeline ran against every source. Differences from the morning reconnaissance:
+
+| Source | Result | Action taken |
+|---|---|---|
+| UPSC | HTTP 403 for every listing page | Marked blocked. Admin task raised. No workaround attempted. See decisions D13. |
+| IBPS | TLS verification failed: the server omits its intermediate certificate | Added the official intermediate (decisions D14). Collection now works with verification on. |
+| SSC | Headless render works. 10 dated notices on the notice board. | Parser reads the notice cards (decisions D11). |
+| NTA | 145 notices found. Recent notice PDFs are scanned images. | Sent to review as low text quality until OCR runs in the worker image. |
+| RRB | 254 notification-number sections listed. Section pages stay firewall-blocked. | Alerts link to the official page. Dates by manual entry. |
+| Kerala PSC, SBI, KDRB | Worked as planned | None |
+
+## News and other regular-update sources
+
+Checked 2026-11-08 at the owner's request, to cover RBI and to catch notices early.
+
+| Source | Type | Usable? | Used how |
+|---|---|---|---|
+| RBI press-release RSS (`www.rbi.org.in/pressreleases_rss.xml`) | Official | Yes. No recruitment items that day. | Official source for RBI items |
+| Employment News (`employmentnews.gov.in`) | Official (Government of India) | The free job list is short. Full content is in the paid e-paper. | Not used yet. Candidate for later. |
+| PIB Fact Check | Official | Published as embedded X posts only | Admins add items by hand with the PIB link |
+| Indian Express Jobs RSS | News | Yes. robots.txt allows it. | Signal only |
+| The Hindu Education RSS | News | Yes. robots.txt allows it. | Signal only |
+| Mathrubhumi RSS | News (Malayalam) | Yes | Signal only |
+| Google News search RSS | Aggregator | Works | Off pending legal review |

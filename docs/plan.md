@@ -1,5 +1,19 @@
 # Implementation plan
 
+## Status (2026-11-08)
+
+| Milestone | Status | Notes |
+|---|---|---|
+| M0 Recon and plan | Done | |
+| M1 Foundation, Kerala PSC and UPSC | Done | UPSC adapter works on saved pages, but the live site now returns HTTP 403 to the crawler (decisions D13). |
+| M2 Extraction and review | Done | OCR code is in place but untested locally (Tesseract not installed here; it is in the worker image). LLM fallback is untested (no key). The gold set is 68 facts, not 200. |
+| M3 All launch sources | Done with limits | SSC rendered; RBI via RSS plus manual; RRB alerts only (section pages firewall-blocked); NTA scanned PDFs need OCR. |
+| M4 Mobile read experience | Done | APK builds. Not yet run on a physical phone or emulator from here. |
+| M5 Accounts, tracking, alerts | Done with limits | Push needs a Firebase project. Local reminders and the inbox work without it. |
+| M6 Eligibility | Done | Kerala relaxation amounts are not yet extracted from the general conditions, so those cases return "check before applying". |
+| M7 Scam Check and readiness | Done | Certificate-validity rules: none extracted yet, so the app says so. |
+| M8 Release hardening | Partly | Malayalam needs native review; security review, privacy policy, deployment guide, and Play checklist are drafts. Not deployed or submitted. |
+
 Updated after Milestone 0 reconnaissance (2026-11-08). Each milestone ends with a report covering what changed, how to run it, test results, known limitations, and decisions needed.
 
 ## Changes from the original brief
