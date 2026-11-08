@@ -1,0 +1,6 @@
+* text=auto eol=lf
+data/fixtures/** binary
+data/gold/** binary
+*.png binary
+*.jpg binary
+*.pdf binary
