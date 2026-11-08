@@ -1,0 +1,59 @@
+# Qualification taxonomy used to compare a user's qualifications with structured rules.
+# level: 1 secondary, 2 higher secondary/ITI, 3 diploma, 4 bachelor, 5 professional bachelor, 6 master, 7 doctorate
+# A qualification implies its parent chain (a B.Sc implies Plus Two implies SSLC). It never implies siblings.
+qualifications:
+  - { code: SSLC, name: "SSLC / Class 10", level: 1, aliases: ["10th", "matriculation", "secondary school"] }
+  - { code: PLUS_TWO, name: "Plus Two / HSE / Class 12", level: 2, parent: SSLC, aliases: ["12th", "higher secondary", "hse", "intermediate"] }
+  - { code: ITI, name: "ITI / NCVT / SCVT certificate", level: 2, parent: SSLC }
+  - { code: DIPLOMA_ENGG, name: "Diploma in Engineering", level: 3, parent: SSLC }
+  - { code: DIPLOMA_OTHER, name: "Other diploma", level: 3, parent: SSLC }
+  - { code: DEGREE, name: "Any bachelor's degree", level: 4, parent: PLUS_TWO, aliases: ["graduation", "graduate"] }
+  - { code: BA, name: "B.A.", level: 4, parent: DEGREE }
+  - { code: BCOM, name: "B.Com.", level: 4, parent: DEGREE }
+  - { code: BSC, name: "B.Sc. (any subject)", level: 4, parent: DEGREE }
+  - { code: BSC_CHEMISTRY, name: "B.Sc. Chemistry", level: 4, parent: BSC }
+  - { code: BSC_BIOCHEMISTRY, name: "B.Sc. Biochemistry", level: 4, parent: BSC }
+  - { code: BSC_BIOTECHNOLOGY, name: "B.Sc. Biotechnology", level: 4, parent: BSC }
+  - { code: BSC_MICROBIOLOGY, name: "B.Sc. Microbiology", level: 4, parent: BSC }
+  - { code: BSC_PHYSICS, name: "B.Sc. Physics", level: 4, parent: BSC }
+  - { code: BSC_MATHEMATICS, name: "B.Sc. Mathematics", level: 4, parent: BSC }
+  - { code: BSC_COMPUTER_SCIENCE, name: "B.Sc. Computer Science", level: 4, parent: BSC }
+  - { code: BSC_NURSING, name: "B.Sc. Nursing", level: 5, parent: DEGREE }
+  - { code: BCA, name: "BCA", level: 4, parent: DEGREE }
+  - { code: BBA, name: "BBA", level: 4, parent: DEGREE }
+  - { code: BTECH, name: "B.Tech / B.E. (any branch)", level: 5, parent: DEGREE }
+  - { code: BTECH_CIVIL, name: "B.Tech / B.E. Civil", level: 5, parent: BTECH }
+  - { code: BTECH_MECHANICAL, name: "B.Tech / B.E. Mechanical", level: 5, parent: BTECH }
+  - { code: BTECH_ELECTRICAL, name: "B.Tech / B.E. Electrical", level: 5, parent: BTECH }
+  - { code: BTECH_ELECTRONICS, name: "B.Tech / B.E. Electronics", level: 5, parent: BTECH }
+  - { code: BTECH_CS, name: "B.Tech / B.E. Computer Science / IT", level: 5, parent: BTECH }
+  - { code: LLB, name: "LL.B.", level: 5, parent: DEGREE }
+  - { code: MBBS, name: "MBBS", level: 5, parent: DEGREE }
+  - { code: BED, name: "B.Ed.", level: 5, parent: DEGREE }
+  - { code: PG, name: "Any master's degree", level: 6, parent: DEGREE }
+  - { code: MA, name: "M.A.", level: 6, parent: PG }
+  - { code: MSC, name: "M.Sc.", level: 6, parent: PG }
+  - { code: MCOM, name: "M.Com.", level: 6, parent: PG }
+  - { code: MBA, name: "MBA", level: 6, parent: PG }
+  - { code: MCA, name: "MCA", level: 6, parent: PG }
+  - { code: MTECH, name: "M.Tech / M.E.", level: 6, parent: PG }
+  - { code: MD_MS, name: "MD / MS (medical)", level: 6, parent: MBBS }
+  - { code: PHD, name: "Ph.D.", level: 7, parent: PG }
+
+# Reservation groups used in Kerala PSC rotation. Needs verification against the current official list before release.
+kerala_communities:
+  - { code: OPEN, name: "Open competition / none of the below" }
+  - { code: EZHAVA, name: "Ezhava / Thiyya / Billava" }
+  - { code: MUSLIM, name: "Muslim" }
+  - { code: LC_AI, name: "Latin Catholic / Anglo-Indian" }
+  - { code: OBC_OTHER, name: "Other Backward Classes (other)" }
+  - { code: VISWAKARMA, name: "Viswakarma" }
+  - { code: SIUC_NADAR, name: "SIUC Nadar" }
+  - { code: HINDU_NADAR, name: "Hindu Nadar" }
+  - { code: SCCC, name: "SC converted to Christianity" }
+  - { code: DHEEVARA, name: "Dheevara" }
+  - { code: SC, name: "Scheduled Caste" }
+  - { code: ST, name: "Scheduled Tribe" }
+  - { code: EWS, name: "Economically Weaker Section" }
+
+central_categories: [GEN, EWS, OBC, SC, ST]
