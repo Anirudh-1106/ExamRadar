@@ -1,0 +1,122 @@
+# Source registry. Hostnames here were verified by direct fetch on the date shown.
+# purpose: content = pages we collect, apply = valid apply/portal link target, portal = login portal (link only)
+# Apply links are valid only for the organisation they are listed under (see docs/decisions.md D2).
+
+organisations:
+  - key: upsc
+    name: Union Public Service Commission
+    group: central
+    collection: auto
+    domains:
+      - { host: www.upsc.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: upsconline.gov.in, purpose: apply, verified: 2026-11-08 }
+      - { host: upsconline.nic.in, purpose: apply, verified: 2026-11-08 }
+    listings:
+      - https://www.upsc.gov.in/whats-new
+      - https://www.upsc.gov.in/examinations/active-exams
+      - https://www.upsc.gov.in/examinations/forthcoming-exams
+      - https://www.upsc.gov.in/examinations/exam-calendar
+      - https://www.upsc.gov.in/recruitment/recruitment-advertisement
+    schedule: { every_minutes: 120, active_deadline_minutes: 30 }
+
+  - key: kerala_psc
+    name: Kerala Public Service Commission
+    group: kerala
+    collection: auto
+    domains:
+      - { host: keralapsc.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: www.keralapsc.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: thulasi.psc.kerala.gov.in, purpose: apply, verified: 2026-11-08, note: "login portal, no deep links" }
+      - { host: psc.kerala.gov.in, purpose: portal, verified: 2026-11-08 }
+    listings:
+      - https://keralapsc.gov.in/notifications
+      - https://keralapsc.gov.in/examinations
+      - https://keralapsc.gov.in/latest
+      - https://keralapsc.gov.in/psc-examination-updates
+      - https://keralapsc.gov.in/shortlists
+      - https://keralapsc.gov.in/rankedlist
+    schedule: { every_minutes: 120, active_deadline_minutes: 30 }
+
+  - key: kdrb
+    name: Kerala Devaswom Recruitment Board
+    group: kerala
+    collection: auto
+    domains:
+      - { host: kdrb.kerala.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: recruitment.kdrb.kerala.gov.in, purpose: apply, verified: 2026-11-08 }
+    listings:
+      - https://kdrb.kerala.gov.in/wp-sitemap.xml
+      - https://kdrb.kerala.gov.in/category/examination/notifications/
+      - https://kdrb.kerala.gov.in/category/examination/announcements/
+      - https://recruitment.kdrb.kerala.gov.in/index.php/LatestNotifications
+    schedule: { every_minutes: 180 }
+
+  - key: sbi
+    name: State Bank of India
+    group: central
+    collection: auto
+    domains:
+      - { host: sbi.bank.in, purpose: content, verified: 2026-11-08 }
+      - { host: recruitment.sbi.bank.in, purpose: apply, verified: 2026-11-08 }
+      - { host: ibpsreg.ibps.in, purpose: apply, verified: 2026-11-08, note: "used by some SBI recruitments" }
+    listings:
+      - https://sbi.bank.in/web/careers/current-openings
+      - https://sbi.bank.in/web/careers/recruitment-results
+    schedule: { every_minutes: 120 }
+
+  - key: ibps
+    name: Institute of Banking Personnel Selection
+    group: central
+    collection: auto
+    domains:
+      - { host: www.ibps.in, purpose: content, verified: 2026-11-08 }
+      - { host: ibpsreg.ibps.in, purpose: apply, verified: 2026-11-08 }
+    listings:
+      - https://www.ibps.in/
+      - https://www.ibps.in/index.php/recruitment/
+    schedule: { every_minutes: 120 }
+
+  - key: nta
+    name: National Testing Agency
+    group: central
+    collection: auto
+    domains:
+      - { host: nta.ac.in, purpose: content, verified: 2026-11-08 }
+      - { host: www.nta.ac.in, purpose: content, verified: 2026-11-08 }
+      - { host: ugcnet.nta.nic.in, purpose: content, verified: 2026-11-08 }
+      - { host: csirnet.nta.nic.in, purpose: content, verified: 2026-11-08 }
+      - { host: exams.nta.nic.in, purpose: content, verified: 2026-11-08 }
+      - { host: exams.nta.ac.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://nta.ac.in/
+      - https://ugcnet.nta.nic.in/
+      - https://csirnet.nta.nic.in/
+    schedule: { every_minutes: 120 }
+
+  - key: rrb
+    name: Railway Recruitment Boards
+    group: central
+    collection: auto
+    crawl_delay_seconds: 10
+    domains:
+      - { host: rrb.indianrailways.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://rrb.indianrailways.gov.in/thiruvananthapuram
+    schedule: { every_minutes: 180 }
+
+  - key: ssc
+    name: Staff Selection Commission
+    group: central
+    collection: pending_decision   # see docs/decisions.md D11
+    domains:
+      - { host: ssc.gov.in, purpose: content, verified: 2026-11-08 }
+    listings: []
+
+  - key: rbi
+    name: Reserve Bank of India
+    group: central
+    collection: manual             # image CAPTCHA, see docs/decisions.md D5
+    domains:
+      - { host: opportunities.rbi.org.in, purpose: content, verified: 2026-11-08 }
+      - { host: www.rbi.org.in, purpose: content, verified: 2026-11-08 }
+    listings: []
