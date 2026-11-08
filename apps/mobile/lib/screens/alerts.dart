@@ -83,22 +83,6 @@ const _types = [
   'objection_deadline',
   'result',
 ];
-const _typeNames = {
-  'new_notice': 'New official notices',
-  'new_matching_exam': 'New exams that match me',
-  'application_opening': 'Applications opening',
-  'deadline_7': 'Deadline in 7 days',
-  'deadline_3': 'Deadline in 3 days',
-  'deadline_1': 'Deadline tomorrow',
-  'confirmation_deadline': 'Kerala PSC confirmation deadline',
-  'date_change': 'Date changes',
-  'link_change': 'Link changes',
-  'correction_window': 'Correction window',
-  'admit_card': 'Admit cards',
-  'answer_key': 'Answer keys',
-  'objection_deadline': 'Objection deadlines',
-  'result': 'Results and rank lists',
-};
 
 class AlertSettingsScreen extends ConsumerStatefulWidget {
   const AlertSettingsScreen({super.key});
@@ -177,7 +161,7 @@ class _AlertSettingsState extends ConsumerState<AlertSettingsScreen> {
               SectionHeader(context.t('alertTypes')),
               for (final t in _types)
                 SwitchListTile(
-                  title: Text(_typeNames[t] ?? t),
+                  title: Text(context.t('nt_$t')),
                   value: p.enabledTypes.contains(t),
                   onChanged: (on) => _save(_copy(p, types: on ? [...p.enabledTypes, t] : p.enabledTypes.where((x) => x != t).toList())),
                 ),
