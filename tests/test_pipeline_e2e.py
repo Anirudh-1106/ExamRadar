@@ -203,3 +203,39 @@ def test_new_matching_exam_for_users_with_stored_profile(db, client):
     db.commit()
     got = {n.user_id for n in db.scalars(select(Notification).where(Notification.type == "new_matching_exam"))}
     assert eligible.id in got and too_old.id not in got and no_profile.id not in got
+
+
+def test_kerala_psc_general_conditions_relaxations_give_clear_answers(db, client):
+    from examradar_api.services import rule_specs
+    from examradar_core.models import EligibilityRule, Post
+    from examradar_eligibility import Profile, evaluate
+
+    p = Pipeline(db, client=client, today=TODAY)
+    p.run_source(src(db, "kerala_psc:https://keralapsc.gov.in/notifications"))
+    p.process_documents(40)
+    p.run_source(src(db, "kerala_psc:https://keralapsc.gov.in/general-conditions"))
+    p.process_documents(5)
+    db.commit()
+    cn = db.scalar(select(CategoryNumber).where(CategoryNumber.number == "162/2026"))
+    post = db.scalar(select(Post).where(Post.exam_cycle_id == cn.exam_cycle_id))
+    rels = db.scalars(select(EligibilityRule).where(EligibilityRule.post_id == post.id, EligibilityRule.rule_type == "relaxation",
+                                                    EligibilityRule.status == "published")).all()
+    assert {(r.params["applies_to"], r.params["years"]) for r in rels if not r.params.get("conditional")} >= {("OBC", 3), ("SC", 5), ("ST", 5), ("PWBD", 10)}
+    assert all(r.evidence_id and r.clause_text for r in rels)
+    specs = [s for s in rule_specs(db, post) if s.rule_type in ("age", "relaxation", "relaxation_reference")]
+
+    def status(**kw):
+        return evaluate(specs, Profile(pwd=False, ex_serviceman=False, gender="male", **kw)).status
+
+    # Base window: born 02/01/1982 to 01/01/2008. OBC gets 3 years, SC/ST 5, capped at 50.
+    assert status(date_of_birth=date(1980, 5, 1), category="OBC") == "eligible"
+    assert status(date_of_birth=date(1980, 5, 1), kerala_community="EZHAVA") == "eligible"
+    assert status(date_of_birth=date(1980, 5, 1), category="GEN", kerala_community="OPEN") == "not_eligible"
+    assert status(date_of_birth=date(1978, 5, 1), category="OBC") == "not_eligible"
+    assert status(date_of_birth=date(1977, 5, 1), category="SC") == "eligible"
+    assert status(date_of_birth=date(1975, 5, 1), category="SC") == "needs_check"  # limit may not apply (conditional)
+    def pwd(d):
+        return evaluate(specs, Profile(date_of_birth=d, category="GEN", kerala_community="OPEN", pwd=True, ex_serviceman=False)).status
+
+    assert pwd(date(1976, 5, 1)) == "eligible"  # 10 years for disability, within the overall cap of 50
+    assert pwd(date(1974, 5, 1)) == "not_eligible"  # the General Conditions cap every concession at 50

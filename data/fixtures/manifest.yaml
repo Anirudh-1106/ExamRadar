@@ -163,3 +163,15 @@ documents:
   retrieved_at: '2026-11-08'
   official: true
   bytes: 266965
+- file: kerala_psc/general-conditions.html
+  source_url: https://keralapsc.gov.in/general-conditions
+  sha256: 59b2de3049261b2960eef0294b26fae7afab75bdd612b2360995a55fd7df48d7
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 31719
+- file: kerala_psc/general_conditions_added_latest.pdf
+  source_url: https://keralapsc.gov.in/sites/default/files/inline-files/general_conditions_added_latest.pdf
+  sha256: 2a10e22aa5646e723eb3f9459f5fdd0b0c6d5e1d120ebec1c1aa8d3b615fc555
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 499406

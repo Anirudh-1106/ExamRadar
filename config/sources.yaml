@@ -32,6 +32,7 @@ organisations:
       - https://keralapsc.gov.in/notifications
       - https://keralapsc.gov.in/examinations
       - https://keralapsc.gov.in/latest
+      - https://keralapsc.gov.in/general-conditions
     apply_entry: https://thulasi.psc.kerala.gov.in/thulasi/
     schedule: { every_minutes: 120, active_deadline_minutes: 30 }
 

@@ -25,6 +25,8 @@ URLS = {
     "https://keralapsc.gov.in/extra-ordinary-gazette-date-30102026": "kerala_psc/gazette_30102026.html",
     "https://keralapsc.gov.in/sites/default/files/2026-10/noti-162-26.pdf": "kerala_psc/noti-162-26.pdf",
     "https://keralapsc.gov.in/sites/default/files/2026-10/for-confirmation-january-2027.pdf": "kerala_psc/for-confirmation-january-2027.pdf",
+    "https://keralapsc.gov.in/general-conditions": "kerala_psc/general-conditions.html",
+    "https://keralapsc.gov.in/sites/default/files/inline-files/general_conditions_added_latest.pdf": "kerala_psc/general_conditions_added_latest.pdf",
     "https://www.upsc.gov.in/whats-new": "upsc/whats-new.html",
     "https://www.upsc.gov.in/examinations/active-exams": "upsc/active-exams.html",
     "https://www.upsc.gov.in/examinations/exam-calendar": "upsc/exam-calendar.html",

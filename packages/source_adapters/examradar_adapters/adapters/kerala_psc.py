@@ -33,6 +33,11 @@ class KeralaPSC(Adapter):
             return self._programmes(body, base_url)
         if path.startswith("/latest"):
             return self._latest(body, base_url)
+        if path.startswith("/general-conditions"):
+            items = [i for i in generic_anchor_items(body, base_url, self.content_hosts(), min_len=5) if i.doc_urls]
+            for i in items:
+                i.kind = "general_conditions"
+            return items
         return [i for i in generic_anchor_items(body, base_url, self.content_hosts()) if i.doc_urls]
 
     def _notifications(self, body: bytes, base: str) -> list[Item]:
@@ -128,6 +133,8 @@ class KeralaPSC(Adapter):
         from examradar_extraction import rules_kpsc
         from examradar_extraction.rules import event_facts
 
+        if item.kind == "general_conditions":
+            return rules_kpsc.general_conditions_facts(doc)
         if item.kind == "schedule":
             return rules_kpsc.programme_facts(doc, item.title)
         if item.kind == "notification":

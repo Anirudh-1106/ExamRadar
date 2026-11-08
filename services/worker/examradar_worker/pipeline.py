@@ -52,7 +52,7 @@ from examradar_extraction.validate import (
     link_allowed,
     verify_quote,
 )
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from . import notify
@@ -381,6 +381,7 @@ class Pipeline:
         self.s.add(run)
         self.s.flush()
         pages = doc.pages_text or [doc.text or ""]
+        org_rules = False
         for f in facts:
             ef = ExtractedField(extraction_run_id=run.id, document_id=doc.id, field_name=f.field, value=f.value,
                                 confidence=f.confidence, method=f.method)
@@ -395,12 +396,19 @@ class Pipeline:
                                published_on=doc.published_on, retrieved_at=doc.retrieved_at, last_checked_at=doc.last_checked_at)
             self.s.add(ev)
             self.s.flush()
+            if f.field in ("relaxation", "relaxation_cap"):
+                # Organisation-wide rules (Kerala PSC General Conditions) apply to every post that refers to them.
+                ef.status = "published" if f.confidence >= AUTO_PUBLISH_CONFIDENCE else "needs_review"
+                org_rules = True
+                continue
             for target, cat in self.targets(org, ad, cycle, f):
                 ef.exam_cycle_id = ef.exam_cycle_id or target.id
                 self.apply_one(org, target, cat, f.field, f.value, ef, ev, doc, f.method, f.confidence)
             if ef.exam_cycle_id is None and ef.status == "candidate":
                 ef.status = "unassigned"
         self.s.flush()
+        if org_rules:
+            self.apply_org_relaxations(org)
 
     def targets(self, org: Organisation, ad: Adapter, cycle: ExamCycle | None, f: Fact) -> list[tuple[ExamCycle, str | None]]:
         cats = f.value.get("category_numbers") or []
@@ -483,6 +491,9 @@ class Pipeline:
                     old.status = "superseded"
                 self.s.add(EligibilityRule(post_id=p.id, rule_type=rule_type, params=v, clause_text=ev.quote, evidence_id=ev.id))
             ef.status = "published"
+            if field == "relaxation_reference":
+                self.s.flush()
+                self.apply_org_relaxations(org, cycle)
             if field == "age_rule" and self.notify_enabled:
                 self.s.flush()
                 notify.on_new_matching_exam(self.s, cycle, self.today)
@@ -498,6 +509,36 @@ class Pipeline:
             else:
                 self._to_review(ef, cycle, f"{field} needs review before it is used on devices")
         self.s.flush()
+
+    def apply_org_relaxations(self, org: Organisation, cycle: ExamCycle | None = None) -> int:
+        """Attach the organisation's published age relaxations to posts whose notification refers to them."""
+        latest_doc = self.s.scalar(
+            select(func.max(ExtractedField.document_id)).join(Document, Document.id == ExtractedField.document_id).where(
+                Document.organisation_id == org.id, ExtractedField.field_name == "relaxation", ExtractedField.status == "published"))
+        if latest_doc is None:
+            return 0
+        fields = self.s.scalars(select(ExtractedField).where(ExtractedField.document_id == latest_doc, ExtractedField.status == "published",
+                                                            ExtractedField.field_name.in_(["relaxation", "relaxation_cap"]))).all()
+        cap = next((f.value["cap_age"] for f in fields if f.field_name == "relaxation_cap"), None)
+        rels = [f for f in fields if f.field_name == "relaxation"]
+        q = (select(EligibilityRule).join(Post, Post.id == EligibilityRule.post_id).join(ExamCycle, ExamCycle.id == Post.exam_cycle_id)
+             .join(Exam, Exam.id == ExamCycle.exam_id).where(Exam.organisation_id == org.id, EligibilityRule.rule_type == "relaxation_reference",
+                                                             EligibilityRule.status == "published"))
+        if cycle is not None:
+            q = q.where(ExamCycle.id == cycle.id)
+        n = 0
+        for ref in self.s.scalars(q).all():
+            for old in self.s.scalars(select(EligibilityRule).where(EligibilityRule.post_id == ref.post_id, EligibilityRule.rule_type == "relaxation",
+                                                                  EligibilityRule.status == "published")):
+                old.status = "superseded"
+            for f in rels:
+                ev = self.s.scalar(select(FieldEvidence).where(FieldEvidence.extracted_field_id == f.id))
+                params = {**f.value, **({"cap_age": cap} if cap and int(f.value.get("years", 0)) < 99 else {})}
+                self.s.add(EligibilityRule(post_id=ref.post_id, rule_type="relaxation", params=params,
+                                           clause_text=ev.quote if ev else None, evidence_id=ev.id if ev else None))
+                n += 1
+        self.s.flush()
+        return n
 
     def _to_review(self, ef: ExtractedField, cycle: ExamCycle, reason: str, priority: int = 2) -> None:
         ef.status = "needs_review"

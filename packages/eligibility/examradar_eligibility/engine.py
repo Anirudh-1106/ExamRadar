@@ -84,6 +84,8 @@ class Profile:
             g.add("PWBD")
         if self.ex_serviceman:
             g.add("EXSM")
+        if (self.gender or "").lower() == "female":
+            g.add("FEMALE")
         return g
 
 
@@ -165,19 +167,38 @@ def _age_rule(spec: RuleSpec, p: Profile, relax: list[RuleSpec]) -> RuleResult:
     if dob >= lo:
         return RuleResult(**base, outcome="pass", user_value=uv, requirement=req, explanation="Your date of birth is within the limit.")
     groups = p.relaxation_groups()
-    years = max((int(r.params.get("years", 0)) for r in relax
-                 if r.rule_type == "relaxation" and str(r.params.get("applies_to", "")).upper() in groups), default=0)
-    if years:
+    rel = [r for r in relax if r.rule_type == "relaxation" and str(r.params.get("applies_to", "")).upper() in groups]
+    firm = max((int(r.params.get("years", 0)) for r in rel if not r.params.get("conditional")), default=0)
+    cond = [r for r in rel if r.params.get("conditional")]
+    cap = next((r.params.get("cap_age") for r in relax if r.params.get("cap_age")), None)
+
+    def earliest(years: int, capped: bool = True) -> date:
         lo2 = _shift_years(lo, -years)
-        cap = next((r.params.get("cap_age") for r in relax if r.params.get("cap_age")), None)
-        if cap and v.get("max_age") is not None and v.get("type") == "born_between":
-            cap_lo = _shift_years(lo, -(int(cap) - int(v["max_age"])))
-            lo2 = max(lo2, cap_lo)
-        if dob >= lo2:
-            return RuleResult(**base, outcome="pass", user_value=uv, requirement=f"{req}, relaxed by {years} years",
-                              explanation=f"Eligible with the {years}-year age relaxation for your category.")
-        return RuleResult(**base, outcome="fail", user_value=uv, requirement=f"{req}, relaxed by {years} years",
+        if capped and cap and v.get("max_age") is not None and v.get("type") == "born_between":
+            lo2 = max(lo2, _shift_years(lo, -(int(cap) - int(v["max_age"]))))
+        return lo2
+
+    if firm and dob >= earliest(firm):
+        return RuleResult(**base, outcome="pass", user_value=uv, requirement=f"{req}, relaxed by {firm} years",
+                          explanation=f"Eligible with the {firm}-year age relaxation that applies to you.")
+    for r in sorted(cond, key=lambda r: -int(r.params.get("years", 0))):
+        yrs = int(r.params.get("years", 0))
+        if dob >= earliest(max(firm, yrs), capped=yrs < 99):
+            return RuleResult(**base, outcome="unknown", user_value=uv, requirement=req,
+                              explanation="You may be eligible through an age relaxation that depends on your circumstances. "
+                                          + str(r.params.get("note", "")) + " Check before applying.")
+    # Relaxations exist for groups the profile has not answered yet (disability, ex-serviceman).
+    unanswered = {"PWBD": p.pwd is None, "EXSM": p.ex_serviceman is None}
+    if any(unanswered.get(str(r.params.get("applies_to", "")).upper()) for r in relax if r.rule_type == "relaxation"):
+        return RuleResult(**base, outcome="unknown", user_value=uv, requirement=req,
+                          explanation="You are above the base limit. Tell us whether you are a person with disability or an "
+                                      "ex-serviceman to check the age relaxation.")
+    if firm:
+        return RuleResult(**base, outcome="fail", user_value=uv, requirement=f"{req}, relaxed by {firm} years",
                           explanation="You are above the upper age limit even with relaxation.")
+    if any(r.rule_type == "relaxation" for r in relax) and (p.category or p.kerala_community):
+        return RuleResult(**base, outcome="fail", user_value=uv, requirement=req,
+                          explanation="You are above the upper age limit, and no age relaxation applies to your category.")
     ref = [r for r in relax if r.rule_type == "relaxation_reference"]
     if any(groups & {c.upper() for c in r.params.get("categories", [])} for r in ref) or (
             ref and (p.pwd is None or p.ex_serviceman is None)):

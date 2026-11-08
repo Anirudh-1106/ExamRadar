@@ -161,3 +161,45 @@ def programme_facts(doc: DocText, title: str) -> list[Fact]:
                     facts.append(Fact("confirmation_note", {**base, "text": re.sub(r"\s+", " ", conf)},
                                       " | ".join([cell("cat"), conf]), pidx + 1, 0.9, "table"))
     return facts
+
+
+def general_conditions_facts(doc: DocText) -> list[Fact]:
+    """Age concessions from Kerala PSC's General Conditions (Part II), which notifications refer to as 'usual age relaxation'.
+
+    Firm rules give a clear answer. Rules that depend on facts the app does not collect (length of service, widowhood,
+    type of disability, special qualification cases) are marked conditional and lead to 'check before applying'.
+    """
+    text = " ".join(flat(p) for p in doc.pages)
+    facts: list[Fact] = []
+
+    def add(value: dict[str, Any], m: "re.Match[str]") -> None:
+        facts.append(Fact("relaxation", value, m.group(0), doc.page_of(text.find(m.group(0)[:40])), 0.95))
+
+    cap = re.search(r"maximum age limit shall in no case exceed 50 \(fifty\) years", text, re.I)
+    if cap:
+        facts.append(Fact("relaxation_cap", {"cap_age": 50}, cap.group(0), None, 0.95))
+    m = re.search(r"The upper age limit prescribed shall be raised by five years in the case of candidates belonging to any of the "
+                  r"Scheduled Castes.{0,200}?Scheduled Tribes and by three years in the case of candidates belonging to any of the "
+                  r"Other Backward Classes", text, re.I)
+    if m:
+        for grp, yrs in (("SC", 5), ("ST", 5), ("OBC", 3)):
+            add({"applies_to": grp, "years": yrs}, m)
+    m = re.search(r"The maximum age limit laid down for appointment to any post shall not apply in the case of candidates belonging to "
+                  r"any of the Scheduled Caste", text, re.I)
+    if m:
+        for grp in ("SC", "ST"):
+            add({"applies_to": grp, "years": 99, "conditional": True,
+                 "note": "In some cases the upper age limit does not apply to SC/ST candidates (General Conditions 2(ii) to 2(iv))."}, m)
+    m = re.search(r"relaxed in the case of Ex-servicemen to the extent of the period of service.{0,120}?up to a maximum of five years", text, re.I)
+    if m:
+        add({"applies_to": "EXSM", "years": 5, "conditional": True, "note": "Ex-servicemen: up to five years, depending on service."}, m)
+    m = re.search(r"Age concession upto 15 years will be granted to candidates belonging to Blindness and Low Vision and Deaf and hard of "
+                  r"hearing categories.{0,120}?and 10 years to candidates belonging to Locomotor disability", text, re.I)
+    if m:
+        add({"applies_to": "PWBD", "years": 10}, m)
+        add({"applies_to": "PWBD", "years": 15, "conditional": True,
+             "note": "15 years for blindness, low vision, deafness or hard of hearing; 10 years for other listed disabilities."}, m)
+    m = re.search(r"upper age limit prescribed in the Special Rules, shall be further raised by five years in the case of widows", text, re.I)
+    if m:
+        add({"applies_to": "FEMALE", "years": 5, "conditional": True, "note": "Widows: five more years."}, m)
+    return facts
