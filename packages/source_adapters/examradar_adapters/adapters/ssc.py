@@ -19,7 +19,7 @@ from ..base import (
     slugify,
     soup_of,
 )
-from ..http import FetchError, FetchResult, PoliteClient, SourceBlocked, looks_like_challenge
+from ..http import FetchResult, PoliteClient, render_page
 
 MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
 
@@ -38,25 +38,7 @@ class SSC(Adapter):
     sector = "other"
 
     def fetch(self, client: PoliteClient, url: str, etag: str | None = None, last_modified: str | None = None) -> FetchResult:
-        if not client.allowed(url):
-            raise FetchError(f"robots.txt disallows {url}")
-        try:
-            from playwright.sync_api import sync_playwright
-        except ImportError as e:
-            raise FetchError("Playwright is not installed; install the 'browser' extra to collect SSC") from e
-        with sync_playwright() as p:
-            browser = p.chromium.launch()
-            try:
-                page = browser.new_page(user_agent=client.user_agent)
-                resp = page.goto(url, wait_until="networkidle", timeout=60000)
-                page.wait_for_timeout(2500)
-                html = page.content().encode("utf-8")
-                status = resp.status if resp else 0
-            finally:
-                browser.close()
-        if looks_like_challenge(status, html):
-            raise SourceBlocked(f"challenge page at {url}")
-        return FetchResult(url, url, status, html, "text/html")
+        return render_page(client, url)
 
     def parse_listing(self, listing: Listing, body: bytes, base_url: str) -> list[Item]:
         soup = soup_of(body)

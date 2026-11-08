@@ -349,7 +349,8 @@ class Pipeline:
                 si.document_id = doc.id
                 done += 1
             si.processed = True
-            self.s.flush()
+            # Commit per document so a long run never holds the database and finished work survives interruptions.
+            self.s.commit()
         return done
 
     def process_document(self, org: Organisation, ad: Adapter, item: Item, cycle: ExamCycle | None, doc: Document,

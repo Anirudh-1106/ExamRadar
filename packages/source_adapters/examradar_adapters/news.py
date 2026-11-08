@@ -21,6 +21,17 @@ ORG_PATTERNS: dict[str, str] = {
     "rbi": r"\brbi\b.*(recruit|grade b|assistant|exam|vacanc|officer)|reserve bank.*(recruit|exam)",
     "rrb": r"\brrb\b|railway recruitment|\bntpc\b|\balp\b|group d",
     "nta": r"ugc[- ]?net|csir[- ]?net|\bnta\b",
+    "ctet": r"\bctet\b",
+    "ktet": r"\bk-?tet\b",
+    "kerala_set": r"kerala set\b|state eligibility test",
+    "kerala_hc": r"kerala high court.*(recruit|exam|vacanc)",
+    "kvs": r"\bkvs\b|kendriya vidyalaya",
+    "nvs": r"\bnvs\b|navodaya",
+    "isro": r"\bisro\b",
+    "drdo": r"\bdrdo\b|ceptam",
+    "lic": r"\blic\b.*(aao|ado|assistant|recruit|exam)",
+    "epfo": r"\bepfo\b",
+    "cmd_kerala": r"centre for management development|\bcmd kerala",
 }
 JOB_WORDS = re.compile(
     r"recruit|notification|vacanc|exam|admit card|hall ticket|answer key|result|apply|application|last date|cut-?off|"

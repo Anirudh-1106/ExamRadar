@@ -23,6 +23,10 @@ def make_engine(url: str) -> Engine:
         def _fk_on(dbapi_conn, _):  # pragma: no cover - driver hook
             cur = dbapi_conn.cursor()
             cur.execute("PRAGMA foreign_keys=ON")
+            # WAL lets the API read while the worker writes; wait instead of failing when the file is busy.
+            cur.execute("PRAGMA journal_mode=WAL")
+            cur.execute("PRAGMA busy_timeout=30000")
+            cur.execute("PRAGMA synchronous=NORMAL")
             cur.close()
 
         return eng

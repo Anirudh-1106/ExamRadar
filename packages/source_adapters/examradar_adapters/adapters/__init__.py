@@ -1,4 +1,5 @@
 from ..base import Adapter
+from .generic import Generic
 from .ibps import IBPS
 from .kdrb import KDRB
 from .kerala_psc import KeralaPSC
@@ -10,5 +11,5 @@ from .ssc import SSC
 from .upsc import UPSC
 
 ADAPTERS: dict[str, type[Adapter]] = {
-    a.key: a for a in (KeralaPSC, UPSC, SBI, IBPS, NTA, RRB, KDRB, RBI, SSC)
+    a.key: a for a in (KeralaPSC, UPSC, SBI, IBPS, NTA, RRB, KDRB, RBI, SSC, Generic)
 }

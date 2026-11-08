@@ -124,6 +124,172 @@ organisations:
     apply_entry: https://opportunities.rbi.org.in/Scripts/Vacancies.aspx
     schedule: { every_minutes: 120 }
 
+  # ---- Later sources (checked 2026-11-08). All use the configurable adapter; see adapters/generic.py for options.
+  - key: cmd_kerala
+    adapter: generic
+    name: Centre for Management Development, Kerala
+    group: kerala
+    sector: other
+    collection: auto
+    follow: true
+    domains:
+      - { host: cmd.kerala.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://cmd.kerala.gov.in/recruitment/
+    schedule: { every_minutes: 240 }
+
+  - key: ktet
+    adapter: generic
+    name: Kerala Teacher Eligibility Test (Pareeksha Bhavan)
+    group: kerala
+    sector: teaching
+    collection: auto
+    include: "notification|prospectus|result|hall ?ticket|admit|answer ?key|time ?table|exam date|k-?tet"
+    exclude: "model question|question paper|g\\.?o\\.?\\s*\\(|forgot"
+    docs_only: true
+    cycle: { mode: family, family: K-TET }
+    domains:
+      - { host: ktet.kerala.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://ktet.kerala.gov.in/
+      - https://ktet.kerala.gov.in/notification.php
+    schedule: { every_minutes: 360 }
+
+  - key: kerala_set
+    adapter: generic
+    name: Kerala State Eligibility Test (LBS Centre)
+    group: kerala
+    sector: teaching
+    collection: auto
+    # SET notices appear in the LBS Centre homepage news when a session opens.
+    include: '\bSET\b|state eligibility'
+    docs_only: true
+    cycle: { mode: family, family: Kerala SET }
+    domains:
+      - { host: lbscentre.kerala.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://lbscentre.kerala.gov.in/
+    schedule: { every_minutes: 360 }
+
+  - key: kerala_hc
+    adapter: generic
+    name: High Court of Kerala (Recruitment)
+    group: kerala
+    sector: other
+    collection: auto
+    render: [https://hckrecruitment.keralacourts.in/hckrecruitment/Recruitment/notifications]
+    recent_years: 1
+    domains:
+      - { host: hckrecruitment.keralacourts.in, purpose: content, verified: 2026-11-08 }
+      - { host: highcourt.kerala.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://hckrecruitment.keralacourts.in/hckrecruitment/Recruitment/notifications
+    schedule: { every_minutes: 360 }
+
+  - key: kvs
+    adapter: generic
+    name: Kendriya Vidyalaya Sangathan
+    group: central
+    sector: teaching
+    collection: auto
+    include: "recruit|advertis|vacanc|exam|result|admit|answer ?key|interview|selection"
+    render: [https://kvs.gov.in/en/recruitment/]
+    domains:
+      - { host: kvs.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: cdnbbsr.s3waas.gov.in, path_prefix: /s32d2ca7eedf739ef4c3800713ec482e1a/, purpose: content, verified: 2026-11-08, note: "KVS folder on the government S3WaaS host" }
+    listings:
+      - https://kvs.gov.in/en/recruitment/
+    schedule: { every_minutes: 360 }
+
+  - key: nvs
+    adapter: generic
+    name: Navodaya Vidyalaya Samiti
+    group: central
+    sector: teaching
+    collection: auto
+    render: [https://navodaya.gov.in/nvs/en/Home1]
+    # The recruitment box lists notices in Hindi as rows with script links and a publication date.
+    rows: "#recruitment .nvs3-job-row"
+    no_links: true
+    published: 'प्रकाशित तिथि:\s*(\d{4}-\d{2}-\d{2})'
+    include: "भर्ती|अधिसूचना|परीक्षा|प्रवेश पत्र|विज्ञापन|परिणाम|recruit|notification|exam|admit|result"
+    domains:
+      - { host: navodaya.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://navodaya.gov.in/nvs/en/Home1
+    schedule: { every_minutes: 360 }
+
+  - key: ctet
+    adapter: generic
+    name: Central Teacher Eligibility Test (CBSE)
+    group: central
+    sector: teaching
+    collection: auto
+    cycle: { mode: family, family: CTET }
+    domains:
+      - { host: ctet.nic.in, purpose: content, verified: 2026-11-08 }
+      - { host: cdnbbsr.s3waas.gov.in, path_prefix: /s3443dec3062d0286986e21dc0631734c9/, purpose: content, verified: 2026-11-08, note: "CTET folder on the government S3WaaS host" }
+    listings:
+      - https://ctet.nic.in/
+    schedule: { every_minutes: 240 }
+
+  - key: isro
+    adapter: generic
+    name: Indian Space Research Organisation
+    group: central
+    sector: engineering
+    collection: auto
+    follow: true
+    grid: { title: post, number: advtNum, start: opendate, end: closedate }
+    max_age_days: 400
+    domains:
+      - { host: www.isro.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://www.isro.gov.in/CurrentOpportunities.html
+    schedule: { every_minutes: 360 }
+
+  - key: drdo
+    adapter: generic
+    name: Defence Research and Development Organisation
+    group: central
+    sector: engineering
+    collection: auto
+    follow: true
+    domains:
+      - { host: xn--m1b0a2bb8esed.xn--11b7cb3a6a.xn--h2brj9c, purpose: content, verified: 2026-11-08, note: "DRDO's official Hindi-script domain; drdo.gov.in redirects here" }
+      - { host: www.drdo.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://xn--m1b0a2bb8esed.xn--11b7cb3a6a.xn--h2brj9c/drdo/en/offerings/vacancies
+    schedule: { every_minutes: 360 }
+
+  - key: lic
+    adapter: generic
+    name: Life Insurance Corporation of India
+    group: central
+    sector: banking
+    collection: auto
+    render: [https://licindia.in/careers]
+    include: "recruit|advertis|vacanc|exam|result|admit|call letter|apprentice|assistant|officer|aao|ado"
+    domains:
+      - { host: licindia.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://licindia.in/careers
+    schedule: { every_minutes: 360 }
+
+  - key: epfo
+    adapter: generic
+    name: Employees' Provident Fund Organisation
+    group: central
+    sector: other
+    collection: auto
+    render: [https://www.epfo.gov.in/recruitments/]
+    domains:
+      - { host: www.epfo.gov.in, purpose: content, verified: 2026-11-08 }
+      - { host: www.epfindia.gov.in, purpose: content, verified: 2026-11-08 }
+    listings:
+      - https://www.epfo.gov.in/recruitments/
+    schedule: { every_minutes: 360 }
+
 # Publisher RSS feeds used as signals only. Robots rules checked 2026-11-08.
 news_feeds:
   - { key: news_indianexpress_jobs, publisher: The Indian Express, url: "https://indianexpress.com/section/jobs/feed/", enabled: true }

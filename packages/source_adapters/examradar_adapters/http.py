@@ -185,3 +185,33 @@ class PoliteClient:
 
     def close(self) -> None:
         self._client.close()
+
+
+def render_page(client: "PoliteClient", url: str, wait_ms: int = 2500) -> FetchResult:
+    """Render a public page in headless Chromium, as a visitor's browser would. Used only for JavaScript-only sites.
+
+    Same identity (User-Agent) as the HTTP client, robots.txt is checked first, and challenge pages raise SourceBlocked.
+    """
+    if not client.allowed(url):
+        raise RobotsDisallowed(f"robots.txt disallows {url}")
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError as e:
+        raise FetchError("Playwright is not installed; install the 'browser' extra for JavaScript-only sources") from e
+    client._wait_turn(urlparse(url).netloc)
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        try:
+            page = browser.new_page(user_agent=client.user_agent)
+            resp = page.goto(url, wait_until="networkidle", timeout=60000)
+            page.wait_for_timeout(wait_ms)
+            html = page.content().encode("utf-8")
+            status = resp.status if resp else 0
+            final = page.url
+        finally:
+            browser.close()
+    if looks_like_challenge(status, html):
+        raise SourceBlocked(f"challenge or block page (HTTP {status}) at {url}")
+    if status >= 400:
+        raise FetchError(f"HTTP {status} for {url}")
+    return FetchResult(url, final, status, html, "text/html")

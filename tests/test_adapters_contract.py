@@ -137,3 +137,30 @@ def test_ssc_rendered_notice_board():
     assert len(dated) >= 8 and all(i.data.get("fetch") is False for i in dated)
     assert any(i.kind == "answer_key" for i in dated)
     assert any(i.cycle and i.cycle.title == "Combined Graduate Level Examination, 2026" for i in dated)
+
+
+@pytest.mark.parametrize("key,rel,url,minimum", [
+    ("cmd_kerala", "cmd_kerala/recruitment.html", "https://cmd.kerala.gov.in/recruitment/", 8),
+    ("ctet", "ctet/home.html", "https://ctet.nic.in/", 5),
+    ("isro", "isro/current-opportunities.html", "https://www.isro.gov.in/CurrentOpportunities.html", 20),
+    ("nvs", "nvs/home_rendered.html", "https://navodaya.gov.in/nvs/en/Home1", 10),
+    ("kerala_hc", "kerala_hc/notifications_rendered.html", "https://hckrecruitment.keralacourts.in/hckrecruitment/Recruitment/notifications", 10),
+    ("lic", "lic/careers_rendered.html", "https://licindia.in/careers", 1),
+    ("drdo", "drdo/vacancies.html", "https://xn--m1b0a2bb8esed.xn--11b7cb3a6a.xn--h2brj9c/drdo/en/offerings/vacancies", 1),
+])
+def test_later_sources_via_configurable_adapter(key, rel, url, minimum):
+    items = parse(key, url, rel)
+    assert len(items) >= minimum, (key, len(items))
+    for i in items:
+        assert i.url is None or build_adapter(ORGS[key])._ok_url(i.url) or i.url == url
+        assert len(i.title) >= 12
+
+
+def test_isro_grid_gives_official_windows_and_ktet_uses_file_names():
+    items = parse("isro", "https://www.isro.gov.in/CurrentOpportunities.html", "isro/current-opportunities.html")
+    first = [i for i in items if i.key == "ISRO:ICRB:01(A-JPA):2026"][0]
+    assert {f.value["event_type"]: f.value["date"] for f in first.facts} == {"application_start": "2026-07-27", "application_end": "2026-08-20"}
+    ktet = parse("ktet", "https://ktet.kerala.gov.in/", "ktet/home.html")
+    assert any(i.cycle and i.cycle.title == "K-TET Sep 2026" and i.kind == "notification" for i in ktet)
+    nvs = parse("nvs", "https://navodaya.gov.in/nvs/en/Home1", "nvs/home_rendered.html")
+    assert any(i.kind == "admit_card" for i in nvs) and all(i.published_hint for i in nvs)

@@ -175,3 +175,64 @@ documents:
   retrieved_at: '2026-11-08'
   official: true
   bytes: 499406
+- file: cmd_kerala/recruitment.html
+  source_url: https://cmd.kerala.gov.in/recruitment/
+  sha256: 81e0fcee8a8913b2c068bbb32e9bfb7f998eb9442d6d14c9bdfbebbf69e3145b
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 128607
+- file: ktet/home.html
+  source_url: https://ktet.kerala.gov.in/
+  sha256: 3aa26643ec9d14af96dad871eab9f17d0dea71ce0cb43ffab0552ad1aedb5e0e
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 37409
+- file: ctet/home.html
+  source_url: https://ctet.nic.in/
+  sha256: 81e9aaf0a9892063b40a5b82ec7b1f88a25d011487cbcc034a9be3005cc7000a
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 92515
+- file: isro/current-opportunities.html
+  source_url: https://www.isro.gov.in/CurrentOpportunities.html
+  sha256: 22aa203b62f917057e2368cca474f7ff6c9a5113dbdd70d82415168d8ec2d6f6
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 1751390
+- file: nvs/home_rendered.html
+  source_url: https://navodaya.gov.in/nvs/en/Home1 (rendered)
+  sha256: 8cf5448b92d2a31e2b57d5a987add3ec6f5c776f00d6c0a5f6de5dc32a5f80e1
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 1033852
+- file: kerala_hc/notifications_rendered.html
+  source_url: https://hckrecruitment.keralacourts.in/hckrecruitment/Recruitment/notifications
+    (rendered)
+  sha256: 978a880adce88953e8cd2295a2a1385f30ba3dc6317a173fc5ca52ffad28e12a
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 137058
+- file: lic/careers_rendered.html
+  source_url: https://licindia.in/careers (rendered)
+  sha256: 5e9c57d3e1ecb7986013afe3b23a72700d950500917bbb8ed8cbbc8902dbca3a
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 249035
+- file: drdo/vacancies.html
+  source_url: https://xn--m1b0a2bb8esed.xn--11b7cb3a6a.xn--h2brj9c/drdo/en/offerings/vacancies
+  sha256: 337057d7ec7917de80c301d6be54f70f94a15c47853b16fb10ca140624653b6d
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 307308
+- file: epfo/recruitments_rendered.html
+  source_url: https://www.epfo.gov.in/recruitments/ (rendered)
+  sha256: 354383725a9e805033ca75f8fa2dee70a56b37a991fc02f18de31996163e7999
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 251821
+- file: kvs/recruitment_rendered.html
+  source_url: https://kvs.gov.in/en/recruitment/ (rendered)
+  sha256: 0248dc11edba7e78107a5bf814a4600b65c2a1ac8f65697a650c6813f497c98b
+  retrieved_at: '2026-11-08'
+  official: true
+  bytes: 136227

@@ -62,17 +62,18 @@ CLASSIFY_RULES: list[tuple[str, str]] = [
     (r"postpone|re-?schedul|date change|deferred|മാറ്റി", "postponement"),
     (r"cancel", "cancellation"),
     (r"corrigendum|addendum|extension|extended|revised", "corrigendum"),
-    (r"answer ?key", "answer_key"),
-    (r"admit card|hall ticket|admission ticket|call letter|e-call", "admit_card"),
+    (r"answer ?key|उत्तर कुंजी", "answer_key"),
+    (r"admit card|hall ticket|admission ticket|call letter|e-call|प्रवेश पत्र", "admit_card"),
     (r"city intimation|exam city", "exam_city"),
     (r"ranked list|rank list", "ranked_list"),
     (r"short ?list|probability list|eligibility list", "short_list"),
-    (r"result|select(ion)? list|marks|merit list|cut-?off", "result"),
+    (r"result|select(ion)? list|marks|merit list|cut-?off|परिणाम|चयन सूची", "result"),
     (r"interview", "interview"),
     (r"(document|certificate) verification|\bdv\b|\botv\b", "document_verification"),
     (r"objection", "objection"),
     (r"programme|schedule|calendar|time ?table", "schedule"),
-    (r"notification|advertisement|recruitment|applications? (are )?invited|vacanc|\bcen\b|apply online|registration", "notification"),
+    (r"notification|advertisement|recruitment|applications? (are )?invited|vacanc|\bcen\b|apply online|registration|विज्ञापन|भर्ती अधिसूचना",
+     "notification"),
 ]
 
 
