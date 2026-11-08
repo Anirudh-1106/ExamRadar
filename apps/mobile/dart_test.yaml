@@ -1,0 +1,3 @@
+tags:
+  screenshots:
+    skip: "Run explicitly with --tags screenshots to refresh docs/screenshots."

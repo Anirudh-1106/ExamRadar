@@ -1,0 +1,4028 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ExamRadar API",
+    "description": "Official Central and Kerala government exam data with evidence. Independent; not affiliated with any government body.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/meta": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Meta",
+        "operationId": "meta_v1_meta_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetaOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exams": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "List Exams",
+        "operationId": "list_exams_v1_exams_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(central|kerala)$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Group"
+            }
+          },
+          {
+            "name": "org",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Org"
+            }
+          },
+          {
+            "name": "sector",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sector"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date From"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date To"
+            }
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ids"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(deadline|recent)$",
+              "default": "deadline",
+              "title": "Sort"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ExamSummary_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exams/{exam_id}": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Exam Detail",
+        "operationId": "exam_detail_v1_exams__exam_id__get",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exams/{exam_id}/changes": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Exam Changes",
+        "operationId": "exam_changes_v1_exams__exam_id__changes_get",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChangeOut"
+                  },
+                  "title": "Response Exam Changes V1 Exams  Exam Id  Changes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exams/{exam_id}/posts": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Exam Posts",
+        "operationId": "exam_posts_v1_exams__exam_id__posts_get",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostOut"
+                  },
+                  "title": "Response Exam Posts V1 Exams  Exam Id  Posts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exams/{exam_id}/checklist": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Exam Checklist",
+        "operationId": "exam_checklist_v1_exams__exam_id__checklist_get",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/calendar": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Calendar",
+        "operationId": "calendar_v1_calendar_get",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "End"
+            }
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ids"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarEntry"
+                  },
+                  "title": "Response Calendar V1 Calendar Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notices": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Notices",
+        "operationId": "notices_v1_notices_get",
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Org"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 30,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_NoticeOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/news": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "News",
+        "description": "Headlines from news publishers. Shown as unverified mentions only; never used as exam data.",
+        "operationId": "news_v1_news_get",
+        "parameters": [
+          {
+            "name": "org",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Org"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 30,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NewsOut"
+                  },
+                  "title": "Response News V1 News Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Sources",
+        "operationId": "sources_v1_sources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SourceStatusOut"
+                  },
+                  "type": "array",
+                  "title": "Response Sources V1 Sources Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/eligibility/evaluate": {
+      "post": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Evaluate Stateless",
+        "description": "Evaluates without storing the profile. Use this when the profile stays on the device.",
+        "operationId": "evaluate_stateless_v1_eligibility_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ExamEligibility"
+                  },
+                  "type": "array",
+                  "title": "Response Evaluate Stateless V1 Eligibility Evaluate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/scam-check": {
+      "post": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Scam Check",
+        "operationId": "scam_check_v1_scam_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScamIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScamOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/scam-check/pdf": {
+      "post": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Scam Check Pdf",
+        "operationId": "scam_check_pdf_v1_scam_check_pdf_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_scam_check_pdf_v1_scam_check_pdf_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScamOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/stats/latency": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Detection Latency",
+        "description": "Median hours from the publication time stated in file names to our first detection, where that time is known.",
+        "operationId": "detection_latency_v1_stats_latency_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices/register": {
+      "post": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Register",
+        "operationId": "register_v1_devices_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/device": {
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Update Device",
+        "operationId": "update_device_v1_me_device_put",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/profile": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Get Profile",
+        "operationId": "get_profile_v1_me_profile_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Put Profile",
+        "operationId": "put_profile_v1_me_profile_put",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Delete Profile",
+        "operationId": "delete_profile_v1_me_profile_delete",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/eligibility": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "My Eligibility",
+        "operationId": "my_eligibility_v1_me_eligibility_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamEligibility"
+                  },
+                  "title": "Response My Eligibility V1 Me Eligibility Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/exams": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "My Exams",
+        "operationId": "my_exams_v1_me_exams_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyExamOut"
+                  },
+                  "title": "Response My Exams V1 Me Exams Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/exams/{exam_id}": {
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Save Exam",
+        "operationId": "save_exam_v1_me_exams__exam_id__put",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Unsave Exam",
+        "operationId": "unsave_exam_v1_me_exams__exam_id__delete",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/exams/{exam_id}/status": {
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Set Status",
+        "operationId": "set_status_v1_me_exams__exam_id__status_put",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/exams/{exam_id}/checklist/{key}": {
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Set Check",
+        "operationId": "set_check_v1_me_exams__exam_id__checklist__key__put",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Exam Id"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          },
+          {
+            "name": "done",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Done"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/preferences": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Get Prefs",
+        "operationId": "get_prefs_v1_me_preferences_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrefsOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Put Prefs",
+        "operationId": "put_prefs_v1_me_preferences_put",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrefsOut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrefsOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/notifications": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Inbox",
+        "operationId": "inbox_v1_me_notifications_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NotificationOut"
+                  },
+                  "title": "Response Inbox V1 Me Notifications Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/notifications/read": {
+      "post": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Mark Read",
+        "operationId": "mark_read_v1_me_notifications_read_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "title": "Ids"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me/export": {
+      "get": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Export",
+        "description": "Everything we hold about this account, as JSON (DPDP right to access).",
+        "operationId": "export_v1_me_export_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/me": {
+      "delete": {
+        "tags": [
+          "me"
+        ],
+        "summary": "Delete Account",
+        "description": "Deletes the account and everything linked to it. Cannot be undone.",
+        "operationId": "delete_account_v1_me_delete",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApplyOut": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "copy_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Copy Text"
+          },
+          "copy_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Copy Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "host"
+        ],
+        "title": "ApplyOut"
+      },
+      "Body_scam_check_pdf_v1_scam_check_pdf_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_scam_check_pdf_v1_scam_check_pdf_post"
+      },
+      "CalendarEntry": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "date_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date End"
+          },
+          "exam_id": {
+            "type": "integer",
+            "title": "Exam Id"
+          },
+          "exam_title": {
+            "type": "string",
+            "title": "Exam Title"
+          },
+          "organisation_key": {
+            "type": "string",
+            "title": "Organisation Key"
+          },
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "certainty": {
+            "type": "string",
+            "title": "Certainty"
+          },
+          "precision": {
+            "type": "string",
+            "title": "Precision"
+          },
+          "is_deadline": {
+            "type": "boolean",
+            "title": "Is Deadline"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "exam_id",
+          "exam_title",
+          "organisation_key",
+          "event_type",
+          "title",
+          "certainty",
+          "precision",
+          "is_deadline"
+        ],
+        "title": "CalendarEntry"
+      },
+      "ChangeOut": {
+        "properties": {
+          "event_id": {
+            "type": "integer",
+            "title": "Event Id"
+          },
+          "event_title": {
+            "type": "string",
+            "title": "Event Title"
+          },
+          "revision_no": {
+            "type": "integer",
+            "title": "Revision No"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "old_value": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Old Value"
+          },
+          "new_value": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "New Value"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "event_id",
+          "event_title",
+          "revision_no",
+          "kind",
+          "created_at"
+        ],
+        "title": "ChangeOut"
+      },
+      "ChecklistItemOut": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "due": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due"
+          },
+          "certainty": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Certainty"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "text"
+        ],
+        "title": "ChecklistItemOut"
+      },
+      "ChecklistOut": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChecklistItemOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "photo_specs": {
+            "items": {
+              "$ref": "#/components/schemas/PhotoSpecOut"
+            },
+            "type": "array",
+            "title": "Photo Specs"
+          },
+          "certificate_rules": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Certificate Rules"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "photo_specs",
+          "certificate_rules",
+          "note"
+        ],
+        "title": "ChecklistOut"
+      },
+      "DeviceIn": {
+        "properties": {
+          "fcm_token": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fcm Token"
+          },
+          "app_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "App Version"
+          }
+        },
+        "type": "object",
+        "title": "DeviceIn"
+      },
+      "EvaluateIn": {
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/ProfileData"
+          },
+          "exam_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Exam Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile"
+        ],
+        "title": "EvaluateIn"
+      },
+      "EventOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "date_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Start"
+          },
+          "date_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date End"
+          },
+          "precision": {
+            "type": "string",
+            "enum": [
+              "day",
+              "month"
+            ],
+            "title": "Precision",
+            "default": "day"
+          },
+          "certainty": {
+            "type": "string",
+            "enum": [
+              "official",
+              "tentative",
+              "expected"
+            ],
+            "title": "Certainty"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "category_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Number"
+          },
+          "revision_count": {
+            "type": "integer",
+            "title": "Revision Count",
+            "default": 1
+          },
+          "is_deadline": {
+            "type": "boolean",
+            "title": "Is Deadline",
+            "default": false
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvidenceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "event_type",
+          "title",
+          "certainty",
+          "status"
+        ],
+        "title": "EventOut"
+      },
+      "EvidenceOut": {
+        "properties": {
+          "quote": {
+            "type": "string",
+            "title": "Quote"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "document_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Hash"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "published_on": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published On"
+          }
+        },
+        "type": "object",
+        "required": [
+          "quote",
+          "source_url"
+        ],
+        "title": "EvidenceOut"
+      },
+      "ExamDetail": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "exam_name": {
+            "type": "string",
+            "title": "Exam Name"
+          },
+          "organisation": {
+            "$ref": "#/components/schemas/OrgOut"
+          },
+          "sector": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sector"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "is_fast_alert": {
+            "type": "boolean",
+            "title": "Is Fast Alert"
+          },
+          "next_event": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "application_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exam_date": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "category_numbers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Category Numbers",
+            "default": []
+          },
+          "vacancies_total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vacancies Total"
+          },
+          "has_changes": {
+            "type": "boolean",
+            "title": "Has Changes",
+            "default": false
+          },
+          "official_url": {
+            "type": "string",
+            "title": "Official Url"
+          },
+          "last_checked_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Checked At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/EventOut"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "posts": {
+            "items": {
+              "$ref": "#/components/schemas/PostOut"
+            },
+            "type": "array",
+            "title": "Posts"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/LinkOut"
+            },
+            "type": "array",
+            "title": "Links"
+          },
+          "apply": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApplyOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notification_pdf": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notification Pdf"
+          },
+          "fees": {
+            "items": {
+              "$ref": "#/components/schemas/FeeOut"
+            },
+            "type": "array",
+            "title": "Fees",
+            "default": []
+          },
+          "qualification_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Text"
+          },
+          "confirmation_notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Confirmation Notes",
+            "default": []
+          },
+          "photo_specs": {
+            "items": {
+              "$ref": "#/components/schemas/PhotoSpecOut"
+            },
+            "type": "array",
+            "title": "Photo Specs",
+            "default": []
+          },
+          "combined_with": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Combined With",
+            "default": []
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/ChangeOut"
+            },
+            "type": "array",
+            "title": "Changes",
+            "default": []
+          },
+          "news": {
+            "items": {
+              "$ref": "#/components/schemas/NewsOut"
+            },
+            "type": "array",
+            "title": "News",
+            "default": []
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
+          "summary_is_machine": {
+            "type": "boolean",
+            "title": "Summary Is Machine",
+            "default": true
+          },
+          "source_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Status"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "exam_name",
+          "organisation",
+          "status",
+          "is_fast_alert",
+          "official_url",
+          "last_checked_at",
+          "updated_at",
+          "events",
+          "posts",
+          "links",
+          "disclaimer"
+        ],
+        "title": "ExamDetail"
+      },
+      "ExamEligibility": {
+        "properties": {
+          "exam_id": {
+            "type": "integer",
+            "title": "Exam Id"
+          },
+          "exam_title": {
+            "type": "string",
+            "title": "Exam Title"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "eligible",
+              "not_eligible",
+              "needs_check"
+            ],
+            "title": "Status"
+          },
+          "posts": {
+            "items": {
+              "$ref": "#/components/schemas/PostEligibility"
+            },
+            "type": "array",
+            "title": "Posts"
+          },
+          "countdown": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Countdown",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "exam_id",
+          "exam_title",
+          "status",
+          "posts"
+        ],
+        "title": "ExamEligibility"
+      },
+      "ExamSummary": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "exam_name": {
+            "type": "string",
+            "title": "Exam Name"
+          },
+          "organisation": {
+            "$ref": "#/components/schemas/OrgOut"
+          },
+          "sector": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sector"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "is_fast_alert": {
+            "type": "boolean",
+            "title": "Is Fast Alert"
+          },
+          "next_event": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "application_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exam_date": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EventOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "category_numbers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Category Numbers",
+            "default": []
+          },
+          "vacancies_total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vacancies Total"
+          },
+          "has_changes": {
+            "type": "boolean",
+            "title": "Has Changes",
+            "default": false
+          },
+          "official_url": {
+            "type": "string",
+            "title": "Official Url"
+          },
+          "last_checked_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Checked At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "exam_name",
+          "organisation",
+          "status",
+          "is_fast_alert",
+          "official_url",
+          "last_checked_at",
+          "updated_at"
+        ],
+        "title": "ExamSummary"
+      },
+      "FeeOut": {
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories",
+            "default": []
+          },
+          "applies_to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applies To"
+          },
+          "exempted": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Exempted",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "title": "FeeOut"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LinkOut": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "url",
+          "host"
+        ],
+        "title": "LinkOut"
+      },
+      "MetaOut": {
+        "properties": {
+          "app_name": {
+            "type": "string",
+            "title": "App Name"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          },
+          "privacy_url": {
+            "type": "string",
+            "title": "Privacy Url"
+          },
+          "api_version": {
+            "type": "string",
+            "title": "Api Version"
+          },
+          "min_app_version": {
+            "type": "string",
+            "title": "Min App Version"
+          },
+          "organisations": {
+            "items": {
+              "$ref": "#/components/schemas/OrgOut"
+            },
+            "type": "array",
+            "title": "Organisations"
+          },
+          "qualifications": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Qualifications"
+          },
+          "kerala_communities": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Kerala Communities"
+          },
+          "central_categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Central Categories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "app_name",
+          "disclaimer",
+          "privacy_url",
+          "api_version",
+          "min_app_version",
+          "organisations",
+          "qualifications",
+          "kerala_communities",
+          "central_categories"
+        ],
+        "title": "MetaOut"
+      },
+      "MyExamOut": {
+        "properties": {
+          "exam": {
+            "$ref": "#/components/schemas/ExamSummary"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "saved_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Saved At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exam",
+          "saved_at"
+        ],
+        "title": "MyExamOut"
+      },
+      "NewsOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "organisation_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Key"
+          },
+          "verified": {
+            "type": "boolean",
+            "title": "Verified",
+            "default": false
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "default": "News report. Not verified by ExamRadar. Check the official website."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url"
+        ],
+        "title": "NewsOut"
+      },
+      "NoticeOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "organisation": {
+            "$ref": "#/components/schemas/OrgOut"
+          },
+          "exam_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exam Id"
+          },
+          "first_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Seen At"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "default": "New official notice detected"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url",
+          "kind",
+          "organisation",
+          "first_seen_at"
+        ],
+        "title": "NoticeOut"
+      },
+      "NotificationOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "deep_link": {
+            "type": "string",
+            "title": "Deep Link"
+          },
+          "exam_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exam Id"
+          },
+          "urgent": {
+            "type": "boolean",
+            "title": "Urgent"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "read": {
+            "type": "boolean",
+            "title": "Read"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "title",
+          "body",
+          "deep_link",
+          "exam_id",
+          "urgent",
+          "created_at",
+          "read"
+        ],
+        "title": "NotificationOut"
+      },
+      "OrgOut": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "group": {
+            "type": "string",
+            "title": "Group"
+          },
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "name",
+          "group",
+          "collection"
+        ],
+        "title": "OrgOut"
+      },
+      "Page_ExamSummary_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExamSummary"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size"
+        ],
+        "title": "Page[ExamSummary]"
+      },
+      "Page_NoticeOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NoticeOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size"
+        ],
+        "title": "Page[NoticeOut]"
+      },
+      "PhotoSpecOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "item": {
+            "type": "string",
+            "title": "Item"
+          },
+          "min_kb": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Kb"
+          },
+          "max_kb": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Kb"
+          },
+          "width": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width"
+          },
+          "height": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height"
+          },
+          "formats": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Formats",
+            "default": []
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvidenceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "item"
+        ],
+        "title": "PhotoSpecOut"
+      },
+      "PostEligibility": {
+        "properties": {
+          "post_id": {
+            "type": "integer",
+            "title": "Post Id"
+          },
+          "post_name": {
+            "type": "string",
+            "title": "Post Name"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "eligible",
+              "not_eligible",
+              "needs_check"
+            ],
+            "title": "Status"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/RuleResultOut"
+            },
+            "type": "array",
+            "title": "Results"
+          }
+        },
+        "type": "object",
+        "required": [
+          "post_id",
+          "post_name",
+          "status",
+          "results"
+        ],
+        "title": "PostEligibility"
+      },
+      "PostOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "department": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Department"
+          },
+          "vacancies": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vacancies"
+          },
+          "vacancies_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vacancies Text"
+          },
+          "pay_scale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pay Scale"
+          },
+          "category_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Number"
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/RuleOut"
+            },
+            "type": "array",
+            "title": "Rules",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "PostOut"
+      },
+      "PrefsOut": {
+        "properties": {
+          "enabled_types": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Enabled Types"
+          },
+          "interests": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Interests"
+          },
+          "quiet_start": {
+            "type": "string",
+            "title": "Quiet Start"
+          },
+          "quiet_end": {
+            "type": "string",
+            "title": "Quiet End"
+          },
+          "max_per_day": {
+            "type": "integer",
+            "title": "Max Per Day"
+          },
+          "digest": {
+            "type": "boolean",
+            "title": "Digest"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled_types",
+          "interests",
+          "quiet_start",
+          "quiet_end",
+          "max_per_day",
+          "digest"
+        ],
+        "title": "PrefsOut"
+      },
+      "ProfileData": {
+        "properties": {
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "GEN",
+                  "EWS",
+                  "OBC",
+                  "SC",
+                  "ST"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "kerala_community": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kerala Community"
+          },
+          "pwd": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pwd"
+          },
+          "ex_serviceman": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ex Serviceman"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "female",
+                  "male",
+                  "other"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "nationality": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nationality"
+          },
+          "domicile_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domicile State"
+          },
+          "qualifications": {
+            "items": {
+              "$ref": "#/components/schemas/QualIn"
+            },
+            "type": "array",
+            "title": "Qualifications",
+            "default": []
+          },
+          "languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Languages",
+            "default": []
+          },
+          "attempts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Attempts",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "title": "ProfileData"
+      },
+      "ProfileIn": {
+        "properties": {
+          "consent": {
+            "type": "boolean",
+            "title": "Consent"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ProfileData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "consent",
+          "data"
+        ],
+        "title": "ProfileIn"
+      },
+      "ProfileOut": {
+        "properties": {
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProfileData"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "consent_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consent At"
+          },
+          "purpose": {
+            "type": "string",
+            "title": "Purpose"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "purpose"
+        ],
+        "title": "ProfileOut"
+      },
+      "QualIn": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "final_year",
+              "appearing"
+            ],
+            "title": "Status",
+            "default": "completed"
+          },
+          "percentage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "title": "QualIn"
+      },
+      "RegisterIn": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": [
+              "android",
+              "ios",
+              "web"
+            ],
+            "title": "Platform",
+            "default": "android"
+          },
+          "app_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "App Version"
+          },
+          "fcm_token": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fcm Token"
+          }
+        },
+        "type": "object",
+        "title": "RegisterIn"
+      },
+      "RegisterOut": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token",
+          "user_id"
+        ],
+        "title": "RegisterOut"
+      },
+      "RuleOut": {
+        "properties": {
+          "rule_type": {
+            "type": "string",
+            "title": "Rule Type"
+          },
+          "params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params"
+          },
+          "clause": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clause"
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvidenceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "rule_type",
+          "params"
+        ],
+        "title": "RuleOut"
+      },
+      "RuleResultOut": {
+        "properties": {
+          "rule_type": {
+            "type": "string",
+            "title": "Rule Type"
+          },
+          "outcome": {
+            "type": "string",
+            "title": "Outcome"
+          },
+          "user_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Value"
+          },
+          "requirement": {
+            "type": "string",
+            "title": "Requirement"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "clause": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clause"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rule_type",
+          "outcome",
+          "user_value",
+          "requirement",
+          "explanation"
+        ],
+        "title": "RuleResultOut"
+      },
+      "ScamEvidenceOut": {
+        "properties": {
+          "level": {
+            "type": "string",
+            "title": "Level"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "level",
+          "text"
+        ],
+        "title": "ScamEvidenceOut"
+      },
+      "ScamIn": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "url",
+              "text"
+            ],
+            "title": "Kind"
+          },
+          "value": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 3,
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "value"
+        ],
+        "title": "ScamIn"
+      },
+      "ScamOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "Verified on official source",
+              "Not found on official sources",
+              "Suspicious",
+              "Known fake"
+            ],
+            "title": "Verdict"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/ScamEvidenceOut"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "verdict",
+          "evidence",
+          "disclaimer"
+        ],
+        "title": "ScamOut"
+      },
+      "SourceStatusOut": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "organisation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "is_official": {
+            "type": "boolean",
+            "title": "Is Official"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "collection": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection"
+          },
+          "last_success_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Success At"
+          },
+          "last_attempt_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Attempt At"
+          },
+          "last_new_item_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last New Item At"
+          },
+          "error_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Rate"
+          },
+          "last_parser_yield": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Parser Yield"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "organisation",
+          "url",
+          "kind",
+          "is_official",
+          "status"
+        ],
+        "title": "SourceStatusOut"
+      },
+      "StatusIn": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "interested",
+              "applied",
+              "confirmed",
+              "admit_card",
+              "exam_taken",
+              "result_checked"
+            ],
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "StatusIn"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
