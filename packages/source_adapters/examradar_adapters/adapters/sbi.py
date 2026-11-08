@@ -22,7 +22,7 @@ class SBI(Adapter):
                 continue
             adv = clean(head.get("data-articleid", ""))
             ps = [clean(p.get_text(" ")) for p in head.find_all("p")]
-            title = re.sub(r"\(\s*apply online.*?\)", "", ps[0], flags=re.I).strip() if ps else adv
+            title = re.sub(r"\(\s*(?:apply online|online registration).*?\)+", "", ps[0], flags=re.I).strip() if ps else adv
             hint = CycleHint(exam_slug=f"sbi-{slugify(re.sub(r'ON REGULAR BASIS|ON CONTRACT(UAL)? BASIS', '', title, flags=re.I))}",
                              exam_name=title.title(), title=f"{title.title()} ({adv})", sector="banking",
                              year=None, notification_number=adv)

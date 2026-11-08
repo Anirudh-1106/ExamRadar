@@ -98,7 +98,7 @@ def main() -> None:
         args = ", ".join(f"{'' if n else 'required '}this.{fn}" for _, fn, _, _, n, _ in fields)
         out.append(f"  const {cls}({{{args}}});" if fields else f"  const {cls}();")
         out.append(f"  factory {cls}.fromJson(Map<String, dynamic> j) => {cls}(")
-        for pname, fn, t, expr, nullable, default in fields:
+        for pname, fn, t, expr, nullable, _default in fields:
             v = f"j['{pname}']"
             parsed = expr.replace("{v}", v)
             if nullable:

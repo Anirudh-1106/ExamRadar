@@ -27,7 +27,9 @@ EVENT_LABELS: list[tuple[str, str, str]] = [
     ("correction_window", r"(?:edit|correction|modification) window|window for (?:correction|modification)", RANGE),
     ("exam",
      r"date of (?:\((?:preliminary|main)\) )?(?:the )?(?:written |online )?examination|online examination\s*[–-]\s*(?:preliminary|main)"
-     r"|(?:preliminary|main) examination (?:will be held )?on", POINT),
+     r"|(?:preliminary|main) examination (?:will be held )?on"
+     r"|(?:preliminary|main) exam(?:ination)? (?:will be |is )?(?:conducted |held |scheduled )?tentatively"
+     r" (?:conducted |held |scheduled )?(?:in|on)(?: the month of)?", POINT),
     ("admit_card",
      r"download of call letters?(?: for online examination)?(?:\s*[–-]\s*(?:preliminary|main))?"
      r"|admission tickets? (?:will be )?available from|admit cards? (?:will be )?(?:available|issued) (?:from|on)", POINT),

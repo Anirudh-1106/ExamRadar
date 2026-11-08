@@ -122,10 +122,18 @@ def programme_facts(doc: DocText, title: str) -> list[Fact]:
                     continue
                 hdr, rows = last_hdr, table
             last_hdr, last_cols = hdr, len(table[0])
+            # A common test spans several rows with one merged cell for its dates; empty cells inherit from the row above.
+            carry: dict[str, str] = {}
             for row in rows:
-                def cell(k: str, row: list[str] = row, hdr: dict[str, int] = hdr) -> str:
+                def cell(k: str, row: list[str] = row, hdr: dict[str, int] = hdr, carry: dict[str, str] = carry) -> str:
                     i = hdr.get(k)
-                    return (row[i] or "").strip() if i is not None and i < len(row) else ""
+                    v = (row[i] or "").strip() if i is not None and i < len(row) else ""
+                    if k in ("exam_date", "admit", "confirmation"):
+                        if v:
+                            carry[k] = v
+                        elif cats_in(cell("cat")):
+                            v = carry.get(k, "")
+                    return v
                 cats = cats_in(cell("cat"))
                 exam = find_dates(cell("exam_date"))
                 if not cats or not exam:

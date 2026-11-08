@@ -1,0 +1,118 @@
+# Gold labels for extraction evaluation.
+# Each fact was checked against the raw page text of the saved official document (data/fixtures), not against
+# extractor output. Labelled on 2026-11-08 by the build agent; a human reviewer should re-verify before the numbers
+# are relied on (docs/evaluation.md). Event keys: [event_type, stage or null, ISO date, precision, category or null].
+# For tables, only the category numbers listed here are scored.
+
+documents:
+  - file: kerala_psc/noti-162-26.pdf
+    source: kerala_psc
+    kind: notification
+    events:
+      - [application_end, null, 2026-12-02, day, null]
+    age: {from: 1982-01-02, to: 2008-01-01}
+    notification_number: "162/2026"
+    vacancies: 1
+
+  - file: kerala_psc/for-confirmation-january-2027.pdf
+    source: kerala_psc
+    kind: schedule
+    title: EXAMINATION PROGRAMME FOR THE MONTH OF JANUARY 2027 (FOR SUBMITTING CONFIRMATION)
+    scored_categories: ["698/2025", "700/2025", "447/2025", "448/2025", "832/2025", "090/2026", "073/2026", "058/2026"]
+    events:
+      - [exam, null, 2027-01-12, day, "698/2025"]
+      - [admit_card, null, 2026-12-28, day, "698/2025"]
+      - [admit_card, null, 2026-12-28, day, "700/2025"]
+      - [admit_card, null, 2027-01-08, day, "447/2025"]
+      - [admit_card, null, 2027-01-08, day, "448/2025"]
+      - [admit_card, null, 2027-01-12, day, "832/2025"]
+      - [admit_card, null, 2027-01-12, day, "090/2026"]
+      - [admit_card, null, 2027-01-13, day, "073/2026"]
+      - [admit_card, null, 2027-01-15, day, "058/2026"]
+      - [confirmation_deadline, null, 2026-11-14, day, "832/2025"]
+      # Exam dates verified against the weekday-date sequence in the page text, row by row.
+      - [exam, null, 2027-01-12, day, "700/2025"]
+      - [exam, null, 2027-01-23, day, "447/2025"]
+      - [exam, null, 2027-01-23, day, "448/2025"]
+      - [exam, null, 2027-01-27, day, "832/2025"]
+      - [exam, null, 2027-01-27, day, "090/2026"]
+      - [exam, null, 2027-01-28, day, "073/2026"]
+      - [exam, null, 2027-01-30, day, "058/2026"]
+      - [confirmation_deadline, null, 2026-11-14, day, "090/2026"]
+      - [confirmation_deadline, null, 2026-11-14, day, "073/2026"]
+      - [confirmation_deadline, null, 2026-11-14, day, "058/2026"]
+
+  - file: upsc/Notif-ESEP-2027-Engl-160926.pdf
+    source: upsc
+    kind: notification
+    events:
+      - [notification, null, 2026-09-16, day, null]
+      - [application_end, null, 2026-10-06, day, null]
+      - [exam, Preliminary, 2027-01-31, day, null]
+      - [exam, Main, 2027-06-18, day, null]
+    age: {from: 1997-01-02, to: 2006-01-01}
+    notification_number: "02/2027-ENGG"
+
+  - file: upsc/calendar-2027.pdf
+    source: upsc
+    kind: calendar
+    calendar_events:
+      - ["Engineering Services Examination, 2027", notification, null, 2026-09-16]
+      - ["Engineering Services Examination, 2027", application_end, null, 2026-10-06]
+      - ["Engineering Services Examination, 2027", exam, Preliminary, 2027-01-31]
+      - ["Engineering Services Examination, 2027", exam, Main, 2027-06-18]
+      - ["Civil Services Examination, 2027", notification, null, 2027-01-13]
+      - ["Civil Services Examination, 2027", application_end, null, 2027-02-02]
+      - ["Civil Services Examination, 2027", exam, Preliminary, 2027-05-23]
+      - ["Civil Services Examination, 2027", exam, Main, 2027-08-20]
+      - ["Combined Medical Services Examination, 2027", notification, null, 2027-03-03]
+      - ["Combined Medical Services Examination, 2027", application_end, null, 2027-03-23]
+      - ["Combined Medical Services Examination, 2027", exam, null, 2027-07-18]
+
+  - file: ibps/Detailed-Notification_CRP-PO-XVI.pdf
+    source: ibps
+    kind: notification
+    events:
+      - [application_start, null, 2026-07-01, day, null]
+      - [application_end, null, 2026-07-21, day, null]
+      - [fee_deadline, null, 2026-07-21, day, null]
+      - [admit_card, Preliminary, 2026-08-01, month, null]
+      - [exam, Preliminary, 2026-08-01, month, null]
+      - [result, Preliminary, 2026-09-01, month, null]
+      - [admit_card, Main, 2026-09-01, month, null]
+      - [exam, Main, 2026-10-01, month, null]
+      - [result, Main, 2026-11-01, month, null]
+    age: {from: 1996-07-02, to: 2006-07-01}
+    photo_specs:
+      - {item: signature, min_kb: 10, max_kb: 20, width: 140, height: 60}
+      - {item: thumb impression, min_kb: 20, max_kb: 50, width: 240, height: 240}
+
+  - file: sbi/JA_2026_Detailed_Advt_Eng.pdf
+    source: sbi
+    kind: notification
+    events:
+      - [application_start, null, 2026-08-11, day, null]
+      - [application_end, null, 2026-08-31, day, null]
+      - [fee_deadline, null, 2026-08-31, day, null]
+      - [exam, Preliminary, 2026-09-01, month, null]
+      - [exam, Main, 2026-11-01, month, null]
+    age: {from: 1998-04-02, to: 2006-04-01}
+    notification_number: "CRPD/CR/2026-27/17"
+
+listings:
+  - file: kerala_psc/notifications.html
+    source: kerala_psc
+    url: https://keralapsc.gov.in/notifications
+    item_events:
+      - ["CAT.NO.162/2026 TO 173/2026", application_end, 2026-12-02]
+      - ["CAT.NO.162/2026 TO 173/2026", notification, 2026-10-30]
+      - ["CAT.NO.151/2026 TO CAT.NO.161/2026", application_end, 2026-11-04]
+      - ["CAT.NO.151/2026 TO CAT.NO.161/2026", notification, 2026-09-30]
+  - file: sbi/current-openings.html
+    source: sbi
+    url: https://sbi.bank.in/web/careers/current-openings
+    item_events:
+      - ["CRPD/SCO/2026-27/29", application_start, 2026-11-04]
+      - ["CRPD/SCO/2026-27/29", application_end, 2026-11-25]
+      - ["CRPD/SCO/2026-27/28", application_start, 2026-11-04]
+      - ["CRPD/SCO/2026-27/28", application_end, 2026-11-25]
