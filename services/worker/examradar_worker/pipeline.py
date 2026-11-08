@@ -611,6 +611,9 @@ class Pipeline:
         orgs = {o.key: o for o in self.s.scalars(select(Organisation))}
         new = 0
         for e in entries:
+            # Stories from earlier years are not news about current notices; they are skipped entirely.
+            if e.published and (e.published.year < self.today.year or (self.today - e.published.date()).days > 90):
+                continue
             if self.s.scalar(select(NewsItem.id).where(NewsItem.guid == e.guid[:600])):
                 continue
             org = orgs.get(e.organisations[0])

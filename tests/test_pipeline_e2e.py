@@ -4,7 +4,7 @@
 2. Revised date -> revision -> correct notification
 """
 
-from datetime import date
+from datetime import date, datetime
 
 from examradar_core.models import (
     CategoryNumber,
@@ -99,8 +99,9 @@ def test_new_notice_alert_then_matching_notification(db, client, transport):
     assert n.type == "new_notice" and "001/2026" in n.body
     assert not any(ch.isdigit() and "2026" in n.title for ch in n.title)  # fast alert title carries no dates
     # Delivered to the inbox (no push configured in tests), exactly once.
-    assert notify.dispatch(db) >= 1
-    assert notify.dispatch(db) == 0
+    noon_ist = datetime(2026, 11, 8, 6, 30)  # 12:00 IST, outside quiet hours
+    assert notify.dispatch(db, now=noon_ist) >= 1
+    assert notify.dispatch(db, now=noon_ist) == 0
 
 
 def test_revised_date_goes_to_review_then_revision_and_notification(db, client, transport):
@@ -173,14 +174,16 @@ def test_blocked_source_is_marked_and_not_retried(db, client, transport):
 
 
 def test_news_signal_creates_candidate_and_triggers_recheck(db, client):
-    news = src(db, "news_indianexpress_jobs")
-    p = Pipeline(db, client=client, today=TODAY)
-    run = p.run_news(news)
-    db.commit()
     from examradar_core.models import MissedNoticeCandidate, NewsItem
 
-    assert run.new_items > 10
-    assert db.scalars(select(NewsItem)).first().public is True
+    p = Pipeline(db, client=client, today=TODAY)
+    old_feed = p.run_news(src(db, "news_indianexpress_jobs"))
+    assert old_feed.items_found > 10 and old_feed.new_items == 0, "stories older than 90 days or from earlier years are skipped"
+    run = Pipeline(db, client=client, today=TODAY).run_news(src(db, "news_thehindu_education"))
+    db.commit()
+    assert run.new_items >= 1
+    items = db.scalars(select(NewsItem)).all()
+    assert items and all(n.public for n in items) and all(n.published_at.year == 2026 for n in items if n.published_at)
     assert db.scalars(select(MissedNoticeCandidate)).first() is not None
     assert not db.scalars(select(SourceItem)).all(), "news never becomes official items"
 

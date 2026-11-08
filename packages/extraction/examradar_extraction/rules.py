@@ -25,6 +25,9 @@ EVENT_LABELS: list[tuple[str, str, str]] = [
      POINT),
     ("fee_window", r"payment of (?:application )?fees?(?:\s*/\s*intimation charges)?(?: \(online\))?", RANGE),
     ("correction_window", r"(?:edit|correction|modification) window|window for (?:correction|modification)", RANGE),
+    ("result",
+     r"result of (?:the )?(?:online )?examination\s*[–-]\s*(?:preliminary|main)"
+     r"|declaration of results?\s*[–-]?\s*(?:preliminary|main) examination", POINT),
     ("exam",
      r"date of (?:\((?:preliminary|main)\) )?(?:the )?(?:written |online )?examination|online examination\s*[–-]\s*(?:preliminary|main)"
      r"|(?:preliminary|main) examination (?:will be held )?on"
@@ -72,6 +75,9 @@ def event_facts(doc: DocText) -> list[Fact]:
                     base = {"precision": a.precision, "certainty": cert}
                     if etype == "application_window":
                         pairs = [("application_start", a), ("application_end", b)]
+                        # "Registration and payment of fees: X to Y" states the fee deadline in the same breath.
+                        if re.search(r"payment of (?:application )?fee", m.group(0), re.I):
+                            pairs.append(("fee_deadline", b))
                     elif etype == "fee_window":
                         pairs = [("fee_deadline", b)]
                     else:
