@@ -1,3 +1,5 @@
+import 'dart:ui' show Color;
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -18,12 +20,15 @@ class AlertService {
   bool pushReady = false;
   String? fcmToken;
 
+  static const _brand = Color(0xFF0B5D4B);
   static const _updates = AndroidNotificationDetails(
     'exam_updates',
     'Exam updates',
     channelDescription: 'New notices, date changes, admit cards and results',
     importance: Importance.high,
     priority: Priority.high,
+    icon: 'ic_stat_notify',
+    color: _brand,
   );
   static const _reminders = AndroidNotificationDetails(
     'reminders',
@@ -31,13 +36,15 @@ class AlertService {
     channelDescription: 'Reminders before your saved deadlines',
     importance: Importance.high,
     priority: Priority.high,
+    icon: 'ic_stat_notify',
+    color: _brand,
   );
 
   Future<String?> init() async {
     tzdata.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
     await _plugin.initialize(
-      const InitializationSettings(android: AndroidInitializationSettings('@mipmap/ic_launcher')),
+      const InitializationSettings(android: AndroidInitializationSettings('ic_stat_notify')),
       onDidReceiveNotificationResponse: (r) {
         if (r.payload != null) onOpen?.call(r.payload!);
       },
