@@ -79,6 +79,22 @@ class AlertService {
   Future<void> show(int id, String title, String body, String deepLink) =>
       _plugin.show(id & 0x7fffffff, title, body, const NotificationDetails(android: _updates), payload: deepLink);
 
+  /// One reminder at 09:00 IST on [day], e.g. to renew a certificate before a deadline. Returns false if the day has passed.
+  Future<bool> remindOn(DateTime day, String title, String body, String deepLink) async {
+    final at = tz.TZDateTime(tz.local, day.year, day.month, day.day, 9);
+    if (!at.isAfter(tz.TZDateTime.now(tz.local))) return false;
+    await _plugin.zonedSchedule(
+      Object.hash(title, day.millisecondsSinceEpoch) & 0x7fffffff,
+      title,
+      body,
+      at,
+      const NotificationDetails(android: _reminders),
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      payload: deepLink,
+    );
+    return true;
+  }
+
   /// Schedules reminders for saved exams: 7, 3 and 1 days before deadlines (09:00 IST), the day admit cards open,
   /// and the evening before an exam. Only official or tentative day-precision dates; estimates never trigger these.
   Future<int> scheduleFor(List<ExamDetail> exams, String Function(String key, Map<String, Object?> args) t) async {

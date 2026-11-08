@@ -75,6 +75,43 @@ class CalendarEntry {
   };
 }
 
+class CertificateRuleOut {
+  final String certificate;
+  final String text;
+  final DateTime? issuedFrom;
+  final DateTime? issuedUntil;
+  final String? financialYear;
+  final String? validYear;
+  final EvidenceOut? evidence;
+  const CertificateRuleOut({
+    required this.certificate,
+    required this.text,
+    this.issuedFrom,
+    this.issuedUntil,
+    this.financialYear,
+    this.validYear,
+    this.evidence,
+  });
+  factory CertificateRuleOut.fromJson(Map<String, dynamic> j) => CertificateRuleOut(
+    certificate: j['certificate'] == null ? '' : j['certificate'] as String,
+    text: j['text'] == null ? '' : j['text'] as String,
+    issuedFrom: j['issued_from'] == null ? null : DateTime.parse(j['issued_from'] as String),
+    issuedUntil: j['issued_until'] == null ? null : DateTime.parse(j['issued_until'] as String),
+    financialYear: j['financial_year'] == null ? null : j['financial_year'] as String,
+    validYear: j['valid_year'] == null ? null : j['valid_year'] as String,
+    evidence: j['evidence'] == null ? null : EvidenceOut.fromJson((j['evidence']) as Map<String, dynamic>),
+  );
+  Map<String, dynamic> toJson() => {
+    'certificate': certificate,
+    'text': text,
+    'issued_from': issuedFrom?.toIso8601String().substring(0, 10),
+    'issued_until': issuedUntil?.toIso8601String().substring(0, 10),
+    'financial_year': financialYear,
+    'valid_year': validYear,
+    'evidence': evidence?.toJson(),
+  };
+}
+
 class ChangeOut {
   final int eventId;
   final String eventTitle;
@@ -149,7 +186,7 @@ class ChecklistItemOut {
 class ChecklistOut {
   final List<ChecklistItemOut> items;
   final List<PhotoSpecOut> photoSpecs;
-  final List<Map<String, dynamic>> certificateRules;
+  final List<CertificateRuleOut> certificateRules;
   final String note;
   const ChecklistOut({required this.items, required this.photoSpecs, required this.certificateRules, required this.note});
   factory ChecklistOut.fromJson(Map<String, dynamic> j) => ChecklistOut(
@@ -162,13 +199,13 @@ class ChecklistOut {
     certificateRules:
         j['certificate_rules'] == null
             ? const []
-            : ((j['certificate_rules']) as List).map((e) => Map<String, dynamic>.from(e as Map)).toList(),
+            : ((j['certificate_rules']) as List).map((e) => CertificateRuleOut.fromJson((e) as Map<String, dynamic>)).toList(),
     note: j['note'] == null ? '' : j['note'] as String,
   );
   Map<String, dynamic> toJson() => {
     'items': items.map((e) => e.toJson()).toList(),
     'photo_specs': photoSpecs.map((e) => e.toJson()).toList(),
-    'certificate_rules': certificateRules,
+    'certificate_rules': certificateRules.map((e) => e.toJson()).toList(),
     'note': note,
   };
 }

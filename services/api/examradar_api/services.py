@@ -306,7 +306,36 @@ def checklist(s: Session, c: ExamCycle, today: date, user_id: int | None) -> S.C
                                                                             ExtractedField.field_name == "photo_spec"))]
     note = ("Steps come from the official dates we have verified. Check the notification for the full list of documents."
             if items else "No verified steps yet. Read the official notification.")
-    return S.ChecklistOut(items=items, photo_specs=specs, certificate_rules=[], note=note)
+    return S.ChecklistOut(items=items, photo_specs=specs, certificate_rules=certificate_rules(s, c, by), note=note)
+
+
+def certificate_rules(s: Session, c: ExamCycle, by: dict[str, list[Event]]) -> list[S.CertificateRuleOut]:
+    """Certificate validity rules stated in the notice, with event-based limits resolved to dates."""
+    out = []
+    for f in s.scalars(select(ExtractedField).where(ExtractedField.exam_cycle_id == c.id, ExtractedField.status == "published",
+                                                    ExtractedField.field_name == "certificate_rule")):
+        v = f.value
+        until = date.fromisoformat(v["issued_until"]) if v.get("issued_until") else None
+        ev_name = v.get("until_event")
+        if until is None and ev_name and by.get(ev_name):
+            until = sorted(by[ev_name], key=lambda e: e.date_start)[-1].date_start
+        frm = date.fromisoformat(v["issued_from"]) if v.get("issued_from") else None
+        parts = [f"{v['certificate']} certificate"]
+        if frm:
+            parts.append(f"issued on or after {frm:%d %b %Y}")
+        if until:
+            parts.append(f"and not later than {until:%d %b %Y}" if frm else f"dated on or before {until:%d %b %Y}")
+        elif ev_name == "interview":
+            parts.append("and before your interview")
+        if v.get("valid_year"):
+            parts.append(f"valid for {v['valid_year']}")
+        if v.get("financial_year"):
+            parts.append(f"(income for financial year {v['financial_year']})")
+        ev = s.scalar(select(FieldEvidence).where(FieldEvidence.extracted_field_id == f.id))
+        out.append(S.CertificateRuleOut(certificate=v["certificate"], text=" ".join(parts) + ".", issued_from=frm, issued_until=until,
+                                        financial_year=v.get("financial_year"), valid_year=v.get("valid_year"),
+                                        evidence=evidence_out(s, ev.id) if ev else None))
+    return out
 
 
 def counts_by_org(s: Session) -> dict[str, int]:

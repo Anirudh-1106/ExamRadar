@@ -74,6 +74,11 @@ def main() -> None:
                   {f.value["number"] for f in facts if f.field == "notification_number"})
         if "vacancies" in g:
             score(src, "vacancies", {g["vacancies"]}, {f.value["total"] for f in facts if f.field == "vacancies"})
+        if "certificates" in g:
+            exp = {(c["certificate"], d(c.get("issued_from", "")), c.get("valid_year", "")) for c in g["certificates"]}
+            got = {(f.value["certificate"], f.value.get("issued_from", ""), f.value.get("valid_year", "")) for f in facts
+                   if f.field == "certificate_rule"}
+            score(src, "certificate rules", exp, got)
         if "photo_specs" in g:
             exp = {(s["item"], s["min_kb"], s["max_kb"], s.get("width"), s.get("height")) for s in g["photo_specs"]}
             got = {(f.value["item"], f.value["min_kb"], f.value["max_kb"], f.value.get("width"), f.value.get("height"))

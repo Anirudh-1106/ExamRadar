@@ -52,6 +52,9 @@ documents:
       - [exam, Main, 2027-06-18, day, null]
     age: {from: 1997-01-02, to: 2006-01-01}
     notification_number: "02/2027-ENGG"
+    certificates:
+      - {certificate: "EWS (income and asset)", issued_from: 2026-04-01}
+      - {certificate: "OBC (non-creamy layer)", issued_from: 2026-04-01}
 
   - file: upsc/calendar-2027.pdf
     source: upsc
@@ -83,6 +86,9 @@ documents:
       - [exam, Main, 2026-10-01, month, null]
       - [result, Main, 2026-11-01, month, null]
     age: {from: 1996-07-02, to: 2006-07-01}
+    certificates:
+      - {certificate: "OBC (non-creamy layer)", issued_from: 2026-04-01}
+      - {certificate: "EWS (income and asset)", valid_year: "2026-2027"}
     photo_specs:
       - {item: signature, min_kb: 10, max_kb: 20, width: 140, height: 60}
       - {item: thumb impression, min_kb: 20, max_kb: 50, width: 240, height: 240}
@@ -98,6 +104,8 @@ documents:
       - [exam, Main, 2026-11-01, month, null]
     age: {from: 1998-04-02, to: 2006-04-01}
     notification_number: "CRPD/CR/2026-27/17"
+    certificates:
+      - {certificate: "Disability"}
 
 listings:
   - file: kerala_psc/notifications.html

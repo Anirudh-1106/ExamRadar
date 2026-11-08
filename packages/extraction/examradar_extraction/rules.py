@@ -255,4 +255,73 @@ def photo_spec_facts(doc: DocText) -> list[Fact]:
 
 def generic_facts(doc: DocText) -> list[Fact]:
     return (event_facts(doc) + fee_facts(doc) + vacancy_facts(doc) + age_facts(doc)
-            + notification_number_facts(doc) + photo_spec_facts(doc))
+            + notification_number_facts(doc) + photo_spec_facts(doc) + certificate_facts(doc))
+
+
+CERT_NAMES = [
+    (r"OBC\s*\((?:NCL|Non[- ]Creamy Layer)\)\s*certificate|non[- ]creamy layer certificate|OBC certificate", "OBC (non-creamy layer)"),
+    (r"Income\s*&\s*Asset\s*Certificate|EWS certificate|Economically Weaker Section", "EWS (income and asset)"),
+    (r"disability certificate", "Disability"),
+    (r"(?:caste|community) certificate", "Caste / community"),
+    (r"income certificate", "Income"),
+]
+
+
+def _cert_name(text: str) -> str | None:
+    best = None
+    for rx, name in CERT_NAMES:
+        for m in re.finditer(rx, text, re.I):
+            if best is None or m.start() > best[0]:
+                best = (m.start(), name)
+    return best[1] if best else None
+
+
+def certificate_facts(doc: DocText) -> list[Fact]:
+    """Rules on how recent a certificate must be, for on-device validity reminders. Only what the notice states."""
+    facts: list[Fact] = []
+    seen: set[tuple[Any, ...]] = set()
+    for pno, page in enumerate(doc.pages, start=1):
+        text = flat(page)
+        for m in re.finditer(r"(?:issued|dated) on\s*/\s*after|(?:issued|dated) on or after", text, re.I):
+            cert = _cert_name(text[max(0, m.start() - 260): m.start()])
+            after = find_dates(text[m.end(): m.end() + 25])
+            if not cert or not after:
+                continue
+            value: dict[str, Any] = {"certificate": cert, "issued_from": after[0].value.isoformat()}
+            tail = text[m.end(): m.end() + 260]
+            end = m.end() + after[0].end
+            lim = re.search(r"(?:not later than|till|but before)\s+(the closing date[^|]{0,140}?|the date of interview|last date of [a-z ]+)", tail, re.I)
+            if lim:
+                ie = re.search(r"i\.\s?e\.?\s*(\d{2}\.\d{2}\.\d{4})", tail[lim.end(): lim.end() + 40])
+                if ie and (d := find_dates(ie.group(1))):
+                    value["issued_until"] = d[0].value.isoformat()
+                    end = m.end() + lim.end() + ie.end()
+                else:
+                    value["until_event"] = "interview" if "interview" in lim.group(1).lower() else "application_end"
+                    end = m.end() + lim.end()
+            fy = re.search(r"Financial Year\s*\(FY\)\s*(\d{4}-\d{2,4})", text[max(0, m.start() - 200): m.start()], re.I)
+            if fy:
+                value["financial_year"] = fy.group(1)
+            key = tuple(sorted(value.items()))
+            if key in seen:
+                continue
+            seen.add(key)
+            start = text.rfind(".", 0, max(0, m.start() - 200))
+            facts.append(Fact("certificate_rule", value, text[max(0, m.start() - 160): end].strip(), pno, 0.88))
+        for m in re.finditer(r"certificate should be dated on or before (?:the )?last date of (?:registration|receipt|submission)", text, re.I):
+            cert = _cert_name(text[max(0, m.start() - 300): m.end()])
+            if not cert:
+                continue
+            value = {"certificate": cert, "until_event": "application_end"}
+            key = tuple(sorted(value.items()))
+            if key not in seen:
+                seen.add(key)
+                facts.append(Fact("certificate_rule", value, text[max(0, m.start() - 120): m.end()].strip(), pno, 0.88))
+        for m in re.finditer(r"(?:EWS|Economically Weaker Section)[^|]{0,120}?certificate should be valid for the year (\d{4}-\d{2,4}) for the financial year (\d{4}-\d{2,4})",
+                             text, re.I):
+            value = {"certificate": "EWS (income and asset)", "valid_year": m.group(1), "financial_year": m.group(2)}
+            key = tuple(sorted(value.items()))
+            if key not in seen:
+                seen.add(key)
+                facts.append(Fact("certificate_rule", value, m.group(0), pno, 0.88))
+    return facts

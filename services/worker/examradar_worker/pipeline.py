@@ -503,6 +503,10 @@ class Pipeline:
             ef.status = "published"
         elif field == "confirmation_note":
             ef.status = "published"
+        elif field == "certificate_rule":
+            if not auto:
+                return self._to_review(ef, cycle, "Certificate rule needs review")
+            ef.status = "published"
         else:  # photo_spec and anything new: humans decide
             if force:
                 ef.status = "published"

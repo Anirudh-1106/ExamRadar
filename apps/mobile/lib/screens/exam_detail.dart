@@ -8,6 +8,7 @@ import '../api/models.g.dart';
 import '../config.dart';
 import '../data/state.dart';
 import '../l10n/strings.dart';
+import '../services/notifications.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
 
@@ -591,6 +592,7 @@ class _ChecklistState extends ConsumerState<_Checklist> {
                         subtitle: it.due == null ? null : Text(fmtDate(context, it.due)),
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
+                    for (final rule in f.data.certificateRules) _CertificateRuleTile(rule, widget.d),
                     if (f.data.photoSpecs.isNotEmpty)
                       ListTile(
                         leading: const Icon(Icons.photo_size_select_actual_outlined),
@@ -609,4 +611,74 @@ class _ChecklistState extends ConsumerState<_Checklist> {
           ),
     );
   }
+}
+
+/// A certificate validity rule from the notice. The check runs on the phone; the certificate never leaves it.
+class _CertificateRuleTile extends StatelessWidget {
+  const _CertificateRuleTile(this.rule, this.exam);
+  final CertificateRuleOut rule;
+  final ExamDetail exam;
+
+  Future<void> _check(BuildContext context) async {
+    final p = context.pal;
+    if (rule.issuedFrom == null && rule.issuedUntil == null) {
+      await showDialog<void>(
+        context: context,
+        builder:
+            (c) => AlertDialog(
+              content: Text('${rule.text}\n\n${context.t('certFyOnly')}'),
+              actions: [TextButton(onPressed: () => Navigator.pop(c), child: Text(context.t('ok')))],
+            ),
+      );
+      return;
+    }
+    final picked = await showDatePicker(
+      context: context,
+      helpText: context.t('certIssued'),
+      initialDate: today(),
+      firstDate: DateTime(2015),
+      lastDate: today(),
+    );
+    if (picked == null || !context.mounted) return;
+    final tooOld = rule.issuedFrom != null && picked.isBefore(rule.issuedFrom!);
+    final tooNew = rule.issuedUntil != null && picked.isAfter(rule.issuedUntil!);
+    var message = tooOld ? context.t('certTooOld') : (tooNew ? context.t('certTooNew') : context.t('certOk'));
+    if (tooOld && rule.issuedUntil != null) {
+      final remind = rule.issuedUntil!.subtract(const Duration(days: 7));
+      final set = await AlertService.instance.remindOn(
+        remind.isBefore(today()) ? today().add(const Duration(days: 1)) : remind,
+        '${rule.certificate}: ${context.t('certRenew')}',
+        exam.title,
+        'examradar://exam/${exam.id}',
+      );
+      if (set && context.mounted) message += '\n\n${context.t('certReminderSet', {'date': fmtDate(context, remind)})}';
+    }
+    if (!context.mounted) return;
+    await showDialog<void>(
+      context: context,
+      builder:
+          (c) => AlertDialog(
+            icon: Icon(tooOld || tooNew ? Icons.error_outline : Icons.check_circle_outline, color: tooOld || tooNew ? p.red : p.green),
+            content: Text(message),
+            actions: [TextButton(onPressed: () => Navigator.pop(c), child: Text(context.t('ok')))],
+          ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => ListTile(
+    leading: const Icon(Icons.verified_outlined),
+    title: Text(rule.text),
+    subtitle:
+        rule.evidence == null
+            ? null
+            : Text(
+              '“${rule.evidence!.quote}”',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+    trailing: TextButton(onPressed: () => _check(context), child: Text(context.t('certCheck'))),
+    isThreeLine: rule.evidence != null,
+  );
 }

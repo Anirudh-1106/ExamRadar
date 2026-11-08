@@ -308,10 +308,20 @@ class ChecklistItemOut(BaseModel):
     done: bool = False
 
 
+class CertificateRuleOut(BaseModel):
+    certificate: str
+    text: str
+    issued_from: date | None = None
+    issued_until: date | None = None
+    financial_year: str | None = None
+    valid_year: str | None = None
+    evidence: EvidenceOut | None = None
+
+
 class ChecklistOut(BaseModel):
     items: list[ChecklistItemOut]
     photo_specs: list[PhotoSpecOut]
-    certificate_rules: list[dict[str, Any]]
+    certificate_rules: list[CertificateRuleOut]
     note: str
 
 

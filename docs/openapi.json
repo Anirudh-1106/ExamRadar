@@ -1830,6 +1830,80 @@
         ],
         "title": "CalendarEntry"
       },
+      "CertificateRuleOut": {
+        "properties": {
+          "certificate": {
+            "type": "string",
+            "title": "Certificate"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "issued_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Issued From"
+          },
+          "issued_until": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Issued Until"
+          },
+          "financial_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Financial Year"
+          },
+          "valid_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Year"
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvidenceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "certificate",
+          "text"
+        ],
+        "title": "CertificateRuleOut"
+      },
       "ChangeOut": {
         "properties": {
           "event_id": {
@@ -1985,8 +2059,7 @@
           },
           "certificate_rules": {
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "$ref": "#/components/schemas/CertificateRuleOut"
             },
             "type": "array",
             "title": "Certificate Rules"
