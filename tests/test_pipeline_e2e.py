@@ -183,3 +183,20 @@ def test_news_signal_creates_candidate_and_triggers_recheck(db, client):
     assert db.scalars(select(NewsItem)).first().public is True
     assert db.scalars(select(MissedNoticeCandidate)).first() is not None
     assert not db.scalars(select(SourceItem)).all(), "news never becomes official items"
+
+
+def test_new_matching_exam_for_users_with_stored_profile(db, client):
+    from examradar_core.models import UserProfile
+
+    eligible = make_user(db, {"organisations": ["kerala_psc"]})
+    db.add(UserProfile(user_id=eligible.id, data={"date_of_birth": "1995-05-05", "category": "GEN"}))
+    too_old = make_user(db, {"organisations": ["kerala_psc"]})
+    db.add(UserProfile(user_id=too_old.id, data={"date_of_birth": "1960-05-05", "category": "GEN", "pwd": False, "ex_serviceman": False}))
+    no_profile = make_user(db, {"organisations": ["kerala_psc"]})
+    db.commit()
+    p = Pipeline(db, client=client, today=TODAY)
+    p.run_source(src(db, "kerala_psc:https://keralapsc.gov.in/notifications"))
+    p.process_documents(40)
+    db.commit()
+    got = {n.user_id for n in db.scalars(select(Notification).where(Notification.type == "new_matching_exam"))}
+    assert eligible.id in got and too_old.id not in got and no_profile.id not in got

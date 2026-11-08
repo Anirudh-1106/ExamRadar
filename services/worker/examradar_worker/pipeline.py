@@ -309,10 +309,14 @@ class Pipeline:
             return None
         link = self.s.scalar(select(Link).where(Link.exam_cycle_id == cycle.id, Link.url == url))
         if link is None:
+            previous = self.s.scalar(select(Link).where(Link.exam_cycle_id == cycle.id, Link.kind == "apply")) if kind == "apply" else None
             link = Link(exam_cycle_id=cycle.id, kind=kind, url=url, label=label, host=urlparse(url).hostname or "", allowlisted=True)
             self.s.add(link)
+            self.s.flush()
             if kind in ("notification", "official_page") and not cycle.official_url:
                 cycle.official_url = url
+            if previous is not None and self.notify_enabled:
+                notify.on_link_changed(self.s, cycle, link)
         return link
 
     # ------------------------------------------------------------------ documents
@@ -479,6 +483,9 @@ class Pipeline:
                     old.status = "superseded"
                 self.s.add(EligibilityRule(post_id=p.id, rule_type=rule_type, params=v, clause_text=ev.quote, evidence_id=ev.id))
             ef.status = "published"
+            if field == "age_rule" and self.notify_enabled:
+                self.s.flush()
+                notify.on_new_matching_exam(self.s, cycle, self.today)
         elif field == "notification_number":
             if not cycle.notification_number:
                 cycle.notification_number = v["number"]
@@ -583,6 +590,8 @@ class Pipeline:
         self.s.flush()
         if self.notify_enabled:
             notify.on_event_published(self.s, e, rev)
+            if rev.kind == "create" and etype == "application_end":
+                notify.on_new_matching_exam(self.s, cycle, self.today)
         return e
 
     # ------------------------------------------------------------------ news signals

@@ -124,6 +124,49 @@ def on_event_published(s: Session, ev: Event, rev: EventRevision) -> int:
     return n
 
 
+def on_link_changed(s: Session, cycle: ExamCycle, link) -> int:
+    n = 0
+    for u in users_for_cycle(s, cycle.id):
+        if create(s, u, "link_change", f"Application link changed: {cycle.title}"[:300],
+                  f"The official application link is now on {link.host}. Use only this link.", f"examradar://exam/{cycle.id}",
+                  cycle_id=cycle.id, extra=f"link:{link.id}"):
+            n += 1
+    return n
+
+
+def on_new_matching_exam(s: Session, cycle: ExamCycle, today: date | None = None) -> int:
+    """Users who stored a profile (with consent) and follow this organisation, group, or sector, and who may apply."""
+    from examradar_core.models import EligibilityRule, Post, UserProfile
+    from examradar_core.timeutil import ist_today
+    from examradar_eligibility import Profile, RuleSpec, evaluate
+
+    still_open = s.scalar(select(Event.id).where(Event.exam_cycle_id == cycle.id, Event.event_type == "application_end",
+                                                 Event.status == "active", Event.date_start >= (today or ist_today())))
+    if not still_open:
+        return 0
+    exam = cycle.exam
+    users = users_interested(s, exam.organisation.key, exam.organisation.group, exam.sector) - users_for_cycle(s, cycle.id)
+    posts = s.scalars(select(Post).where(Post.exam_cycle_id == cycle.id)).all()
+    n = 0
+    for uid in users:
+        prof = s.get(UserProfile, uid)
+        if prof is None or not posts:
+            continue
+        p = Profile.from_dict(prof.data)
+        ok = False
+        for post in posts:
+            rules = [RuleSpec(r.rule_type, r.params) for r in s.scalars(select(EligibilityRule).where(
+                EligibilityRule.post_id == post.id, EligibilityRule.status == "published"))]
+            if rules and evaluate(rules, p).status != "not_eligible":
+                ok = True
+                break
+        if ok and create(s, uid, "new_matching_exam", f"New exam you may be able to apply for: {cycle.title}"[:300],
+                         "Based on your saved details and the official notification. Check the notice before applying.",
+                         f"examradar://exam/{cycle.id}", cycle_id=cycle.id):
+            n += 1
+    return n
+
+
 def deadline_reminders(s: Session, today: date) -> int:
     """7, 3, and 1 days before deadlines from official or tentative dates. Expected dates never trigger these."""
     created = 0
