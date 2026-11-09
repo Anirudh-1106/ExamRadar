@@ -506,6 +506,11 @@ class Pipeline:
         elif field == "notification_number":
             if not cycle.notification_number:
                 cycle.notification_number = v["number"]
+            elif v["number"] not in cycle.notification_number:
+                # The document names another number than the listing gave this exam: another category of a
+                # multi-category notice, or an older notification cited on the first page. The listing number stays.
+                ef.status, ef.validation_errors = "rejected", [f"number {v['number']} differs from {cycle.notification_number}"]
+                return
             ef.status = "published"
         elif field == "confirmation_note":
             ef.status = "published"
