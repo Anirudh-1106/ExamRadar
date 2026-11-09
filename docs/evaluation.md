@@ -23,9 +23,9 @@ Measured on 2026-11-09. The generated table is in `evaluation-results.md`; rerun
 
 ## Bugs the bulk set found, now fixed
 
-- **Spaced category numbers.** Some PDFs print "3 61 /2025". The rule read this as 061/2025 instead of 361/2025 in 37 documents.
+- **Spaced category numbers.** Some PDFs print "3 61 /2025". The rule read this as 061/2025 instead of 361/2025 in 32 documents.
 - **Trailing dot in dates.** "born between 02.01.1980. and 01.01.2005." gave no age rule in 2 documents.
-- **Evidence across a page break.** Qualification and age-relaxation clauses that ran onto the next page failed quote verification in 55 documents. The quote is now cut to the words on one page, and the full text stays in the value.
+- **Evidence across a page break.** Qualification and age-relaxation clauses that ran onto the next page failed quote verification in 55 facts. The quote is now cut to the words on one page, and the full text stays in the value.
 
 The earlier misses on the detailed set, IBPS result months and the SBI fee deadline, were fixed on 2026-11-08.
 
