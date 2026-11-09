@@ -10,14 +10,14 @@ ExamRadar is independent and not affiliated with any government body. Always con
 
 ## What works today
 
-- **Collection** from Kerala PSC, SBI, IBPS, NTA, KDRB, RRB Thiruvananthapuram, SSC (rendered), and RBI's RSS. Tested live on 2026-11-08. UPSC blocks our crawler (HTTP 403), so UPSC needs manual entry or permission.
+- **Collection** from Kerala PSC, SBI, IBPS, NTA (with OCR for scanned notices), KDRB, RRB Thiruvananthapuram, SSC (rendered), and RBI's RSS. Added on 2026-11-09: CMD Kerala, KTET, Kerala SET, Kerala High Court, KVS, NVS, CTET, ISRO, DRDO, LIC, and EPFO. UPSC blocks our crawler (HTTP 403), so UPSC comes from news signals plus manual entry.
 - **News signals** from publisher RSS feeds. They trigger official re-checks and admin review, and appear in the app only as labelled, unverified headlines.
-- **Extraction** with evidence: dates, age limits, vacancies, fees, notification numbers, photo specs, and Kerala PSC programme tables, including confirmation deadlines. 100% precision and 95.6% recall on a 68-fact gold set (see `docs/evaluation.md`).
+- **Extraction** with evidence: dates, fee deadlines, result dates, age limits, vacancies, fees, notification numbers, photo specs, certificate validity rules, and Kerala PSC programme tables. 100% precision and recall on 924 labelled values from 307 documents, mostly Kerala PSC (see `docs/evaluation.md` for the limits).
 - **Review and revisions:** changed dates wait for an admin. Revisions are append-only. Retraction sends corrections.
 - **Admin console** with TOTP login, review queue showing highlighted evidence, manual entry, source health, missed notices, fact checks, notification preview, and audit log.
-- **Eligibility engine** per post, deterministic, with explanations, clauses, and age-limit projections.
+- **Eligibility engine** per post, deterministic, with explanations, clauses, and age-limit projections. Kerala PSC age relaxations follow the official General Conditions paragraph by paragraph.
 - **Scam Check** for links, messages, and PDFs, with SSRF-safe fetching, lookalike detection, RDAP domain age, and official-record matching.
-- **Android app** (Flutter): Home, Exams, Calendar, My Exams, exam detail, alerts, Scam Check, profile, readiness tools, source status, offline cache, local reminders, English and Malayalam, large text, and dark mode.
+- **Android app** (Flutter): Home, Exams, Calendar, My Exams, exam detail, alerts, Scam Check, profile, readiness tools, certificate date checks with reminders, source status, offline cache, local reminders, English and Malayalam, large text, and dark mode.
 
 ## Quick start
 
@@ -52,5 +52,5 @@ packages/eligibility/       Deterministic eligibility engine
 config/                     Source registry and trusted intermediate certificates
 data/fixtures/              Saved real official documents (with hashes)
 data/gold/                  Hand-checked evaluation labels
-tools/                      Dart model generator, evaluation script
+tools/                      Dart model generator, evaluation and labelling scripts, icon generator
 ```

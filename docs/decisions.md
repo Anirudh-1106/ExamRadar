@@ -64,3 +64,21 @@ A date that differs from an already published one goes to the review queue with 
 
 ## D21. UPSC coverage while its site refuses the crawler (2026-11-08)
 Checked other routes on 2026-11-08: `upsc.gov.in` still returns 403; `upsconline.gov.in` only previews applications made before 25 March 2025; `upsconline.nic.in` needs a login; PIB's RSS now also returns 403 to the crawler; Employment News' free list had no UPSC items. No other official, openly readable source carries UPSC notices. UPSC updates therefore come from news feeds that allow it (Indian Express Jobs and Education, The Hindu, Mint Education), shown as unverified headlines and raised to admins, who enter official dates from upsc.gov.in in a browser. Disguising the crawler's identity to get past the block was ruled out (brief rule 8).
+
+## D22. OCR from a project-local install (2026-11-09)
+Tesseract with English and Malayalam data is installed with conda into `.tools/ocr` (ignored by git), because the system installer needs administrator approval. `TESSERACT_CMD` and `TESSDATA_PREFIX` override the path. Servers install the `tesseract-ocr` and `tesseract-ocr-mal` packages instead. After a rule or OCR change, `examradar reprocess <org>` re-reads stored documents and closes "low text quality" reviews that now read well.
+
+## D23. One configurable adapter for the later sources (2026-11-09)
+CMD Kerala, KTET, Kerala SET, Kerala High Court, KVS, NVS, CTET, ISRO, DRDO, LIC, and EPFO use one generic adapter, set up in `config/sources.yaml`: link rows, tables, or class-based grids, include and exclude patterns, browser rendering where the site needs JavaScript, and age limits on old items. Each has a saved fixture and a contract test. A source that needs more than this gets its own adapter.
+
+## D24. Kerala PSC age relaxations come from the official General Conditions (2026-11-09)
+The General Conditions page is collected like any other document. Its paragraph 2 concessions become organisation-wide rules, each tagged with its sub-paragraph. A notification's own wording decides which apply: "usual age relaxation" applies all, "Sub paras i, ii ... of Para 2" applies only those, and "including the relaxation as per para 2(i)" removes the community concession that is already in the stated limit. Concessions that depend on facts the app does not ask (for example widows' status) give "check before applying", never a firm yes. The 50-year overall cap is applied last.
+
+## D25. Certificate validity rules (2026-11-09)
+Rules such as "OBC certificate issued on or after 01.04.2026" are extracted with their quote and served per exam. The app checks a date the user enters and can set a local reminder. Certificates are never uploaded.
+
+## D26. Only recent news is shown (2026-11-09)
+News items from earlier years, or older than 90 days, are skipped at collection and hidden by the API. Old headlines were removed from the live database.
+
+## D27. SQLite in write-ahead mode for local runs (2026-11-09)
+Local runs use SQLite with WAL and a 30-second busy timeout, and the pipeline commits after each document, so the API keeps answering while the worker runs. Production uses PostgreSQL.
