@@ -344,6 +344,8 @@ class Pipeline:
                     continue
                 doc, fresh = self.store_document(org, res.final_url, res.content, res.content_type, si.kind, si.title[:500])
                 if not fresh and doc.processed_at:
+                    # Already read for another item: link it so its facts can reach this item's exam (reprocess).
+                    si.document_id = si.document_id or doc.id
                     continue
                 self.process_document(org, ad, item, cycle, doc, res.content)
                 si.document_id = doc.id

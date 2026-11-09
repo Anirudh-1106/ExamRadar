@@ -239,3 +239,19 @@ def test_kerala_psc_general_conditions_relaxations_give_clear_answers(db, client
 
     assert pwd(date(1976, 5, 1)) == "eligible"  # 10 years for disability, within the overall cap of 50
     assert pwd(date(1974, 5, 1)) == "not_eligible"  # the General Conditions cap every concession at 50
+
+
+def test_known_document_is_linked_to_a_new_item(db, client):
+    p = Pipeline(db, client=client, today=TODAY)
+    p.run_source(src(db, "kerala_psc:https://keralapsc.gov.in/notifications"))
+    p.process_documents(10)
+    db.commit()
+    first = db.scalar(select(SourceItem).where(SourceItem.document_id.is_not(None)))
+    # The same PDF listed again under a new item (another listing, or after a rebuild) must still be linked.
+    twin = SourceItem(source_id=first.source_id, item_key=first.item_key + "-again", title=first.title, url=first.url,
+                      kind=first.kind, data=first.data, processed=False)
+    db.add(twin)
+    db.commit()
+    p.process_documents(10)
+    db.commit()
+    assert twin.processed and twin.document_id == first.document_id
