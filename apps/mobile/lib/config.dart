@@ -3,6 +3,6 @@
 class AppConfig {
   static const appName = String.fromEnvironment('APP_NAME', defaultValue: 'ExamRadar');
   static const defaultApiBase = String.fromEnvironment('API_BASE_URL', defaultValue: 'http://10.0.2.2:8000');
-  static const version = '0.1.1';
+  static const version = '0.1.2';
   static const deepLinkScheme = 'examradar';
 }
