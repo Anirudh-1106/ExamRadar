@@ -8,7 +8,8 @@ Options (all optional) under an organisation in sources.yaml:
   follow: true              open HTML notice pages on the same site to find their PDFs
   table: {title: n, number: n, start: n, end: n}   column numbers for listing tables with dates
   grid: {title: cls, number: cls, start: cls, end: cls}   class names for card or grid layouts with dates
-  max_age_days: n           ignore listed recruitments whose last date is older than this
+  max_age_days: n           ignore listed recruitments whose last date (or start date, if no last date) is older than this
+  recent_years: n           ignore undated notices whose title or number names only years before (this year - n)
   docs_only: true           keep only links to documents (PDFs), not pages
   cycle: {mode: per_item | family | none, family: "CTET", session: "regex with (month) and (year) groups"}
   sector: teaching | engineering | banking | other ...
@@ -28,6 +29,12 @@ NOISE = r"tender|quotation|auction|\brti\b|annual report|budget|pension|press re
 LINK_WORDS = r"(click here|download|view|more details?|read more|details|english|hindi|pdf)[^a-z]*"
 SESSION = (r"(JAN(?:UARY)?|FEB(?:RUARY)?|MAR(?:CH)?|APR(?:IL)?|MAY|JUNE?|JULY?|AUG(?:UST)?|SEPT?(?:EMBER)?|OCT(?:OBER)?|"
            r"NOV(?:EMBER)?|DEC(?:EMBER)?)[\s,.-]*(20\d{2})")
+
+
+def _series(number: str | None) -> tuple[str, int] | None:
+    """'VSSC-301', 'VSSC – 294', 'NO. 288' -> ('VSSC', 301) ... ; numbers with a year or several parts -> None."""
+    m = re.fullmatch(r"\s*([A-Za-z][A-Za-z.]*)\s*[-–:.]?\s*(\d{1,4})\s*", number or "")
+    return (m.group(1).upper().rstrip("."), int(m.group(2))) if m else None
 
 
 class Generic(Adapter):
@@ -169,36 +176,70 @@ class Generic(Adapter):
         age = self.cfg.get("max_age_days")
         if age and end_d and end_d < date.today() - timedelta(days=int(age)):
             return None
+        if not end_d:
+            starts = [f.value["date"] for f in facts if f.value["event_type"] == "application_start"]
+            if age and starts and date.fromisoformat(starts[0]) < date.today() - timedelta(days=int(age)):
+                return None
+            if not facts and self._too_old(f"{title} {number or ''}"):
+                return None  # undated, and the title or advertisement number names only old years
         is_doc = url.lower().split("?")[0].endswith(".pdf")
         return Item(key=number or title, title=title, url=url, kind="notification" if facts else classify_text(title),
                     doc_urls=[url] if is_doc else [], facts=facts, cycle=self.hint(title, number),
                     follow=[url] if (not is_doc and url != base_url and self.cfg.get("follow")) else [])
 
     def _grid(self, body: bytes, base_url: str) -> list[Item]:
+        from datetime import date, timedelta
+
+        from examradar_extraction.dates import find_dates
+
         g = self.cfg["grid"]
-        out = []
-        for t in soup_of(body).find_all(class_=g["title"]):
+        out: list[Item] = []
+        expired: dict[str, int] = {}
+        titles = soup_of(body).find_all(class_=g["title"])
+        for i, t in enumerate(titles):
             title = clean(t.get_text(" "))
-            if len(title) < 10 or not self._keep(title):
-                continue
+            # An entry's cells are the elements between its title and the next title; never read a neighbour's cells.
+            stop = titles[i + 1] if i + 1 < len(titles) else None
+            cells = []
+            for el in t.next_elements:
+                if el is stop:
+                    break
+                if getattr(el, "name", None):
+                    cells.append(el)
 
-            def nxt(cls: str | None, t: Any = t) -> str:
-                el = t.find_next(class_=cls) if cls else None
-                return clean(el.get_text(" ")) if el is not None else ""
+            def of(cls: str | None, cells: list = cells) -> list[str]:
+                return [clean(e.get_text(" ")) for e in cells if cls and cls in (e.get("class") or [])]
 
-            end_el = t.find_next(class_=g["end"]) if g.get("end") else t
-            link = end_el.find_next("a", href=True) if end_el is not None else None
+            nums = of(g.get("number"))
+            start, end = (of(g.get("start")) or [""])[0], (of(g.get("end")) or [""])[0]
+            if not (start or end):
+                # Some sections put the open and close dates in cells styled like the number.
+                dated = [n for n in nums[1:] if find_dates(n)]
+                if len(dated) >= 2:
+                    start, end = dated[0], dated[1]
+            link = next((e for e in cells if e.name == "a" and e.get("href")), None)
             url = normalise_url(str(link["href"]), base_url) if link else base_url
             if not self._ok_url(url):
                 url = base_url
-            it = self._dated_item(title, nxt(g.get("number")) or None, url, base_url, nxt(g.get("start")), nxt(g.get("end")))
+            number = (nums[0] if nums else "") or None
+            ends = find_dates(end) if end else []
+            ser = _series(number)
+            if ser and ends and self.cfg.get("max_age_days") and ends[0].value < date.today() - timedelta(days=int(self.cfg["max_age_days"])):
+                expired[ser[0]] = max(expired.get(ser[0], 0), ser[1])
+            if len(title) < 10 or not self._keep(title):
+                continue
+            it = self._dated_item(title, number, url, base_url, start, end)
             if it:
                 out.append(it)
-        return out
+        # An undated advertisement numbered below an expired one of the same series ("VSSC-301" under an expired
+        # "VSSC-322") is older still.
+        return [it for it in out if it.facts or not (ser := _series(it.key)) or ser[1] > expired.get(ser[0], -1)]
 
     def parse_detail(self, url: str, body: bytes) -> list[Item]:
         soup = soup_of(body)
         page_title = clean((soup.find("h1") or soup.title or soup).get_text(" "))[:300]
+        # Drop breadcrumbs ("... Home / Careers") so the notice joins the same exam as its listing entry.
+        page_title = re.sub(r"\s+Home\s*[/>»|].*$", "", page_title)
         out = []
         for a in soup.find_all("a", href=True):
             href = normalise_url(str(a["href"]), url)

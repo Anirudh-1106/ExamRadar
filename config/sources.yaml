@@ -242,6 +242,7 @@ organisations:
     follow: true
     grid: { title: post, number: advtNum, start: opendate, end: closedate }
     max_age_days: 400
+    recent_years: 1
     domains:
       - { host: www.isro.gov.in, purpose: content, verified: 2026-11-08 }
     listings:

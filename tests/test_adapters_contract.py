@@ -160,6 +160,11 @@ def test_isro_grid_gives_official_windows_and_ktet_uses_file_names():
     items = parse("isro", "https://www.isro.gov.in/CurrentOpportunities.html", "isro/current-opportunities.html")
     first = [i for i in items if i.key == "ISRO:ICRB:01(A-JPA):2026"][0]
     assert {f.value["event_type"]: f.value["date"] for f in first.facts} == {"application_start": "2026-07-27", "application_end": "2026-08-20"}
+    # Every entry keeps its own number; undated entries never borrow a neighbour's dates.
+    assert all(i.cycle and i.cycle.notification_number for i in items)
+    assert not any(f.value["date"] for i in items if i.key == "SAC:01:2026" for f in i.facts)
+    # VSSC-301 is undated but numbered below VSSC-322, which closed in January 2023.
+    assert not any(i.key == "VSSC-301" for i in items)
     ktet = parse("ktet", "https://ktet.kerala.gov.in/", "ktet/home.html")
     assert any(i.cycle and i.cycle.title == "K-TET Sep 2026" and i.kind == "notification" for i in ktet)
     nvs = parse("nvs", "https://navodaya.gov.in/nvs/en/Home1", "nvs/home_rendered.html")
