@@ -13,6 +13,10 @@ def normalise_url(url: str, base: str | None = None) -> str:
     if base:
         url = urljoin(base, url)
     p = urlparse(url.strip())
+    if base and p.scheme == "http":
+        b = urlparse(base)
+        if b.scheme == "https" and b.netloc.lower() == p.netloc.lower():
+            p = p._replace(scheme="https")  # an http link on an https page of the same site
     q = [(k, v) for k, v in parse_qsl(p.query, keep_blank_values=True) if k.lower() not in VOLATILE_PARAMS]
     path = re.sub(r"/{2,}", "/", p.path) or "/"
     return urlunparse((p.scheme.lower() or "https", p.netloc.lower(), path, "", urlencode(q), ""))
