@@ -147,6 +147,7 @@ organisations:
     include: "notification|prospectus|result|hall ?ticket|admit|answer ?key|time ?table|exam date|k-?tet"
     exclude: "model question|question paper|g\\.?o\\.?\\s*\\(|forgot"
     docs_only: true
+    page_dates: true
     cycle: { mode: family, family: K-TET }
     domains:
       - { host: ktet.kerala.gov.in, purpose: content, verified: 2026-11-08 }

@@ -78,8 +78,26 @@ def _english_quality(text: str) -> float:
     return good / len(text)
 
 
+_STOP = frozenset("the of and to in for is be by on with from are as at will shall this that which has have not all any who".split())
+_ODD = re.compile(r"[a-z][A-Z]|[A-Za-z]\d[A-Za-z]|[A-Za-z][@{}<>\]\[$*][A-Za-z]")
+
+
+def looks_garbled(text: str) -> bool:
+    """A text layer of Latin-looking junk, as left by legacy Malayalam fonts or bad scanner OCR: almost no common
+    English words and many tokens shaped like 'creJccru' or 'oorcoloilo5'. On real pages the odd share stays below 0.1."""
+    toks = text.split()
+    if len(toks) < 30:
+        return False
+    words = [w for w in (re.sub(r"[^A-Za-z]", "", t).lower() for t in toks) if w]
+    stop = sum(w in _STOP for w in words) / max(len(words), 1)
+    odd = sum(1 for t in toks if _ODD.search(t)) / len(toks)
+    return odd >= 0.2 and stop < 0.05
+
+
 def page_needs_ocr(text: str, has_images: bool) -> bool:
     if len(text.strip()) < 40 and has_images:
+        return True
+    if looks_garbled(text):
         return True
     if malayalam_ratio(text) > 0.3 and malayalam_quality(text) < 0.5:
         return True
@@ -107,6 +125,8 @@ def extract_pdf(data: bytes, tables: bool = False, ocr: str = "auto", max_pages:
         q = _english_quality(text)
         if malayalam_ratio(text) > 0.3:
             q = min(q, malayalam_quality(text))
+        if looks_garbled(text):
+            q = min(q, 0.2)
         qualities.append(q)
         if tables:
             try:

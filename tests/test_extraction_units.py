@@ -110,3 +110,12 @@ def test_kerala_psc_spaced_category_number_and_trailing_dot_dates():
     pages = ["... end of page one. Other Note:-", "Backward Communities are eligible for usual age relaxation as per rules"]
     q = fit_quote("Other Note:- Backward Communities are eligible for usual age relaxation", pages)
     assert verify_quote(q, pages).ok and "usual age relaxation" in q
+
+
+def test_garbled_text_layer_is_sent_to_ocr():
+    from examradar_extraction.pdf import looks_garbled
+
+    junk = "Garog crudaeicd oorcoloilo5creJccru orali GArO s'l 6 eilsl6nileil OS omlioo6rud o-lO\"la,9/C a,m'l\"S/5fDOlOS " * 4
+    real = ("Applications are invited online from qualified candidates for appointment to the post of Assistant in the "
+            "Kerala State Co-operative Bank. The last date for receipt of applications is 02.12.2026 and the age limit is 18-36.")
+    assert looks_garbled(junk) and not looks_garbled(real)

@@ -11,6 +11,7 @@ Options (all optional) under an organisation in sources.yaml:
   max_age_days: n           ignore listed recruitments whose last date (or start date, if no last date) is older than this
   recent_years: n           ignore undated notices whose title or number names only years before (this year - n)
   docs_only: true           keep only links to documents (PDFs), not pages
+  page_dates: true          read a key-dates block printed on the listing page and give it to the latest session
   cycle: {mode: per_item | family | none, family: "CTET", session: "regex with (month) and (year) groups"}
   sector: teaching | engineering | banking | other ...
 """
@@ -63,15 +64,41 @@ class Generic(Adapter):
         return bool(n is not None and years and max(years) < date.today().year - int(n))
 
     def parse_listing(self, listing: Listing, body: bytes, base_url: str) -> list[Item]:
+        items: list[Item] = []
         if self.cfg.get("grid"):
             items = self._grid(body, base_url)
-            if items:
-                return items
-        if self.cfg.get("table"):
+        if not items and self.cfg.get("table"):
             items = self._table(body, base_url)
-            if items:
-                return items
-        return self._rows(body, base_url)
+        if not items:
+            items = self._rows(body, base_url)
+        if self.cfg.get("page_dates"):
+            self._page_dates(body, items)
+        return items
+
+    def _page_dates(self, body: bytes, items: list[Item]) -> None:
+        """page_dates: true reads a key-dates block printed on the listing page itself ("Submission of Online
+        Application from : 23/09/2026 to 03/10/2026 ... Date of Examinations: 14/11/2026") and gives it to the latest
+        session in the listing, only when the dates fall in that session's year."""
+        from examradar_extraction.pdf import DocText
+        from examradar_extraction.rules import event_facts
+
+        from ..normalise import main_text
+
+        facts = event_facts(DocText([main_text(body)]))
+        sessions = [i for i in items if i.cycle and i.cycle.year]
+        if not facts or not sessions:
+            return
+        months = "jan feb mar apr may jun jul aug sep oct nov dec".split()
+
+        def order(i: Item) -> tuple[int, int]:
+            label = (i.cycle.title if i.cycle else "").lower()
+            return (i.cycle.year or 0 if i.cycle else 0, max((n for n, m in enumerate(months) if m in label), default=-1))
+
+        latest = max(sessions, key=order)
+        first_year = min(int(f.value["date"][:4]) for f in facts)
+        if latest.cycle and first_year == latest.cycle.year:
+            have = {(f.value.get("event_type"), f.value.get("date")) for f in latest.facts}
+            latest.facts.extend(f for f in facts if (f.value["event_type"], f.value["date"]) not in have)
 
     def _rows(self, body: bytes, base_url: str) -> list[Item]:
         soup = soup_of(body)

@@ -167,5 +167,9 @@ def test_isro_grid_gives_official_windows_and_ktet_uses_file_names():
     assert not any(i.key == "VSSC-301" for i in items)
     ktet = parse("ktet", "https://ktet.kerala.gov.in/", "ktet/home.html")
     assert any(i.cycle and i.cycle.title == "K-TET Sep 2026" and i.kind == "notification" for i in ktet)
+    # The key dates printed on the KTET home page go to the September 2026 session.
+    sep = next(i for i in ktet if i.cycle and i.cycle.title == "K-TET Sep 2026")
+    assert {(f.value["event_type"], f.value["date"]) for f in sep.facts} >= {
+        ("application_start", "2026-09-23"), ("application_end", "2026-10-03"), ("admit_card", "2026-11-04"), ("exam", "2026-11-14")}
     nvs = parse("nvs", "https://navodaya.gov.in/nvs/en/Home1", "nvs/home_rendered.html")
     assert any(i.kind == "admit_card" for i in nvs) and all(i.published_hint for i in nvs)

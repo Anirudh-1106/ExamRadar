@@ -14,7 +14,8 @@ EVENT_LABELS: list[tuple[str, str, str]] = [
     ("notification", r"date of (?:notification|publication)(?: of (?:the )?examination)?|date of advertisement", POINT),
     ("application_window",
      r"online registration(?: of application)?(?: and payment of fees?)?(?: including edit/modification of application by candidates)?"
-     r"|apply online from|on-?line applications? (?:can be submitted|will be accepted) from", RANGE),
+     r"|apply online from|on-?line applications? (?:can be submitted|will be accepted) from"
+     r"|submission of (?:the )?on-?line applications?(?: forms?)? from", RANGE),
     ("fee_deadline", r"last date (?:for|of) (?:online )?payment of (?:application )?fees?", POINT),
     # Extension notices: "decided to extend the last date for submission of the Online Application Form ... up to 09th November 2026".
     ("application_end",
@@ -39,7 +40,8 @@ EVENT_LABELS: list[tuple[str, str, str]] = [
      r" (?:conducted |held |scheduled )?(?:in|on)(?: the month of)?", POINT),
     ("admit_card",
      r"download of call letters?(?: for online examination)?(?:\s*[–-]\s*(?:preliminary|main))?"
-     r"|admission tickets? (?:will be )?available from|admit cards? (?:will be )?(?:available|issued) (?:from|on)", POINT),
+     r"|admission tickets? (?:will be )?available from|admit cards? (?:will be )?(?:available|issued) (?:from|on)"
+     r"|download(?:ing)? (?:of )?(?:the )?(?:admit cards?|hall tickets?)(?: through (?:the )?website)?", POINT),
 ]
 _COMPILED = [(t, re.compile(p, re.I), k) for t, p, k in EVENT_LABELS]
 TENTATIVE = re.compile(r"tentative|likely|provisional(?:ly)?|expected", re.I)
