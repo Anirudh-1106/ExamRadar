@@ -130,8 +130,6 @@ class Generic(Adapter):
         return list(items.values())
 
     def _table(self, body: bytes, base_url: str) -> list[Item]:
-        from examradar_extraction.dates import find_dates
-
         cols = self.cfg["table"]
         need = max(v for v in cols.values() if isinstance(v, int))
         out = []
@@ -148,15 +146,10 @@ class Generic(Adapter):
             if not self._ok_url(url):
                 url = base_url
             number = cell[cols["number"]] if "number" in cols else None
-            facts = []
-            for key, et in (("start", "application_start"), ("end", "application_end")):
-                if key in cols and (d := find_dates(cell[cols[key]])):
-                    facts.append(Fact("event", {"event_type": et, "date": d[0].value.isoformat(), "precision": d[0].precision,
-                                                "certainty": "official"}, f"{title[:120]} | {cell[cols[key]]}", None, 0.9))
-            is_doc = url.lower().split("?")[0].endswith(".pdf")
-            out.append(Item(key=number or title, title=title, url=url, kind="notification" if facts else classify_text(title),
-                            doc_urls=[url] if is_doc else [], facts=facts, cycle=self.hint(title, number),
-                            follow=[url] if (not is_doc and url != base_url and self.cfg.get("follow")) else []))
+            it = self._dated_item(title, number or None, url, base_url, cell[cols["start"]] if "start" in cols else "",
+                                  cell[cols["end"]] if "end" in cols else "")
+            if it:
+                out.append(it)
         return out
 
     def _dated_item(self, title: str, number: str | None, url: str, base_url: str, start: str, end: str) -> Item | None:
@@ -265,8 +258,8 @@ class Generic(Adapter):
                       title, flags=re.I)
         core = re.sub(r"\s*\(?\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\)?", "", core)
         # "for recruitment to the post of X" -> "X"
-        core = re.sub(r"^\W*(?:\d+\s*[–-]\s*)?(?:for\s+)?(?:recruitment|selection|engagement)?\s*(?:for|to|of)?\s*(?:selection\s+to\s+)?"
-                      r"(?:the\s+)?(?:posts?\s+of\s+)?", "", core, flags=re.I)
+        core = re.sub(r"^\W*(?:\d+\s*[–-]\s*)?(?:for\s+)?(?:direct\s+)?(?:(?:recruitment|selection|engagement)\b)?\s*(?:(?:for|to|of)\b)?\s*"
+                      r"(?:selection\s+to\s+)?(?:the\s+)?(?:posts?\s+of\s+)?", "", core, flags=re.I)
         core = clean(re.sub(r"[-–:|]+\s*$", "", core))[:160]
         if len(core) < 10:
             return None

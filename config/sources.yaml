@@ -179,6 +179,8 @@ organisations:
     collection: auto
     render: [https://hckrecruitment.keralacourts.in/hckrecruitment/Recruitment/notifications]
     recent_years: 1
+    table: { number: 0, title: 2, start: 3, end: 4 }
+    max_age_days: 400
     domains:
       - { host: hckrecruitment.keralacourts.in, purpose: content, verified: 2026-11-08 }
       - { host: highcourt.kerala.gov.in, purpose: content, verified: 2026-11-08 }
@@ -226,6 +228,7 @@ organisations:
     sector: teaching
     collection: auto
     cycle: { mode: family, family: CTET }
+    recent_years: 1
     domains:
       - { host: ctet.nic.in, purpose: content, verified: 2026-11-08 }
       - { host: cdnbbsr.s3waas.gov.in, path_prefix: /s3443dec3062d0286986e21dc0631734c9/, purpose: content, verified: 2026-11-08, note: "CTET folder on the government S3WaaS host" }
