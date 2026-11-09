@@ -175,3 +175,27 @@ Checked 2026-11-08 at the owner's request, to cover RBI and to catch notices ear
 | The Hindu Education RSS | News | Yes. robots.txt allows it. | Signal only |
 | Mathrubhumi RSS | News (Malayalam) | Yes | Signal only |
 | Google News search RSS | Aggregator | Works | Off pending legal review |
+
+## Later sources (added 2026-11-09)
+
+All use the generic adapter (decisions D23). Each has a saved fixture and a contract test. Counts are from the first live crawl.
+
+| Source | What it gives | Live result | Limits |
+|---|---|---|---|
+| CMD Kerala | Recruitment notices and shortlists (PDF) | 13 exams, 28 documents | Few dates in the notices; mostly notices and lists |
+| KTET (Pareeksha Bhavan) | Session notification and the key dates printed on the home page | K-TET Sep 2026 with application window, admit card, and exam dates | The notification PDF has a garbled text layer; OCR now reads it as Malayalam, which the rules do not yet parse |
+| Kerala SET (LBS Centre) | SET notices from the LBS home page | None open on 2026-11-09 | Picked up when a notice appears |
+| Kerala High Court | Recruitment table with opening and closing dates | 31 recruitments, 56 dates | Needs browser rendering; rows closed more than 400 days ago are skipped |
+| KVS | Recruitment page on the S3WaaS host | 1 item | Few items |
+| NVS | Recruitment notices with publication dates | 26 notices | Titles are in Hindi only; links are script handlers, so the listing page is the evidence |
+| CTET | Session bulletins and notices | CTET Feb 2026 and Sep 2026 | Older sessions are skipped |
+| ISRO | Current opportunities with opening and closing dates | 41 recruitments, 59 dates | Undated adverts below an expired number in the same series are treated as expired |
+| DRDO | Vacancies on the official Hindi-script domain | 2 items | Detail links switched from http to https |
+| LIC | Careers page (rendered) | 2 items | Few items |
+| EPFO | Recruitment page (rendered) | No openings on 2026-11-09 | Picked up when a notice appears |
+
+Bugs found during the first live crawl and fixed the same day:
+
+- **ISRO.** Rows without dates borrowed the next section's dates, and detail pages created duplicate exams with breadcrumb titles. The ISRO records were rebuilt from a fresh crawl.
+- **Kerala High Court and CTET.** Old and test rows (for example "0/0000 TEST APPLICATION", "CTET Aug 2018") were shown. Their records were rebuilt.
+- **Known documents.** A new listing item that pointed to an already processed PDF was not linked to it, so the PDF's facts never reached the item's exam.
