@@ -383,6 +383,11 @@ class Pipeline:
         self.s.flush()
         pages = doc.pages_text or [doc.text or ""]
         org_rules = False
+        if any(f.field in ("relaxation", "relaxation_cap") for f in facts):
+            # Re-reading the same General Conditions replaces its earlier facts instead of adding duplicates.
+            for old in self.s.scalars(select(ExtractedField).where(ExtractedField.document_id == doc.id, ExtractedField.status == "published",
+                                                                  ExtractedField.field_name.in_(["relaxation", "relaxation_cap"]))):
+                old.status = "superseded"
         for f in facts:
             ef = ExtractedField(extraction_run_id=run.id, document_id=doc.id, field_name=f.field, value=f.value,
                                 confidence=f.confidence, method=f.method)
@@ -536,7 +541,13 @@ class Pipeline:
             for old in self.s.scalars(select(EligibilityRule).where(EligibilityRule.post_id == ref.post_id, EligibilityRule.rule_type == "relaxation",
                                                                   EligibilityRule.status == "published")):
                 old.status = "superseded"
+            # Only the General Conditions paragraphs this notification applies, minus any already built into its limit.
+            allowed = set(ref.params.get("paras") or []) or None
+            excluded = set(ref.params.get("exclude") or [])
             for f in rels:
+                para = f.value.get("para")
+                if para and ((allowed is not None and para not in allowed) or para in excluded):
+                    continue
                 ev = self.s.scalar(select(FieldEvidence).where(FieldEvidence.extracted_field_id == f.id))
                 params = {**f.value, **({"cap_age": cap} if cap and int(f.value.get("years", 0)) < 99 else {})}
                 self.s.add(EligibilityRule(post_id=ref.post_id, rule_type="relaxation", params=params,

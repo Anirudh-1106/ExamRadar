@@ -55,13 +55,9 @@ def notification_facts(doc: DocText) -> list[Fact]:
     q = re.search(r"Qualifications?\s*:?-?\s*(.{10,600}?)\s+(?:Link-|Note\s*:|\d{1,2}\s*\.\s*Mode of submitting)", text_all, re.I)
     if q:
         facts.append(Fact("qualification", {"text": q.group(1).strip()}, q.group(0)[: len(q.group(0))].strip(), None, 0.85))
-    rel = re.search(r"Candidates belonging to (.{5,80}?) (?:are|is) eligible\s+for\s+usual age relaxation", text_all, re.I)
-    if rel:
-        groups = []
-        for g, code in (("backward", "OBC"), ("SC", "SC"), ("ST", "ST")):
-            if re.search(g, rel.group(1), re.I):
-                groups.append(code)
-        facts.append(Fact("relaxation_reference", {"categories": groups, "where": "Part II General Conditions"}, rel.group(0), None, 0.85))
+    ref = relaxation_reference(text_all)
+    if ref:
+        facts.append(ref)
     facts += age_facts(doc)
     facts += [f for f in event_facts(doc) if f.value["event_type"] in ("application_end", "exam")]
     return facts
@@ -183,23 +179,56 @@ def general_conditions_facts(doc: DocText) -> list[Fact]:
                   r"Other Backward Classes", text, re.I)
     if m:
         for grp, yrs in (("SC", 5), ("ST", 5), ("OBC", 3)):
-            add({"applies_to": grp, "years": yrs}, m)
+            add({"applies_to": grp, "years": yrs, "para": "i"}, m)
     m = re.search(r"The maximum age limit laid down for appointment to any post shall not apply in the case of candidates belonging to "
                   r"any of the Scheduled Caste", text, re.I)
     if m:
         for grp in ("SC", "ST"):
-            add({"applies_to": grp, "years": 99, "conditional": True,
+            add({"applies_to": grp, "years": 99, "conditional": True, "para": "ii",
                  "note": "In some cases the upper age limit does not apply to SC/ST candidates (General Conditions 2(ii) to 2(iv))."}, m)
     m = re.search(r"relaxed in the case of Ex-servicemen to the extent of the period of service.{0,120}?up to a maximum of five years", text, re.I)
     if m:
-        add({"applies_to": "EXSM", "years": 5, "conditional": True, "note": "Ex-servicemen: up to five years, depending on service."}, m)
+        add({"applies_to": "EXSM", "years": 5, "conditional": True, "para": "vi", "note": "Ex-servicemen: up to five years, depending on service."}, m)
     m = re.search(r"Age concession upto 15 years will be granted to candidates belonging to Blindness and Low Vision and Deaf and hard of "
                   r"hearing categories.{0,120}?and 10 years to candidates belonging to Locomotor disability", text, re.I)
     if m:
-        add({"applies_to": "PWBD", "years": 10}, m)
-        add({"applies_to": "PWBD", "years": 15, "conditional": True,
+        add({"applies_to": "PWBD", "years": 10, "para": "vii"}, m)
+        add({"applies_to": "PWBD", "years": 15, "conditional": True, "para": "vii",
              "note": "15 years for blindness, low vision, deafness or hard of hearing; 10 years for other listed disabilities."}, m)
     m = re.search(r"upper age limit prescribed in the Special Rules, shall be further raised by five years in the case of widows", text, re.I)
     if m:
-        add({"applies_to": "FEMALE", "years": 5, "conditional": True, "note": "Widows: five more years."}, m)
+        add({"applies_to": "FEMALE", "years": 5, "conditional": True, "para": "xiv", "note": "Widows: five more years."}, m)
     return facts
+
+
+ROMAN = {"i": 1, "ii": 2, "iii": 3, "iv": 4, "v": 5, "vi": 6, "vii": 7, "viii": 8, "ix": 9, "x": 10, "xi": 11, "xii": 12, "xiii": 13, "xiv": 14}
+
+
+def relaxation_reference(text: str) -> Fact | None:
+    """How a notification applies the General Conditions age concessions.
+
+    - 'usual age relaxation' or 'see para 2 of the General Conditions': the concessions apply.
+    - 'including the relaxation as per para 2(i)': the stated limit already includes the community relaxation,
+      so para 2(i) is excluded and the other concessions still apply.
+    - 'Sub paras i, ii, iii, iv, vi, vii & xiv of Para (2)': only those paragraphs apply.
+    - 'No other age relaxation will be allowed' with nothing else: none apply.
+    """
+    usual = re.search(r"[^.]{0,120}usual age relaxation[^.]{0,120}", text, re.I)
+    including = re.search(r"including the (?:age )?relaxation (?:as per|in) para\s*2\s*\(\s*i\s*\)", text, re.I)
+    paras_m = re.search(r"see\s+Sub\s*-?\s*paras?\s+((?:[ivx]+\s*(?:,|&|and)?\s*)+)\s*of\s+Para\s*\(?\s*2\s*\)?", text, re.I)
+    no_other = re.search(r"No other age relaxation (?:will|shall) be allowed", text, re.I)
+    if not (usual or including or paras_m):
+        return None
+    if no_other and not (usual or including or paras_m):
+        return None
+    groups = []
+    scope = (usual.group(0) if usual else "") + (paras_m.group(0) if paras_m else "")
+    for g, code in ((r"backward|OBC", "OBC"), (r"\bSC\b|Scheduled Castes?", "SC"), (r"\bST\b|Scheduled Tribes?", "ST")):
+        if re.search(g, scope, re.I):
+            groups.append(code)
+    paras = sorted({p.lower() for p in re.findall(r"[ivx]+", paras_m.group(1), re.I) if p.lower() in ROMAN}, key=lambda p: ROMAN[p]) if paras_m else None
+    value: dict[str, Any] = {"categories": groups or ["OBC", "SC", "ST"], "where": "Part II General Conditions",
+                             "paras": paras, "exclude": ["i"] if including else []}
+    m = including or paras_m or usual
+    assert m is not None
+    return Fact("relaxation_reference", value, m.group(0).strip(), None, 0.85)

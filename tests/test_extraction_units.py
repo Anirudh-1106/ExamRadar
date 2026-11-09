@@ -82,3 +82,15 @@ DOMAINS = [{"host": "thulasi.psc.kerala.gov.in", "path_prefix": "/", "purpose": 
 ])
 def test_allowlist_exact_host(url, ok):
     assert link_allowed(url, DOMAINS) is ok
+
+
+def test_kerala_psc_relaxation_reference_variants():
+    from examradar_extraction.rules_kpsc import relaxation_reference
+
+    usual = relaxation_reference("Candidates belonging to Other Backward Community and SC/ST Community are eligible for usual age "
+                                 "relaxation. Note: please see Sub paras i, ii, iii, iv, vi ,vii & xiv of Para (2) of the General Conditions")
+    assert usual.value["paras"] == ["i", "ii", "iii", "iv", "vi", "vii", "xiv"] and usual.value["exclude"] == []
+    included = relaxation_reference("are eligible to apply for this post. (Including the relaxation as per para 2 (i) of General Conditions). "
+                                    "Note: please see Sub paras ii, iii, iv, vi, vii & xiv of Para (2)")
+    assert included.value["exclude"] == ["i"] and "i" not in included.value["paras"]
+    assert relaxation_reference("Age Limit : 18-36. No other age relaxation will be allowed.") is None
