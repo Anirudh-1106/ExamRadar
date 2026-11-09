@@ -170,7 +170,7 @@ def vacancy_facts(doc: DocText) -> list[Fact]:
 
 
 RE_BORN = re.compile(
-    r"born (?:between|not earlier than)\s+(.{3,40}?\d{4})\s*,?\s+and\s+(?:not later than\s+)?(.{3,40}?\d{4})", re.I)
+    r"born (?:between|not earlier than)\s+(.{3,40}?\d{4})\.?\s*,?\s+and\s+(?:not later than\s+)?(.{3,40}?\d{4})", re.I)
 RE_AGE_RANGE = re.compile(
     r"(?:age limit|age)\s*:?\s*(?:\(as on\s+([^)]{6,30})\))?\s*:?\s*(\d{2})\s*(?:-|–|to)\s*(\d{2})(?:\s*years)?", re.I)
 RE_UPSC_AGE = re.compile(

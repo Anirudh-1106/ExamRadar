@@ -1,0 +1,1457 @@
+# Bulk gold labels: Kerala PSC notifications (one row per official PDF, identified by URL and SHA-256).
+# Proposed by tools/gold_helper.py from raw page text with plain date parsing (independent of the extraction rules),
+# then checked row by row against the raw snippets on 2026-11-09 by the build agent. Every category number was also
+# cross-checked against the number in the PDF file name. Fields the helper could not read are left out and not scored.
+# A human reviewer should re-verify a sample before these numbers are relied on (docs/evaluation.md).
+# Scoring per labelled field: correct if the value is among the extracted values, wrong if values were extracted but
+# none match, missed if nothing was extracted.
+documents:
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-100-25.pdf"
+    sha256: 4ada7e1bad1d17069979cdb13d6e810d80bf020ea34fb69992b6f35adb26ab9b
+    notification_number: "100/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-101-25.pdf"
+    sha256: 04ef5a245ce528805c46d621fb65525596be00dbdf63c5060ec61f85e61a27e1
+    notification_number: "101/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-102-25.pdf"
+    sha256: 0ac241cb38e8a897a92c1e01a3e431a505af1aa8aa163d09e17a6b35313fb5c2
+    notification_number: "102/2025"
+    application_end: 2025-07-16
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-103-25.pdf"
+    sha256: 0cc82c663b414b41f59f30c71d67b0c938adf581b5bd58cd358acbdbc5c41707
+    notification_number: "103/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-104-25.pdf"
+    sha256: 278498dd2153147efcbd11aea81fd9f30f3b3e87f98f820a464db2dac97f0945
+    notification_number: "104/2025"
+    application_end: 2025-07-16
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-105-25.pdf"
+    sha256: fc087bd61fd691b6ac4b1a5a25ac2d2cc164c82c1e79d9810b722b1842c89649
+    notification_number: "105/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-106-25.pdf"
+    sha256: fda7b13afc095d8be8c38a3730a133eb78112466618bc7ec62f943650a153c40
+    notification_number: "106/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-107-25.pdf"
+    sha256: 4688c65d31b0033631bd11a9611e52fa35626fb75c30e20c51727c1708bd8e86
+    notification_number: "107/2025"
+    application_end: 2025-07-16
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-108-25.pdf"
+    sha256: 6d855f02a1e391cd26d3fe705419a341100cb7590a700614a18838aa5425f51e
+    notification_number: "108/2025"
+    application_end: 2025-07-16
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-109-25.pdf"
+    sha256: 5ef640fe04424697df3880ec1d3adb1bfc4faee1784089d782cbc7bb870144f0
+    notification_number: "109/2025"
+    application_end: 2025-07-16
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-110-25.pdf"
+    sha256: 1439feed6dd3dd0b3aa824a83dc1d6afd2257100a8605c63c3f7e06822dc177b
+    notification_number: "110/2025"
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-111-25.pdf"
+    sha256: 2b2787eb0d37eb1aa868080f94b2a133c7e2f013e2908c5d95168849df64e369
+    notification_number: "111/2025"
+    application_end: 2025-07-16
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-112-25.pdf"
+    sha256: f705b8458111ed4578972f4c0237698d9c9b0b170e85b75d32d0cc663cf139b7
+    notification_number: "112/2025"
+    application_end: 2025-07-16
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-113-25.pdf"
+    sha256: f55c7480da1c40ff1fd2949a95b1308de17d539df342f63312aead270e4b69ab
+    notification_number: "113/2025"
+    application_end: 2025-07-16
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-114-25.pdf"
+    sha256: 466209e7366991b672f958a7dcef215cc8ddc4b941a1e8b77cea36db9db9ca6d
+    notification_number: "114/2025"
+    application_end: 2025-07-16
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-115-25.pdf"
+    sha256: 9b32af8832954db76fa000c45e1d387056e93d29414d778871ef46b5410d4a70
+    notification_number: "115/2025"
+    application_end: 2025-07-16
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-116-25.pdf"
+    sha256: 6f43326a208b67679270bbf449ef9da143eea017313d5305fb3f717513192458
+    notification_number: "116/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-117-25.pdf"
+    sha256: f942e565bd1e5bdc76837004416e742ad7d1c72216f3be8b0037717d6263232d
+    notification_number: "117/2025"
+    application_end: 2025-07-16
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-118-25.pdf"
+    sha256: 72a923003e0d3e55a14ed70e9ebcc72ec9bd0c1fe7000d39487a88ae10a0c2d8
+    notification_number: "118/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-119-25.pdf"
+    sha256: 5f8c5820b9b825847799b6f7e4626121d2a677690a8d6e9d3d24ee13aa173cb2
+    notification_number: "119/2025"
+    application_end: 2025-07-16
+    age: {from: 1980-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-121-25.pdf"
+    sha256: 5aefe8366601e79c6a31adedcbdd52f3abcb4602515890c421605ca1dd838987
+    notification_number: "121/2025"
+    application_end: 2025-07-16
+    age: {from: 1976-01-02, to: 2002-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-122-25.pdf"
+    sha256: 3d7886655210c21fd763daecc9a25067c9440bc425ad59d5298d88dbbd644b4d
+    notification_number: "122/2025"
+    application_end: 2025-07-16
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-123-25.pdf"
+    sha256: c71239548a38cf9587fc6900243ef8d986c13b6958df16ef9ef2f724f2e195e3
+    notification_number: "123/2025"
+    application_end: 2025-07-16
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-124-25.pdf"
+    sha256: a178f5b1ce1f0f077832e3fb399994e2cfeec334ab0c2283028e0f70b5991859
+    notification_number: "124/2025"
+    application_end: 2025-07-16
+    age: {from: 1986-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-125-25.pdf"
+    sha256: 2c5c7f8c4341c5e8e597fee866f48079d2ffec0ab7d2bc3717c94db9d5e6c54e
+    notification_number: "125/2025"
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-126-25.pdf"
+    sha256: 733587325e7d136e1a887dc23cf5494506b4260f087ae52c1b3a5efca954d548
+    notification_number: "126/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-127-25.pdf"
+    sha256: 433bf20a82787cd626bcd77faf1b0b81abf2901e03e1cca4553ab430bbe448df
+    notification_number: "127/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-128-25.pdf"
+    sha256: e4513fdd8b234d978a93661dcf971bfe39283e41c3418c9d43f4a565caa7a824
+    notification_number: "128/2025"
+    application_end: 2025-07-16
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-129-130-25.pdf"
+    sha256: ebd1a8e28d63eaf7c204a57b35c31a886ae334e3350d5b1e98eb8fdeea6a4bdd
+    notification_number: "129/2025"
+    application_end: 2025-07-16
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-131-25.pdf"
+    sha256: 691d9621dcb8ca913121a5308f48a2dd86598ba70864876838bd12a4c407d5cd
+    notification_number: "131/2025"
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-132-25.pdf"
+    sha256: a3835a87168644d0fcb6ad179bf225f0e2dcd4c8786708c64c247ed985c991c2
+    notification_number: "132/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-133-25.pdf"
+    sha256: 1cd678a56a9364f00b9e72bc0a26d250e78e90257380c6e53d62cf8c50dba7f2
+    notification_number: "133/2025"
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-134-25.pdf"
+    sha256: 86a31eaf5d93c10bf33d862ff4cb7a3eaaa290aa5063112acc3e73ce93ddbcd1
+    notification_number: "134/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-135-25.pdf"
+    sha256: e7f4bfb12dc80540d48cd42af249c61ac7ffac0f9bc6855261d2724fd12519e1
+    notification_number: "135/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-136-25.pdf"
+    sha256: f8de751cad604d8f54c3644752e61838e44bf47165b823dfcfd60dc762ccac10
+    notification_number: "136/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-137-144-25.pdf"
+    sha256: d7e3ad1468133409b803a8890522b9fecbe38a17c4de1830e3c2aca310717935
+    notification_number: "137/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-145%20%26146.pdf"
+    sha256: 7adefbe474b6f2d9e10aae9554467cc6f5eec00b7fa53113c14bb5557834d6d8
+    notification_number: "145/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-147%26148.pdf"
+    sha256: edf3b6f27c3ade559c11795ff9b3bcb419434b41839b6c9092d9d2190d8ddca4
+    notification_number: "147/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-149%26150.pdf"
+    sha256: 0a72175df3c1603d609557abb2004331670637b5b33406df73f4d6a726a62c16
+    notification_number: "149/2025"
+    application_end: 2025-07-16
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-151%20-154.pdf"
+    sha256: c8cdefcd794e09f2cdeed1d6108f685b47ba55f8d95b23b9aa22afc755b4cd89
+    notification_number: "151/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-155-25.pdf"
+    sha256: c3e6b29f7033a28bedc86ee68ef90d4d1dfb422467d81e8ca0b50edd134da2ce
+    notification_number: "155/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-156-25.pdf"
+    sha256: aed9e689b71cdcdf83d865364e4243addf8144ef2ee7a8235f05b43fd54da260
+    notification_number: "156/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-157-162-25.pdf"
+    sha256: 8aa68068d6017f082b1d2529df1a36c42ee33353568dd97f8fe11cffbc584fc2
+    notification_number: "157/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-163-25.pdf"
+    sha256: c62de840e4634cc68ff16b1a785c296f441f6aca89891d812ca2f635f5dd3b63
+    notification_number: "163/2025"
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-164-25.pdf"
+    sha256: 948246351ae6c8775eab711435e40410a9f71ea44bf558804ec1115650bfa9e3
+    notification_number: "164/2025"
+    application_end: 2025-07-16
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-165-167.pdf"
+    sha256: 9a0414b3a157d76ac388ffb4223291f1efa8fddb9749cd4b8cebf1d23d5a8d01
+    notification_number: "165/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-168-25.pdf"
+    sha256: c049cfc21d368b8557074a1e0b9f8d72a843be9cdd117271812586330bb3dd7f
+    notification_number: "168/2025"
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-169-25.pdf"
+    sha256: 128e913d2ea3abd2bb38336b185c9b55fb94388eee4c718ee15d7580fe1695a8
+    notification_number: "169/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-170-25%20.pdf"
+    sha256: d64616e8c821fe5c991fed210f12c5e986708241e6ebec14439398c37414718d
+    notification_number: "170/2025"
+    application_end: 2025-07-16
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-171-25.pdf"
+    sha256: 8f853e7f4eb148e51e2fa869d5b53b1aa150a88bdd29ff6da8ae9efb74963e60
+    notification_number: "171/2025"
+    application_end: 2025-07-16
+    age: {from: 1981-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-172%26173-25.pdf"
+    sha256: ecd306fcb2ed578b73ec3f20b372f40ffec8f55d2430ce32c8cce149fe348aff
+    notification_number: "172/2025"
+    application_end: 2025-07-16
+    age: {from: 1983-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-174-25.pdf"
+    sha256: 2a94fb506662a9c6ae707abb7fea881b8c61e733db2108836236b87a5b4effbb
+    notification_number: "174/2025"
+    application_end: 2025-07-16
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-90-25.pdf"
+    sha256: 98f16b37d4c89b13a768f90dfb069f63c73a1887f9c275ec992c2dcbac6aab63
+    notification_number: "090/2025"
+    application_end: 2025-07-16
+    age: {from: 1980-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-91-25.pdf"
+    sha256: 1178094b310ff47ca9934cc084b930f9ad4f578217cf69970849a81aed4ae31d
+    notification_number: "091/2025"
+    application_end: 2025-07-16
+    age: {from: 1980-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-92-25.pdf"
+    sha256: c008fcc4f4698e4c412496c49f4ab4bd27bf7d9452c2320af4fef7a77c2795ce
+    notification_number: "092/2025"
+    application_end: 2025-07-16
+    vacancies: 2
+    age: {from: 1980-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-93-25.pdf"
+    sha256: b175c0df413b40635c6f38d8e4fe8d57dc2aaa7b7a4e489748b522c1095df9b3
+    notification_number: "093/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-94-25.pdf"
+    sha256: d5e14a0fb034e9d90dbf4e2cd00eee74b69a24683d893558f69e0eb12029aa67
+    notification_number: "094/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-95-25.pdf"
+    sha256: 91a6823d8fd46a972d6f6eaf71fdb333f2928dc877c5371590d34a87c022365f
+    notification_number: "095/2025"
+    age: {from: 1986-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-96-25.pdf"
+    sha256: e64c4db43e54d655da03e2758c685379d003efb3c22edfecbab12d48ebab428b
+    notification_number: "096/2025"
+    application_end: 2025-07-16
+    age: {from: 1989-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-97-25.pdf"
+    sha256: 2500e69db9177300ac26ebe5296b71f1bc21818f2356ac57fdb641020c725fe1
+    notification_number: "097/2025"
+    vacancies: 2
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-98-25.pdf"
+    sha256: 6978e477583cf269b7b463e6b55b7e6051b59967c019eaf4f499c9dfc2b1c57e
+    notification_number: "098/2025"
+    application_end: 2025-07-16
+    vacancies: 1
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-06/noti-99-25.pdf"
+    sha256: 428dbc064bb2d9cda1a05d79a5bb4c3cc3dee8b50fb5d8e5d40076cabd9d693a
+    notification_number: "099/2025"
+    application_end: 2025-07-16
+    vacancies: 9
+    age: {from: 1981-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-176-25.pdf"
+    sha256: 097f11b8a6dc2891f65b8cbb48d6f51aaa3a95cf3b7c4041fd470d6d2efac71a
+    notification_number: "176/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+    age: {from: 1980-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-177-25.pdf"
+    sha256: c66880959b7a6685c18c66cb54efa452b750c155708cea647941a24db9452ba2
+    notification_number: "177/2025"
+    application_end: 2025-09-03
+    age: {from: 1983-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-178-25.pdf"
+    sha256: ee2cf030e22713af13cb3a2fbe30b19efeaf86b00ac354a2b91a1478003c0c8b
+    notification_number: "178/2025"
+    application_end: 2025-09-03
+    vacancies: 2
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-179-25.pdf"
+    sha256: b37229cb9205df98fa27cfa53de3cef2ee40f672fdfffe31c598cb4d21471a19
+    notification_number: "179/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-180-25.pdf"
+    sha256: cf465bb13b1aec047b9da9e1ffc5bd4fc3eee0b7dfc298f11ea5bd1c46714a3e
+    notification_number: "180/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-181-25.pdf"
+    sha256: 2e7e6fcdc0e2f10215d80a0e946894b19aa23144214f8cde41af18828f71bda7
+    notification_number: "181/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+    age: {from: 1983-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-182-184-25.pdf"
+    sha256: 0e5436c0d3ce03b13e1e1b89582216a6f703c8ecafe316c1c6719ca3973f3ded
+    notification_number: "182/2025"
+    application_end: 2025-09-03
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-185-25.pdf"
+    sha256: f46aaf85e7dab767631a0bed02e50c7f037f07e1cac6b0d62c023a7a5d38c0b8
+    notification_number: "185/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-186-25.pdf"
+    sha256: 94b18e2dda91bf7da6be55f90e1a0c033d5231e25868f756266ac3d0b3a19849
+    notification_number: "186/2025"
+    application_end: 2025-09-03
+    vacancies: 3
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-187-25.pdf"
+    sha256: 79db09a4068bb96d8d0b96cb4c6a08aae3f3bfe31db801a507250d8228e93164
+    notification_number: "187/2025"
+    application_end: 2025-09-03
+    vacancies: 6
+    age: {from: 1994-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-188-25.pdf"
+    sha256: a45dd6f28255763f547f866b9d5560b141fcc274be8a6833f6da997541e5f496
+    notification_number: "188/2025"
+    application_end: 2025-09-03
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-189-25.pdf"
+    sha256: 609ef57a12715a24620ba428f68bb0e2b097b626432d41c19b81e3ea4f063513
+    notification_number: "189/2025"
+    application_end: 2025-09-03
+    vacancies: 3
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-190-25.pdf"
+    sha256: 879e327836364f436549bf0df8a5633e9db536250ed100c951bc91f5c71983ad
+    notification_number: "190/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-192-25.pdf"
+    sha256: 28698dbd9935811977faed376e81ad2b329a4fbe99e2310f4de58052b92a8d81
+    notification_number: "192/2025"
+    application_end: 2025-09-03
+    vacancies: 2
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-193-25.pdf"
+    sha256: a9a1f2b14d6097c1953015418335a92b8fc396f5627dbca64e7f3d52429c1614
+    notification_number: "193/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-194-25.pdf"
+    sha256: b07bb837bc4cb6f2f733d2b10c012c6ec868d0cf7cf49cab1b775460d3e159b0
+    notification_number: "194/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-195-25.pdf"
+    sha256: 9dc88623a4f00e0bbb2a12e615e51b92e6b27d036ac6298080522930d38c1281
+    notification_number: "195/2025"
+    application_end: 2025-09-03
+    vacancies: 3
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-196-25_0.pdf"
+    sha256: 0302d27ce70d9d77f9160e50e18c8de805c0612cc4931e663040de735f77c0f9
+    notification_number: "196/2025"
+    application_end: 2025-09-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-197-25.pdf"
+    sha256: 4a6206ecede232c7591d676a3510772d0dade728e0a537189152117a096b5e79
+    notification_number: "197/2025"
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-198-25_0.pdf"
+    sha256: 9b97788d94cbf5f34df59773313a62e92d80613ffbbf3b57d9074db5a6737ebe
+    notification_number: "198/2025"
+    application_end: 2025-09-03
+    age: {from: 1974-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-199-25_0.pdf"
+    sha256: eaf5e8e4e73a95299c4d67085b03fe8e5b5fdf9aa6db6a96489ef31538f4f0b9
+    notification_number: "199/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-200-25_1.pdf"
+    sha256: f07334abb2b83aca6b3b65fdfea7f40737ef2b893e8a58243dacbfc1e541c8ca
+    notification_number: "200/2025"
+    application_end: 2025-09-03
+    vacancies: 5
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-201-25_0.pdf"
+    sha256: dbe78e9d91d37cd6cddd3658fa44134c1c6fb793a4143699534d1e2dbb61aa0b
+    notification_number: "201/2025"
+    application_end: 2025-09-03
+    vacancies: 1
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-202-25_0.pdf"
+    sha256: 90462df1174576cbd405607e113b07bbb5bb495eb7448f9734d69f6c3925bc68
+    notification_number: "202/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-203-25_0.pdf"
+    sha256: 1730f87c7cfee9f2d9849b9ec9c0b5188e3cf30e65957a73662ea69da18f8dbf
+    notification_number: "203/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-204-25_0.pdf"
+    sha256: 07857804746bb9f4304f0fa268f0ea55c2d37ccd1da90c7d3d4dbfd7f7694d31
+    notification_number: "204/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-205-25_0.pdf"
+    sha256: 884c602ef01d20658c9a98fe49d55dfa40573aa1c936018b2befa4461c11b982
+    notification_number: "205/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-206-25_0.pdf"
+    sha256: 165ca50f82a149eb7826f74fd396357c5876721d92f0392bd04be074fbdec9b1
+    notification_number: "206/2025"
+    age: {from: 1989-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-207%26208-25.pdf"
+    sha256: 0d7eb3fd6cf1f16be5ecf49bf4d17a12e8e2b99cf1e7a5c76e91deb6b3330c8f
+    notification_number: "207/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-209-25.pdf"
+    sha256: 99c7d86ae812b77a5bcffa476a39c7c029fe359d210b284a96f960a5b7732b2a
+    notification_number: "209/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-210-25.pdf"
+    sha256: 95fb73500816dcf7d8ceccb600da0ec2db41fc7014c1ca68a35b529e1b5a07c9
+    notification_number: "210/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-211-25.pdf"
+    sha256: 93099d5f73bafd29d39278d04cb0ed9998551c7f29a35a2a211c976a203a4e23
+    notification_number: "211/2025"
+    application_end: 2025-09-03
+    age: {from: 1995-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-212-214-25.pdf"
+    sha256: 18f4b970c80ebd12c443fa10aa978874176238c41d0fcbb08841a22cee21e6e6
+    notification_number: "212/2025"
+    application_end: 2025-09-03
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-215-25.pdf"
+    sha256: d78e19c802279062d06e05a8bc843b956721d99da2a772e874e2c1ee26d3fbdd
+    notification_number: "215/2025"
+    application_end: 2025-09-03
+    age: {from: 1999-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-216-25.pdf"
+    sha256: bd564b85262bff2d1659fc38be625e86bd783f625ffda7ff8de6f5fe4c79c32b
+    notification_number: "216/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-217-25.pdf"
+    sha256: 6d88df0e24c4e4f435dc7fad0e757c8a96b3ee8ed503bb86a5747c2b4a159c07
+    notification_number: "217/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-218-25.pdf"
+    sha256: ab92fcdc59347ec1c41f6ae0e161acc29553f1cd3e7a6803238782406f083cc0
+    notification_number: "218/2025"
+    application_end: 2025-09-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-219-25.pdf"
+    sha256: 70bce1599baa1e9e09e144ee1c92f9d1eb2233f841808226b141b72608d2cb82
+    notification_number: "219/2025"
+    application_end: 2025-09-03
+    age: {from: 1980-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-220-25.pdf"
+    sha256: 6bf345bd8eb2242baa5f83f24c5a04cf59b39228d22d6d235c53f2d97f81beba
+    notification_number: "220/2025"
+    application_end: 2025-09-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-221-25.pdf"
+    sha256: 1aedb5df7b0ad0ad48772f07cd8e88492daa9a5d2e47af7d2ee2788103dca47e
+    notification_number: "221/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-222-25.pdf"
+    sha256: b99cd4a0dd033bba6b33d1f97070e22dc5c92cf1af4d83ac3322f2eadce7e4e4
+    notification_number: "222/2025"
+    application_end: 2025-09-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-223-25.pdf"
+    sha256: a94e60ea4fbb543c34f600d28e65f9298810ef1564e0613c789d29e3ed747d33
+    notification_number: "223/2025"
+    application_end: 2025-09-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-224-25.pdf"
+    sha256: 1a1868920874717685e23cc6f4e38371cb67495015ff08289922deb9d9811d9d
+    notification_number: "224/2025"
+    application_end: 2025-09-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-225%26226-25.pdf"
+    sha256: a30b5919aad6c555e85f9e645b9e4625d3a187532c17ee34c540941ae730c6e1
+    notification_number: "225/2025"
+    age: {from: 1980-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-227-25.pdf"
+    sha256: 0e70e5e15ffafdef9d4db20f9109bd0acbacfe2fe0040d77195000aa77952e22
+    notification_number: "227/2025"
+    age: {from: 1980-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-228-25.pdf"
+    sha256: 65c277cf511f23d51dae242dcc5b8e703d327bb5bcb0e764ce11feed721002f2
+    notification_number: "228/2025"
+    application_end: 2025-09-03
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-229-25_1.pdf"
+    sha256: cfb9d117d2e54901f63ba71f30847d56b04e4e87502a213f689783936f0c432e
+    notification_number: "229/2025"
+    application_end: 2025-09-03
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-230-25_1.pdf"
+    sha256: 08bc9db85ad503904d484b3ea834fac9ce5939f3f47192d5c219d58b524c884f
+    notification_number: "230/2025"
+    application_end: 2025-09-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-231-25_0.pdf"
+    sha256: ffcb250eb59c1d88ffa67f942d3eed3c85ce42fab126455de745b59da3281e83
+    notification_number: "231/2025"
+    application_end: 2025-09-03
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-232-234-25_0.pdf"
+    sha256: a0d416a617616c379fba7e6a7e906fa3585a5e57c15ec77a3e7e0775450ec4fd
+    notification_number: "232/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-235-25_0.pdf"
+    sha256: b7108bc808a08812779259957451be54823134259f4a7bdca2333a00d00a7e12
+    notification_number: "235/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-236-25.pdf"
+    sha256: 58bce1237906cb9442b0be4cf6cd049a15c9f26fec9f2a7715a05dd8d4a8d124
+    notification_number: "236/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-237-25.pdf"
+    sha256: ba880b090ce8d080fc9e1d5b4d6349f70fc4928c9e2969185808de80f450fefe
+    notification_number: "237/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-238-25.pdf"
+    sha256: 6b9a171dd5d5bfc85917323560a132c05d8f73fc745bd1316388fe03826484f8
+    notification_number: "238/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-239-241-25.pdf"
+    sha256: 81f4335e52e5946fd51dae90518a322ca998f320f240559a95774ecc21ef36cf
+    notification_number: "239/2025"
+    application_end: 2025-09-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-242-245-25.pdf"
+    sha256: 289038b9cc84c787ec9487b72c456caee4d395c63b146084f2a4154c9a2abcab
+    notification_number: "242/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-246-25.pdf"
+    sha256: 737c9f5e3d00f35bc1f598371805e20e9de22c5e764884a9d9752e1546298423
+    notification_number: "246/2025"
+    application_end: 2025-09-03
+    age: {from: 1981-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-247-25.pdf"
+    sha256: 1bbd3f9e21a4902429c365c4f00a4faa5aae228542824b9b3b304c9cbe3e6239
+    notification_number: "247/2025"
+    application_end: 2025-09-03
+    age: {from: 1991-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-248%26249-25.pdf"
+    sha256: 3da14b7d9af43d05d6d84cdf65005d4b8cdb1fd3d298f8e06794f0e0ee0aa184
+    notification_number: "248/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-250-257-25.pdf"
+    sha256: 475e5d90c526b0b193a0bff1e10e526898d68b0b8b5137084edfc50fa5c5f0e5
+    notification_number: "250/2025"
+    application_end: 2025-09-03
+    age: {from: 1990-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-258%26259-25.pdf"
+    sha256: 2bf0dbb7e4f7c2f813882f207055131ceba10de3600054314a2d6dde1b267dfb
+    notification_number: "258/2025"
+    age: {from: 1986-01-02, to: 2002-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-260-25.pdf"
+    sha256: fb4d705fc24b36cc311e590f36c524990134dccb1c1209fa7487999c03d7623c
+    notification_number: "260/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-261-25.pdf"
+    sha256: 5bbf194c39fc34df38ecbb6180a0c0e1ed818b3e6f4308c4b4ad1666e14253d5
+    notification_number: "261/2025"
+    application_end: 2025-09-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-262-25.pdf"
+    sha256: 4c0e5f48ddce833ccda44205dd207dee5ac6b58ceedc09695b82e7d0a36c8e35
+    notification_number: "262/2025"
+    application_end: 2025-09-03
+    age: {from: 1983-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-263-25.pdf"
+    sha256: 7ecffc12aea222d013e3f3c82c147f4d26f2e6b7324cf34efb775cf2b485b8d9
+    notification_number: "263/2025"
+    application_end: 2025-09-03
+    age: {from: 1983-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-264-25.pdf"
+    sha256: 0236cda6fe60e79e31680fd3ae4a84fcfd8e5c8e0f1a881516c1a0d0c0dbb6e2
+    notification_number: "264/2025"
+    application_end: 2025-09-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-08/noti-265-25.pdf"
+    sha256: 7185948f730cf41c9c1c026700d615ac9a6f7ae734b29c0a250304f1c29ce29f
+    notification_number: "265/2025"
+    application_end: 2025-09-10
+    age: {from: 1989-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-266-25.pdf"
+    sha256: 5d5f56aa796456f09c06882640872f867c47796e113a32e5ec9f61df426b5c2b
+    notification_number: "266/2025"
+    application_end: 2025-10-03
+    vacancies: 2
+    age: {from: 1984-01-02, to: 2001-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-267-25.pdf"
+    sha256: 045d6e424665b750a498dd2e19679534d18a0a4988818b7f2d13a52e88297974
+    notification_number: "267/2025"
+    application_end: 2025-10-03
+    vacancies: 1
+    age: {from: 1984-01-02, to: 2001-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-268-25.pdf"
+    sha256: 91055a92efefbc34c301407d57bc743e3ede208b21cf432cf658e49310fe521e
+    notification_number: "268/2025"
+    application_end: 2025-10-03
+    vacancies: 1
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-269-25.pdf"
+    sha256: 37a50730c0a83df1a9000283805c0a3bb476b10856e993c5fe528fdbb8fc0647
+    notification_number: "269/2025"
+    application_end: 2025-10-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-270-25.pdf"
+    sha256: 6cb49eab2ddb51316c4acd75138fee080b646832f76b8f2fd2b780b06e107b1e
+    notification_number: "270/2025"
+    application_end: 2025-10-03
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-271-25.pdf"
+    sha256: 2e3076b84ca493815b63c6bba355967a44aa5bde186df24c968fc2e09128203e
+    notification_number: "271/2025"
+    application_end: 2025-10-03
+    vacancies: 1
+    age: {from: 1999-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-272-25.pdf"
+    sha256: 4e752d75f9ba97e617b42c0c840cd506fd065a9cafc98d88aa969aa0ecb5fbc8
+    notification_number: "272/2025"
+    application_end: 2025-10-03
+    vacancies: 3
+    age: {from: 1989-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-273-25.pdf"
+    sha256: 28907dc5e5598a7b771c6c783882d180228834b906eee9e9ead53bf9e3904f65
+    notification_number: "273/2025"
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-274-25.pdf"
+    sha256: 5cc0a9e374ce429c5a7185082e9c0d90205fcc29413f438cf1d9d772e9e185ac
+    notification_number: "274/2025"
+    application_end: 2025-10-03
+    age: {from: 1989-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-275-25.pdf"
+    sha256: b3d1e6ebb15497bc0e3eccfd1a9f5595ef5346a6a2438933e20c9d94ceac8d27
+    notification_number: "275/2025"
+    application_end: 2025-10-03
+    vacancies: 4
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-276-25.pdf"
+    sha256: 0eed263254e89efab9e742a74172f11c351810c882a80c9359002cdc3a0646d4
+    notification_number: "276/2025"
+    application_end: 2025-10-03
+    vacancies: 7
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-277-25.pdf"
+    sha256: 63be81439d693481202727a6bfa45b75f017ca63b72eba61aa7f23839396b701
+    notification_number: "277/2025"
+    application_end: 2025-10-03
+    vacancies: 23
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-278-25.pdf"
+    sha256: eff274a29eab6edbacb9e8fb258dc28e063f83c5bce0a070d07920bd5a0c9bdd
+    notification_number: "278/2025"
+    application_end: 2025-10-03
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-279-25.pdf"
+    sha256: fab53611e9df2a8d7f48dfcffaf0d171f9be5dee187ced1f621839f80a329f9d
+    notification_number: "279/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-280-25.pdf"
+    sha256: f73425e5cdb22761a317b863530c3ec243a0c4cfc0e322a19eff04a012bbdaa3
+    notification_number: "280/2025"
+    application_end: 2025-10-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-281-25.pdf"
+    sha256: 07d7e112f9d9ea09c4f993548b35bf34cc68d2b7f5fa89d59c73fd08b49931db
+    notification_number: "281/2025"
+    vacancies: 2
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-282-25.pdf"
+    sha256: bbd7dc9fddb674408cbf350466b8577d24930eab0c40113aa39a0ce0587b82fb
+    notification_number: "282/2025"
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-283-25.pdf"
+    sha256: a31444d3f4ce8501a44dc232a3e084bc94c635baee20a6126201a5ff27b89a49
+    notification_number: "283/2025"
+    application_end: 2025-10-03
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-284-25.pdf"
+    sha256: 3e3990590e13f63be3d7870dfaa3e593c335f7473b65cb1b79f171c12242dba4
+    notification_number: "284/2025"
+    application_end: 2025-10-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-285-25.pdf"
+    sha256: 5c461dad0be5a5027ea11bd9ab52e9bbd5eaf9162f5357be741fea9415a4b575
+    notification_number: "285/2025"
+    application_end: 2025-10-03
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-286-25.pdf"
+    sha256: a8f90940e405eae2dee11804e38190a4bd4b531fac331f1c9553d98fadc1e5c8
+    notification_number: "286/2025"
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-287-25.pdf"
+    sha256: e66afacc550369c1c94cba3313ff22e2e46d441ad80e623859eaf17a1bcc0d2f
+    notification_number: "287/2025"
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-288-25.pdf"
+    sha256: e0c38a1645c4f698435df3a3cc552fb2ee504d6f92c8f685131319a6a93957c0
+    notification_number: "288/2025"
+    application_end: 2025-10-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-289-25.pdf"
+    sha256: 0e55d7307f0228b4a7f29da02b6308405f4990930e595e37914c0b27a9afcd3a
+    notification_number: "289/2025"
+    application_end: 2025-10-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-290-25.pdf"
+    sha256: 94cf6d4945f40d9a3d202aa6dc60a67cc5534da7f56b67212413e1e4b1857421
+    notification_number: "290/2025"
+    application_end: 2025-10-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-291-25.pdf"
+    sha256: bcd2bcb67351262c49bef238b7406d7245d14d6ae0dee9e0ddac71a3132aabba
+    notification_number: "291/2025"
+    application_end: 2025-10-03
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-292-25.pdf"
+    sha256: ddc36f9ed127e47f0177aec4a296923181d6d4718bba20e05c0800bb7c3f0933
+    notification_number: "292/2025"
+    age: {from: 1989-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-293-25.pdf"
+    sha256: 86bda9d32e727b0b23d76caac868c94f11ffe3d99beeeeac3415d1cbca031a68
+    notification_number: "293/2025"
+    application_end: 2025-10-03
+    age: {from: 1984-01-02, to: 2000-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-294-25.pdf"
+    sha256: 29a53bd737587370461040831b6b9a157ccf5e11ee7bfcf23c46e73e61315464
+    notification_number: "294/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-295-25.pdf"
+    sha256: 9240dcc9e9c38e84c25a8e70998454be20144d4fae05caad4ac812cd465b56ea
+    notification_number: "295/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-296-25.pdf"
+    sha256: 72ccb6aeb6b641dcc470c6b5bcb3b4f72a5dd666cb643bf604626a57ff76f7f6
+    notification_number: "296/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-297-25.pdf"
+    sha256: ede91745a7dc8f6c5f3859bcf8309697af06d5847ac297a3012011137a0347ec
+    notification_number: "297/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-298-25.pdf"
+    sha256: b9600d83ee3ada30f124eea43de01c6bc3eaa0a0a00485dae265c2d0e2458bd7
+    notification_number: "298/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-299-25.pdf"
+    sha256: 72e44818b5c7526be25153b99846cbdba3331159054d6c262c5e2cd82db2bacc
+    notification_number: "299/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-300-25.pdf"
+    sha256: 97c19b56f7b726e63fc5c8c87ded162ef501df9805cb42be65bb412819d7055b
+    notification_number: "300/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-301-25.pdf"
+    sha256: cdfb4af423cda0c0125f29afba006360865a8cda73d3810ca2d65e4bd4f24e7d
+    notification_number: "301/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-302%20%26%20303-25.pdf"
+    sha256: 6b8f48e1396042d5a0b3e36b350dc8e65fa4a1c03f48c95cf05ffd475e78dded
+    notification_number: "302/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-304-25.pdf"
+    sha256: 3843a24a0538ed2541ddf5fe78d142f269c818b74f6743678bfecb1729b2ed91
+    notification_number: "304/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-305-25.pdf"
+    sha256: 278f70cf53bf991e599bddcae3dcf56b57578cdeb3ba8faef2ffd6caadfda905
+    notification_number: "305/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-306-25.pdf"
+    sha256: 14a0e0039eff1c62926de5873879add60c38ebf1135d132f596e4ef53633d88e
+    notification_number: "306/2025"
+    application_end: 2025-10-03
+    age: {from: 1977-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-307-25.pdf"
+    sha256: b245d61cc52c55a84f1389d840ac5a251c4e620528b953c0a1b1efe684f91d37
+    notification_number: "307/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2003-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-308-25.pdf"
+    sha256: 708b06b3677ece470f9b19f77825d830634a5a7c76168d62dbec451e58d3db60
+    notification_number: "308/2025"
+    application_end: 2025-10-03
+    age: {from: 1981-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-309-25.pdf"
+    sha256: d57c1370c8c0c0085b674eb581d1be4a52a143e7bc4900e2b5974e570f6e2274
+    notification_number: "309/2025"
+    age: {from: 1982-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-310--25.pdf"
+    sha256: 773c3aedc9f9c39b5a18f1fe42178ff4d323d0e294aba2936f180a05e6915040
+    notification_number: "310/2025"
+    age: {from: 1982-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-311-25.pdf"
+    sha256: c590639024897adf4289efc22fab23fc075cedb8894a978524f2e480bb902caf
+    notification_number: "311/2025"
+    application_end: 2025-10-03
+    age: {from: 1983-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-312-25.pdf"
+    sha256: c1024145c5ddb09408ef47ea8c6bd68d86c152b92612375bfb1f1f059d8b5f37
+    notification_number: "312/2025"
+    age: {from: 1986-01-02, to: 2002-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-313-25.pdf"
+    sha256: ca170f1b1865330758da57ae9e9faac6ffca8e248c3876695b8fa810733688d3
+    notification_number: "313/2025"
+    application_end: 2025-10-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-314-25.pdf"
+    sha256: 9788f39096e0c639f6234ee860ea241372619d07ee628965c8c2666cc4bb0c2f
+    notification_number: "314/2025"
+    application_end: 2025-10-03
+    age: {from: 1978-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-315-25.pdf"
+    sha256: 84db38e01f8780d50e292a0889eb71807c8b17d9b1c369884fe7b49f782cec05
+    notification_number: "315/2025"
+    application_end: 2025-10-03
+    age: {from: 1986-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-316-25.pdf"
+    sha256: 6f26e7caa56e0b1054a3903e068c351b9c8755fbae058b48311b6034646de4c5
+    notification_number: "316/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-317-25.pdf"
+    sha256: 647bba73c4b0a00cefba2e81cc24d19c6e5e230de9c383c8cb1856f0c8112071
+    notification_number: "317/2025"
+    application_end: 2025-10-03
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-318-25.pdf"
+    sha256: 2caf317fee5186045a9ca400868b40f4e671a1fb2a93ecb8c9d4ef2504ee711d
+    notification_number: "318/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-319-25.pdf"
+    sha256: 0f9f8f5f0bea7dda563c6fa59856fd5af30818552cebda0f3b3b7c5a5dbd2d43
+    notification_number: "319/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-320-25.pdf"
+    sha256: 0f72f8ec17f91ec54164533a0037b2c107a9035f8088a7ab0079d7260ff9f02c
+    notification_number: "320/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-321-324-25.pdf"
+    sha256: f37b73c0b5c853ba0c88a8f008996d56bed5dc06de5060836f11279e9b8b3ab9
+    notification_number: "321/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-325-25.pdf"
+    sha256: ce310ccee303ece118fca39b957c1d282dd816e118d8be2e143fd47cb5f03a16
+    notification_number: "325/2025"
+    application_end: 2025-10-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-326-328-25.pdf"
+    sha256: 4e40fe9a0939053606d9227cee11bf6ff7ec9fac1742e38533dbb548895b965c
+    notification_number: "326/2025"
+    application_end: 2025-10-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-329-25.pdf"
+    sha256: c384402b7b1f1f553481532f254007eb9446d437910e175e988e1b829934f5ea
+    notification_number: "329/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-330-25.pdf"
+    sha256: 548e4b7fb9b9b15ff544e9952241a830c70b3dfa38e876026888c15f50b78f2a
+    notification_number: "330/2025"
+    application_end: 2025-10-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-331-25.pdf"
+    sha256: b5cd504656bc8ecc3a76ce6ee28b9ba0cdf4d84c5b4d7d63aee86c39d032b957
+    notification_number: "331/2025"
+    application_end: 2025-10-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-332%26333-25.pdf"
+    sha256: a16fd3d663524d294fd0be5d191591b856dab462785ee45004c50378245f7a4a
+    notification_number: "332/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-334%26335-25.pdf"
+    sha256: cbec5cb2933c5164d3d3f3495fa81f7cda77af24d538a7d3fcf7637220fdb8ba
+    notification_number: "334/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-336-25.pdf"
+    sha256: 22ba9d7fa7e718edc88f433fd305b260dd08f7b41e9d9bb22533f6462e95f029
+    notification_number: "336/2025"
+    application_end: 2025-10-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-337-25.pdf"
+    sha256: dc0493e31a5ef65e84d047a1500370cd3b13f82da517be7eb4301661529d06b3
+    notification_number: "337/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-338-25.pdf"
+    sha256: cc4e7ea5977e7ebc922492b6ba98e53bbebd98dfb7812628f44ac3b65f38bd2a
+    notification_number: "338/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-339-25.pdf"
+    sha256: 14af45fb1e3709fffbc7aaf4dd3898046f58d839b5e136f60bb15d8374cf1209
+    notification_number: "339/2025"
+    age: {from: 1996-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-340%26341-25.pdf"
+    sha256: 69f0f3cd112b40d7f640ab9130d1902a9f46ed38b62496cb0739b415307c8de3
+    notification_number: "340/2025"
+    application_end: 2025-10-03
+    age: {from: 1991-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-342-347-25.pdf"
+    sha256: 6b9fb3c051a4f44e6858e0d5e3a2606e50fc0caefe4403564633c332d637bb04
+    notification_number: "342/2025"
+    application_end: 2025-10-03
+    age: {from: 1991-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-348-25.pdf"
+    sha256: 1f830c90e3434a3c591ef59b354be4cd64830c8fe019c45fa3ddcc6bb6835ce8
+    notification_number: "348/2025"
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-349-25.pdf"
+    sha256: b5ca2fb6ce74a86e4208b5d1f26c21e9f8cfa3185158047ec4f8386271982df5
+    notification_number: "349/2025"
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-350-25.pdf"
+    sha256: f6ac10a854a441a01f3ca6b50dd40d8d7ccbdb3d7c549312f36d060bf3e213bf
+    notification_number: "350/2025"
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-351-25.pdf"
+    sha256: e3818f0bd6c9f2d692f10a1acd3b03991a3f9e8535b5ee2ade45527144a3e321
+    notification_number: "351/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-352-25.pdf"
+    sha256: 1839e83d5bb46cb7e075263880ff894dbb9c9f6bd15683149dea54f06c281850
+    notification_number: "352/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-353-25.pdf"
+    sha256: 9ac2cb6f6d319b7a3311f5036b06fd773ebef913f25f45f8b10993d4ed4b612a
+    notification_number: "353/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-354-25.pdf"
+    sha256: 0fa28ec827d305ed07e4c09aa4f3a3a315b761f1fc51617e22793bf96c6e5338
+    notification_number: "354/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-355-25.pdf"
+    sha256: 86cb20baa8322e4603c3725c081d4f46cbb2896b9486e6be3b8a3fd5fcc43955
+    notification_number: "355/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-356-25.pdf"
+    sha256: 94e780cebb53f9efa681ea49ba650d39b7c4218d19b8d628d8531d290e0880aa
+    notification_number: "356/2025"
+    application_end: 2025-10-03
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-357-25.pdf"
+    sha256: 4ec0b76dc352e6e3c8f09e793e5338f092a4acd30a3193c337f1ac6435e3f1ae
+    notification_number: "357/2025"
+    application_end: 2025-10-15
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-358%26359-25.pdf"
+    sha256: e6657ff84654620794a51682929afb23e70b8f8a7d57c2bfd902c1ea8d2da8b6
+    notification_number: "358/2025"
+    application_end: 2025-10-15
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-360-25.pdf"
+    sha256: 19d9d15c0e2aa1127580b784d477a5b9c227d59bbcbf31930c6dba7907b90f58
+    notification_number: "360/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-361-25.pdf"
+    sha256: 85e8ba85f2d2ed1eb3f7ddec729730e522bf4d785a4fece0ae8eecc3c6318410
+    notification_number: "361/2025"
+    application_end: 2025-10-15
+    vacancies: 1
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-362-25.pdf"
+    sha256: ba90140c67260900b2a97aa9e08e96111ac00284c03c6f8e5a05b0c39ec83177
+    notification_number: "362/2025"
+    application_end: 2025-10-15
+    vacancies: 2
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-363-25.pdf"
+    sha256: f1fb74da10b7d4261e9dc129a3c3e30058177ccebaca61543dcfe56824b49cf2
+    notification_number: "363/2025"
+    application_end: 2025-10-15
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-364-25.pdf"
+    sha256: 9586d6c145b194e933b29e3448aa3346cf5f538635a010c7393aa2a822aa5d48
+    notification_number: "364/2025"
+    application_end: 2025-10-15
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-365-25.pdf"
+    sha256: 26560e4aa31d3dac60f97c089f69e62842198c47a08d573f3ef670232269aeff
+    notification_number: "365/2025"
+    application_end: 2025-10-15
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-366-25.pdf"
+    sha256: 7c8bc953b6366d40813ba0fcaca3d0b6f0670a5268120077789fe6cf0d193f3f
+    notification_number: "366/2025"
+    application_end: 2025-10-15
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-367-25.pdf"
+    sha256: 96cbbd89bfc0ea73785379debee00dd5d05d7955d22c93447b1dee89dfac6261
+    notification_number: "367/2025"
+    application_end: 2025-10-15
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-368-25.pdf"
+    sha256: a969a7f707c24ca726826bf1b69844dd700e7560d5a3397e57c9c38f14acc9d7
+    notification_number: "368/2025"
+    application_end: 2025-10-15
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-369-25.pdf"
+    sha256: 1d8f9f2f702b9234db99cba807e51ada3889385defff5daee921cd4cab19a80d
+    notification_number: "369/2025"
+    application_end: 2025-10-15
+    age: {from: 1984-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-370-25.pdf"
+    sha256: 189503f59120df5976a80b40ff77c96cfec63edbde6ac9d9edd2dac969ad4a5b
+    notification_number: "370/2025"
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-371-25.pdf"
+    sha256: 1003ddb28a540238162df2379f5911248e57f71f66444818818d7b56d616a630
+    notification_number: "371/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-372-25.pdf"
+    sha256: 4112fed684c4e74e69bbef45a0d7b9cf9b756da5ac57ce6b2e7a110c90bf0a18
+    notification_number: "372/2025"
+    application_end: 2025-10-15
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-373-25.pdf"
+    sha256: 6b80eb3e06e11ea45fb8564019f54975b668c8e49eb3047a2d9503dabfd65a00
+    notification_number: "373/2025"
+    age: {from: 1982-01-02, to: 2000-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-374-25.pdf"
+    sha256: 5abf667227b6590c2955c1fbc0bb79701f431837960e8c339cb098611d894b2b
+    notification_number: "374/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-09/noti-375-25.pdf"
+    sha256: b9756fc919cff3bcbcc12a1378f424e4759ce6053911108222552409fdfacd48
+    notification_number: "375/2025"
+    application_end: 2025-10-15
+    age: {from: 1994-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-%20428-25.pdf"
+    sha256: ade0409b7fb62679de6a1259f35b2f473acab7482bc50df9af282ba4030a8da3
+    notification_number: "428/2025"
+    application_end: 2025-12-03
+    age: {from: 1986-01-02, to: 2002-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-376-25.pdf"
+    sha256: 93fbdc05ef197ec6b0d7243f1e56686d6a342990f12cbd7f8f282ae80785c8cd
+    notification_number: "376/2025"
+    application_end: 2025-11-19
+    vacancies: 1
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-377-25.pdf"
+    sha256: 62f520c9da0e926f5d2f4eda8d3d503efc34431bbcd345b5dfdafcaf66483cd4
+    notification_number: "377/2025"
+    application_end: 2025-11-19
+    vacancies: 1
+    age: {from: 1975-01-02, to: 1983-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-378-25.pdf"
+    sha256: 3c882d883de7187a0992575b466c5a0da99ca47e569f97de08e8f853b8a086d3
+    notification_number: "378/2025"
+    vacancies: 21
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-379-25.pdf"
+    sha256: a282d83a9f14d25164ac22fb3f2e5e6f99bb0c50c018ba8a0fab23a9ae8428e6
+    notification_number: "379/2025"
+    vacancies: 2
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-380-25.pdf"
+    sha256: a80ce7a82778c0457e2a51485e14e93825360748a193bcf0a340ce9c9046eea4
+    notification_number: "380/2025"
+    application_end: 2025-11-19
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-381-25.pdf"
+    sha256: 4e952c3930a6e4746f07116c63fdfd8e439d5219c435be8883f9e49fae507e7e
+    notification_number: "381/2025"
+    application_end: 2025-11-19
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-382-25.pdf"
+    sha256: ab025e2aa5679ffe2bc0be303a214c22d8f80f8a8e1d4020047d4ef917413233
+    notification_number: "382/2025"
+    application_end: 2025-11-19
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-383-25.pdf"
+    sha256: 7c1636b5bef1bec6a7a2b06723199e762aff7e0f95f7986c7819f50b5b56a8ca
+    notification_number: "383/2025"
+    application_end: 2025-11-19
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-384-25.pdf"
+    sha256: 35fd0802c6e4a11fa8dc7c8f9dc145437e8f957b955eb636d1b0ae915f1029bc
+    notification_number: "384/2025"
+    application_end: 2025-11-19
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-385-25.pdf"
+    sha256: d320e76c0a1aba8f1b98902ee55d234dac162f85ab7121d4c0cdbafea3a86bda
+    notification_number: "385/2025"
+    application_end: 2025-11-19
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-386-25.pdf"
+    sha256: b4469a6c32f6ae89394d088e3c23653d554db0cdf225c1a2f53c554d43853323
+    notification_number: "386/2025"
+    age: {from: 1986-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-387-25.pdf"
+    sha256: b01fb66fdc45a5a4d8474fa92f8a0e54b9c8314a3c160d4e0d4e72bdcec1b887
+    notification_number: "387/2025"
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-388-25.pdf"
+    sha256: a3e28baa166b435d792f322857e3a3f1a5567b95ce9ded28108f506b26971a58
+    notification_number: "388/2025"
+    application_end: 2025-11-19
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-389-25.pdf"
+    sha256: c9773208fe0e47ad7ac27d932ed97d63e30cf83647f304904e8ed16299529f22
+    notification_number: "389/2025"
+    application_end: 2025-11-19
+    age: {from: 1985-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-390-25.pdf"
+    sha256: b2d85ed02278af361c3a82feff5fc1f682a072b5fd7297de7f5c5fb413dffab6
+    notification_number: "390/2025"
+    application_end: 2025-11-19
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-391-393-25.pdf"
+    sha256: 0626decdbe98dd4b74096b24bf78067e1855ad126f0d605bb81c25a6617f4efd
+    notification_number: "391/2025"
+    application_end: 2025-11-19
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-394-25.pdf"
+    sha256: e2a47c26bdd18607cc4d8b9189879880333a12fc372a98058442ab9bb5e06cab
+    notification_number: "394/2025"
+    application_end: 2025-11-19
+    age: {from: 1996-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-395-25.pdf"
+    sha256: 8818f6ac639492f601a0cfd7e6af8a7957771888e46c6b9ef71be46401594599
+    notification_number: "395/2025"
+    application_end: 2025-11-19
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-396-402-25.pdf"
+    sha256: 6fcd8dfd835286ccd9ad760fa7523d2ed0c2b11c59c5b578cc1535e6decc6851
+    notification_number: "396/2025"
+    application_end: 2025-11-19
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-403-25.pdf"
+    sha256: 3b62d58699493cf2197c3cecbf6fccf9f8cd90227c476492dbcfc62bcb1ad4f5
+    notification_number: "403/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-404-25.pdf"
+    sha256: 3eb4908f206268b67e38aaef89626a2d06b936895b7c84fa6c9cad43cab70cd4
+    notification_number: "404/2025"
+    application_end: 2025-11-19
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-405-25.pdf"
+    sha256: e37759c3c97682cf181650d1f143b5fadd630a43dff2adfac705702839939094
+    notification_number: "405/2025"
+    application_end: 2025-11-19
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-406-25.pdf"
+    sha256: 9da79eaad0dccb6969db14ad4188b60e9fa898768dab35e50228f9bec24ee516
+    notification_number: "406/2025"
+    application_end: 2025-11-19
+    age: {from: 1981-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-407-25.pdf"
+    sha256: ec2c42085ef72a10ddc4a7b50b329492c2b5aea88469703a54cc1baa4ba8237f
+    notification_number: "407/2025"
+    application_end: 2025-11-19
+    age: {from: 1983-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-408-413-25.pdf"
+    sha256: 5a1dd0b4b5edab2438aeb96d2cd0320c5a2464beb8bf23a862a4f95155652e31
+    notification_number: "408/2025"
+    application_end: 2025-11-19
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-414-25.pdf"
+    sha256: 41f96bd76747d56afeaf9ca2d1e0845efa072f7298edba2b8fa88e46eeda85f0
+    notification_number: "414/2025"
+    age: {from: 1989-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-415-25.pdf"
+    sha256: 523dcea1ff4b4e56f0fdb9b074f9732bc5ee34199451d25f99a8223716e6ebe0
+    notification_number: "415/2025"
+    vacancies: 2
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-416-25.pdf"
+    sha256: 56bdb9cf17e4e16932387df7500685cf152be18ae3ca1b3f400e6ec470a81a20
+    notification_number: "416/2025"
+    application_end: 2025-12-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-417-25.pdf"
+    sha256: 65bb99cdfdd2638a46582cb8e5bec91fe403dc6df2712ea4597627db9c623ecc
+    notification_number: "417/2025"
+    application_end: 2025-12-03
+    vacancies: 1
+    age: {from: 1985-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-418-25.pdf"
+    sha256: 37ecdfe0afbc30ba8627755a908419fe5e310a9155e7ec95023444143ea4f61b
+    notification_number: "418/2025"
+    application_end: 2025-12-03
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-419-25.pdf"
+    sha256: d9c3ea67152ecb429c75967ebf426918011a208d334e47e4045a0b267962b066
+    notification_number: "419/2025"
+    age: {from: 1999-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-420-25.pdf"
+    sha256: 6ca3653b5546a8d56f6770c37ac6681d475fcbf794ff34a5f66e52628c796a12
+    notification_number: "420/2025"
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-421-25d.pdf"
+    sha256: e932097d599e0d5587e4ce78f3609658e009b4bd935ce0d4d45385287a69dd95
+    notification_number: "421/2025"
+    application_end: 2025-12-03
+    age: {from: 1989-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-422-25.pdf"
+    sha256: a46364913fb1c6e533f675b9246e6fe1755848fb493af6db82f59cea5eb866c9
+    notification_number: "422/2025"
+    application_end: 2025-12-03
+    age: {from: 1989-01-02, to: 2004-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-423-25.pdf"
+    sha256: 3d2375064df0f137c541d05b3dcac7263c69e0c4959f3c3442f6a2fe2d802604
+    notification_number: "423/2025"
+    application_end: 2025-12-03
+    age: {from: 1989-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-424-25.pdf"
+    sha256: f788c5bb27945278d138e8ec17f08800a0ab4076593eb4bd7119510577eac5d6
+    notification_number: "424/2025"
+    age: {from: 1989-01-02, to: 2002-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-425-25.pdf"
+    sha256: 71470b33410c56920ee24eeef5d83705e3c78472e3a663f973bc30b25f35d597
+    notification_number: "425/2025"
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-426-25.pdf"
+    sha256: 6f2f8d43efbd0af589ddbccfb040d075fecd4b4c3dec2ea1719536faf19aa305
+    notification_number: "426/2025"
+    age: {from: 1980-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-427-25.pdf"
+    sha256: 2b8df5a0564de86db46e297e1f057368799d76879391eeedc6ff12a2d9532b6c
+    notification_number: "427/2025"
+    application_end: 2025-12-03
+    age: {from: 1984-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-429-25.pdf"
+    sha256: 6946488ef5c7a60dcfb5672fd408c55212751e25bd96c3e3e8db1508e2cb073c
+    notification_number: "429/2025"
+    application_end: 2025-12-03
+    age: {from: 1996-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-430-25.pdf"
+    sha256: b3a407a2ed6ebb00c79b688d0f7a26cace8d4338152a00a62958099e27d6d24c
+    notification_number: "430/2025"
+    application_end: 2025-12-03
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-431-434-25.pdf"
+    sha256: c11cb6148c822d9b0ff5795e69b9daed001878026dfe8e8328eacb3b8ae5f4f5
+    notification_number: "431/2025"
+    application_end: 2025-12-03
+    age: {from: 1992-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-435-25.pdf"
+    sha256: d88dbee471e50fd9b00b18eaf4bc2c17e2dd0bd7b54eeea24a286f5345488f83
+    notification_number: "435/2025"
+    application_end: 2025-12-03
+    age: {from: 1992-01-02, to: 2006-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-436-25.pdf"
+    sha256: a5abbd8dc526702e666894fd5b3dfcaded5f377d84a0cda49e215b44d5c96b47
+    notification_number: "436/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-10/noti-437-25.pdf"
+    sha256: 8cbd24030e733ff475767e3ebc95cf537afc832f60f434b8c6100da09685eeba
+    notification_number: "437/2025"
+    application_end: 2025-12-03
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-472-25.pdf"
+    sha256: 1545ea3fd2d6c473ff98c9733c4bb00dbd754640bd381b66ea2a2fb22da59bb3
+    notification_number: "472/2025"
+    vacancies: 1
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-473-25.pdf"
+    sha256: 917f7a256d16ef876976416ec65926e5bca4f9cdaa487ee5ab0fa80919e8f430
+    notification_number: "473/2025"
+    application_end: 2025-12-31
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-474-25.pdf"
+    sha256: e8a13e1943c325198bdeff835908baaabcfe4852ed9b3e21e7c55093bf02859a
+    notification_number: "474/2025"
+    application_end: 2025-12-31
+    age: {from: 1986-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-475-483-25.pdf"
+    sha256: 1c2cc64bd1b55072369e6d53147671225bac18c2623108891f5782e0e756011b
+    notification_number: "475/2025"
+    age: {from: 1984-01-02, to: 2005-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-484%26485-25.pdf"
+    sha256: 200d3400cd77a61f647ad2472aace21d47e27aa2b33da5d1602381cb3a678c4f
+    notification_number: "484/2025"
+    age: {from: 1996-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-486-494-25.pdf"
+    sha256: 8a8ebb1df2400c7735fa29e530b2e3db9e1ac90881adf1a3e6e97e52600eee9a
+    notification_number: "486/2025"
+    age: {from: 1996-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-495-25.pdf"
+    sha256: 6e8c7f68696e51ab4bc6fbac374f230b71dd9d4b7c07600e94ffd37d7a97357c
+    notification_number: "495/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-496-25.pdf"
+    sha256: a12db20914d7e0813539e04497757b32dca2f9c8d09da7372200a0bf50217c09
+    notification_number: "496/2025"
+    application_end: 2025-12-31
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-497-25.pdf"
+    sha256: 7772a4c2fd7ced5a13c7e8bcd4ace9b4542c11cd41296bec8d4244105c8e649d
+    notification_number: "497/2025"
+    application_end: 2025-12-31
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-498-503-25.pdf"
+    sha256: 6673deac5f5015f168a15c02ed4ad594553b7472f1c6576413a80dc83e072149
+    notification_number: "498/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-504-25.pdf"
+    sha256: 9184d167e53c50634ef6d0a2acf18121dce5e6fba47acfe4195c0f8a078bd827
+    notification_number: "504/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-505%26506-25.pdf"
+    sha256: d287257c20ec8961e553452fb80104f57ba169e4ddba0dacf5db5c5e32bfaf1d
+    notification_number: "505/2025"
+    age: {from: 1975-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-507-25.pdf"
+    sha256: fd9d1c24b6084f4ecf84025b7a2c7588dcdbf236afbb907e5493beedd5729c0d
+    notification_number: "507/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-508-25.pdf"
+    sha256: aa4be4d5b16aad692608f6ac6e2bed2c876fc8e61c1c31fcf1979e1b063a822f
+    notification_number: "508/2025"
+    application_end: 2025-12-31
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-509-25.pdf"
+    sha256: 048116febcd181f36b906f8660efbc83fe2bf97c815fdbea2839e29ecbce799d
+    notification_number: "509/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-510-25.pdf"
+    sha256: 82e9449a98d76e715aa7d8441d0f4b198cbc70b21c9c2cbd4f897f2a89969127
+    notification_number: "510/2025"
+    application_end: 2025-12-31
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-511-25.pdf"
+    sha256: 04fc1a5c32a678eac77eed888073d65e56be5dd1670bdf450e225d8fde44e2f2
+    notification_number: "511/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-512-25.pdf"
+    sha256: 802d7215e6bd4b97d9c290d0b130abe54dd2d75f974f070bf3d078269d8b6232
+    notification_number: "512/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-513-516-25.pdf"
+    sha256: 129fa6f94cd4cebb617842156a221679c84fa1feb6f01daf00b97b2ce20603a3
+    notification_number: "513/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-517-521-25.pdf"
+    sha256: 78e42a43cb4debd335c5cffc2d1d4efb189cb848e4dfcee88a28a8d847aadf4a
+    notification_number: "517/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-522-524-25.pdf"
+    sha256: 6fe98aea7042b4b77aa411e837898814da27d26f5217366507dc933eaa2d386f
+    notification_number: "522/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-525-527-25.pdf"
+    sha256: 167e2f234ee990508d812c6f27518b52ba011ce46f19bcf90cac7cf7a83e0a37
+    notification_number: "525/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-528-25.pdf"
+    sha256: 11421a6ad3fe16b9ce8d1e88d67c5dd1af5f90ec61cb6a9e204da4d6e0fb66a7
+    notification_number: "528/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-529-25.pdf"
+    sha256: c350f68937aa9ca461e51807e8b639ddbe9fa9ed6b3638fae017e710e1bbf8ca
+    notification_number: "529/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-530-532-25.pdf"
+    sha256: 3a3a34e511b5bdcb18c99f01be27eb6e3066cfa926815fbd6021b6a1272feda9
+    notification_number: "530/2025"
+    age: {from: 1986-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-533-25.pdf"
+    sha256: 7169b5b74d64f4765349636c21edef0bba6907ee7951f6fd0b4e65d03232f090
+    notification_number: "533/2025"
+    application_end: 2025-12-31
+    age: {from: 1980-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-534-25.pdf"
+    sha256: 2b4fef7ab6e1065011b1dd2f2c3a5fcfc72dda09c825739349c9e8842afd9ac3
+    notification_number: "534/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2025-11/noti-535-25%20.pdf"
+    sha256: 4f65d585b592d2c349058e81e0b9dc45cdb5d5a00a0efe0b09d17b518ee52c61
+    notification_number: "535/2025"
+    application_end: 2025-12-31
+    age: {from: 1982-01-02, to: 2007-01-01}
+  - url: "https://keralapsc.gov.in/sites/default/files/2026-06/noti-191-25.pdf"
+    sha256: c403074c73904939085d4ecfa7e8c4acdaa355c0f4b4470f2e4212821aeda56a
+    notification_number: "191/2025"
+    application_end: 2025-09-03
+    age: {from: 1989-01-02, to: 2007-01-01}

@@ -8,8 +8,27 @@ from examradar_adapters.base import Fact
 from .dates import find_dates
 from .pdf import DocText, flat
 from .rules import age_facts, event_facts
+from .validate import verify_quote
 
 CAT_RX = re.compile(r"\b(\d{1,3})\s*/\s*(\d{4})\b")
+
+
+def fit_quote(quote: str, pages: list[str], min_len: int = 30) -> str:
+    """Evidence is checked one page at a time. A clause that runs over a page break is cut back to the words on the
+    page where it starts; the full text stays in the value."""
+    if verify_quote(quote, pages).ok:
+        return quote
+    words = quote.split()
+    for cut in (lambda w: w[:-1], lambda w: w[1:]):  # shorten from the end, then from the start
+        w = words
+        while len(w) > 1:
+            w = cut(w)
+            q = " ".join(w)
+            if len(q) < min_len:
+                break
+            if verify_quote(q, pages).ok:
+                return q
+    return quote
 
 
 def norm_cat(n: str, y: str) -> str:
@@ -32,9 +51,10 @@ def notification_facts(doc: DocText) -> list[Fact]:
     text_all = " ".join(flat(p) for p in doc.pages)
     facts: list[Fact] = []
     first = flat(doc.pages[0]) if doc.pages else ""
-    m = re.search(r"CATEGORY\s*No\.?\s*:?\s*(\d{1,3})\s*/\s*(\d{4})", first, re.I)
+    # Some PDFs space out the digits ("3 61 /2025" is 361/2025).
+    m = re.search(r"CATEGORY\s*No\.?\s*:?\s*(\d(?: ?\d){0,2})\s*/\s*(\d{4})", first, re.I)
     if m:
-        facts.append(Fact("notification_number", {"number": norm_cat(m.group(1), m.group(2))}, m.group(0), 1, 0.95))
+        facts.append(Fact("notification_number", {"number": norm_cat(m.group(1).replace(" ", ""), m.group(2))}, m.group(0), 1, 0.95))
     post = re.search(
         r"Name of (?:the )?post\s*:\s*(.+?)\s+\d{1,2}\s*\.\s*Scale of Pay\s*:\s*(.+?)\s+\d{1,2}\s*\.\s*Number of Vacanc(?:y|ies)\s*:\s*(.+?)\s+(?:Note|\d{1,2}\s*\.)",
         text_all, re.I)
@@ -54,9 +74,10 @@ def notification_facts(doc: DocText) -> list[Fact]:
             facts.append(Fact("vacancies", {"total": value["vacancies"]}, post.group(0)[-120:].strip(), None, 0.85))
     q = re.search(r"Qualifications?\s*:?-?\s*(.{10,600}?)\s+(?:Link-|Note\s*:|\d{1,2}\s*\.\s*Mode of submitting)", text_all, re.I)
     if q:
-        facts.append(Fact("qualification", {"text": q.group(1).strip()}, q.group(0)[: len(q.group(0))].strip(), None, 0.85))
+        facts.append(Fact("qualification", {"text": q.group(1).strip()}, fit_quote(q.group(0).strip(), doc.pages), None, 0.85))
     ref = relaxation_reference(text_all)
     if ref:
+        ref.quote = fit_quote(ref.quote, doc.pages)
         facts.append(ref)
     facts += age_facts(doc)
     facts += [f for f in event_facts(doc) if f.value["event_type"] in ("application_end", "exam")]

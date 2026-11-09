@@ -1,6 +1,9 @@
 """Field-level precision and recall of the rule extractors against data/gold/labels.yaml.
 
 Usage: python tools/evaluate.py   (prints a table and writes docs/evaluation-results.md)
+
+Bulk labels (data/gold/bulk-*.yaml) name documents by URL and SHA-256. They are read from local object storage, or
+downloaded once into data/gold/cache, and the hash is checked before scoring.
 """
 
 import sys
@@ -15,10 +18,33 @@ sys.path.insert(0, str(ROOT))
 
 from examradar_adapters.base import Item, Listing  # noqa: E402
 from examradar_adapters.registry import build_adapter, organisations  # noqa: E402
+from examradar_core.settings import get_settings  # noqa: E402
+from examradar_core.storage import content_key, sha256  # noqa: E402
 from examradar_extraction.pdf import extract_pdf  # noqa: E402
 from examradar_extraction.validate import verify_quote  # noqa: E402
 
 FIX = ROOT / "data" / "fixtures"
+CACHE = ROOT / "data" / "gold" / "cache"
+
+
+def load_by_hash(url: str, digest: str) -> bytes | None:
+    """Stored copy first, then the cache, then one polite download. Returns None if the bytes do not match."""
+    for path in (Path(get_settings().local_storage_dir) / content_key(digest, ".pdf"), CACHE / f"{digest}.pdf"):
+        if path.exists():
+            data = path.read_bytes()
+            if sha256(data) == digest:
+                return data
+    import httpx
+
+    try:
+        data = httpx.get(url, timeout=60, headers={"User-Agent": "ExamRadar-evaluation"}).content
+    except httpx.HTTPError:
+        return None
+    if sha256(data) != digest:
+        return None
+    CACHE.mkdir(parents=True, exist_ok=True)
+    (CACHE / f"{digest}.pdf").write_bytes(data)
+    return data
 
 
 def d(v) -> str:
@@ -85,6 +111,48 @@ def main() -> None:
                    for f in facts if f.field == "photo_spec"}
             score(src, "photo spec", exp, got)
 
+    # Bulk documents: one labelled value per field, scored as found / wrong / missed.
+    bulk_docs = unavailable = 0
+    for bulk in sorted((ROOT / "data" / "gold").glob("bulk-*.yaml")):
+        spec = yaml.safe_load(bulk.read_text(encoding="utf-8"))
+        src = spec.get("source", "kerala_psc")
+        ad = build_adapter(orgs[src])
+        for g in spec["documents"]:
+            data = load_by_hash(g["url"], g["sha256"])
+            if data is None:
+                unavailable += 1
+                continue
+            bulk_docs += 1
+            item = Item(key=g["url"], title=g["url"].rsplit("/", 1)[-1], url=g["url"], kind=spec.get("kind", "notification"))
+            doc = extract_pdf(data, **ad.doc_options(item))
+            facts = ad.extract(item, doc)
+            total_facts += len(facts)
+            quote_fail += sum(1 for f in facts if not verify_quote(f.quote, doc.pages).ok)
+            got_by_field = {
+                "notification number": {f.value["number"] for f in facts if f.field == "notification_number"},
+                "application end": {f.value["date"] for f in facts if f.field == "event" and f.value["event_type"] == "application_end"},
+                "age limit": {(f.value.get("from"), f.value.get("to")) for f in facts if f.field == "age_rule"},
+                "vacancies": {f.value["total"] for f in facts if f.field == "vacancies"},
+            }
+            expected = {
+                "notification number": g.get("notification_number"),
+                "application end": d(g["application_end"]) if "application_end" in g else None,
+                "age limit": (d(g["age"]["from"]), d(g["age"]["to"])) if "age" in g else None,
+                "vacancies": g.get("vacancies"),
+            }
+            for field, want in expected.items():
+                if want is None:
+                    continue
+                st = stats[(src + " (bulk)", field)]
+                got = got_by_field[field]
+                if want in got:
+                    st[0] += 1
+                elif got:
+                    st[1] += 1
+                    st[2] += 1
+                else:
+                    st[2] += 1
+
     for g in gold["listings"]:
         ad = build_adapter(orgs[g["source"]])
         items = ad.parse_listing(Listing(g["url"]), (FIX / g["file"]).read_bytes(), g["url"])
@@ -115,11 +183,13 @@ def main() -> None:
     lines.append(f"| **All** | | {tp} | {fp} | {fn} | {fmt(tp / (tp + fp) if tp + fp else None)} | {fmt(tp / (tp + fn) if tp + fn else None)} |")
     out = "\n".join(lines)
     print(out)
-    print(f"\nExtracted facts: {total_facts}. Facts whose quote was not found in the document: {quote_fail}.")
+    docs_line = (f"Documents scored: {len(gold['documents']) + len(gold['listings']) + bulk_docs} "
+                 f"({bulk_docs} bulk; {unavailable} bulk documents unavailable or changed).")
+    print(f"\n{docs_line} Extracted facts: {total_facts}. Facts whose quote was not found in the document: {quote_fail}.")
     (ROOT / "docs" / "evaluation-results.md").write_text(
         "# Evaluation results (generated)\n\nGenerated by `python tools/evaluate.py` from `data/gold/labels.yaml`. "
         "These are rule-extractor results before validation and review.\n\n" + out +
-        f"\n\nExtracted facts scored: {total_facts}. Facts whose supporting quote failed verification: {quote_fail}.\n",
+        f"\n\n{docs_line} Extracted facts scored: {total_facts}. Facts whose supporting quote failed verification: {quote_fail}.\n",
         encoding="utf-8")
 
 

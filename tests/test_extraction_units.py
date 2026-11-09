@@ -94,3 +94,19 @@ def test_kerala_psc_relaxation_reference_variants():
                                     "Note: please see Sub paras ii, iii, iv, vi, vii & xiv of Para (2)")
     assert included.value["exclude"] == ["i"] and "i" not in included.value["paras"]
     assert relaxation_reference("Age Limit : 18-36. No other age relaxation will be allowed.") is None
+
+
+def test_kerala_psc_spaced_category_number_and_trailing_dot_dates():
+    from examradar_extraction.pdf import DocText
+    from examradar_extraction.rules import age_facts
+    from examradar_extraction.rules_kpsc import fit_quote, notification_facts
+
+    doc = DocText(pages=["CATEGORY NO: 3 61 /2025 Applications are invited online",
+                         "Age limit : 20-45. Only candidates born between 02.01.1980. and 01.01.2005. are eligible"])
+    nums = [f.value["number"] for f in notification_facts(doc) if f.field == "notification_number"]
+    assert nums == ["361/2025"]
+    age = age_facts(doc)[0].value
+    assert (age["from"], age["to"]) == ("1980-01-02", "2005-01-01")
+    pages = ["... end of page one. Other Note:-", "Backward Communities are eligible for usual age relaxation as per rules"]
+    q = fit_quote("Other Note:- Backward Communities are eligible for usual age relaxation", pages)
+    assert verify_quote(q, pages).ok and "usual age relaxation" in q

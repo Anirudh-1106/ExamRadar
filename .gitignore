@@ -37,3 +37,4 @@ Thumbs.db
 
 # Local tools (OCR binaries)
 .tools/
+data/gold/cache/
